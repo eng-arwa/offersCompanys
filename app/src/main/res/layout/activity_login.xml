@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -74,6 +73,16 @@
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/purple"
                 android:text="Login"
+                android:textSize="18sp"
+                app:cornerRadius="20dp" />
+
+            <Button
+                android:id="@+id/RegisterButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/purple"
+                android:text="Register"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
 
