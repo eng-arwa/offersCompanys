@@ -1,4 +1,5 @@
 package offersApp.offerscompanys;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,23 +8,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private Context context;
     private List<DataClass> dataList;
 
-    public void setSearchList(List<DataClass> dataSearchList){
-        this.dataList = dataSearchList;
-        notifyDataSetChanged();
-    }
-
-    public MyAdapter(Context context, List<DataClass> dataList){
+    public MyAdapter(Context context, List<DataClass> dataList) {
         this.context = context;
         this.dataList = dataList;
     }
@@ -37,8 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-        holder.recImage.setImageResource(dataList.get(position).getDataImage());
+        Glide.with(context).load(dataList.get(position).getDataImage()).into(holder.recImage);
         holder.recTitle.setText(dataList.get(position).getDataTitle());
         holder.recDesc.setText(dataList.get(position).getDataDesc());
         holder.recLang.setText(dataList.get(position).getDataLang());
@@ -46,20 +44,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailsActivity.class);
+                Intent intent = new Intent(context, Detailactivity.class);
                 intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
+                intent.putExtra("Description", dataList.get(holder.getAdapterPosition()).getDataDesc());
                 intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
-                intent.putExtra("Desc", dataList.get(holder.getAdapterPosition()).getDataDesc());
-
+                intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
+                intent.putExtra("Language", dataList.get(holder.getAdapterPosition()).getDataLang());
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    public void searchDataList(ArrayList<DataClass> searchList){
+        dataList = searchList;
+        notifyDataSetChanged();
     }
 }
 
@@ -73,9 +76,9 @@ class MyViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
 
         recImage = itemView.findViewById(R.id.recImage);
-        recTitle = itemView.findViewById(R.id.recTitle);
-        recDesc = itemView.findViewById(R.id.recDesc);
-        recLang = itemView.findViewById(R.id.recLang);
         recCard = itemView.findViewById(R.id.recCard);
+        recDesc = itemView.findViewById(R.id.recDesc);
+        recLang = itemView.findViewById(R.id.recPriority);
+        recTitle = itemView.findViewById(R.id.recTitle);
     }
 }

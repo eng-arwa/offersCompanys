@@ -1,26 +1,45 @@
 package offersApp.offerscompanys;
 
+
 public class DataClass {
+
     private String dataTitle;
-    private int dataDesc;
+    private String dataDesc;
     private String dataLang;
-    private int dataImage;
+    private String dataImage;
+    private String key;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public String getDataTitle() {
         return dataTitle;
     }
-    public int getDataDesc() {
+
+    public String getDataDesc() {
         return dataDesc;
     }
+
     public String getDataLang() {
         return dataLang;
     }
-    public int getDataImage() {
+
+    public String getDataImage() {
         return dataImage;
     }
-    public DataClass(String dataTitle, int dataDesc, String dataLang, int dataImage) {
+
+    public DataClass(String dataTitle, String dataDesc, String dataLang, String dataImage) {
         this.dataTitle = dataTitle;
         this.dataDesc = dataDesc;
         this.dataLang = dataLang;
         this.dataImage = dataImage;
+    }
+    public DataClass(){
+
     }
 }
