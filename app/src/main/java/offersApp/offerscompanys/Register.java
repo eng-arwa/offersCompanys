@@ -61,40 +61,40 @@ public class Register extends AppCompatActivity {
                 checkField(phone);
 
                 if (valid){
-                    //registration process
+                   // registration process
 
-//                    fAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//                        @Override
-//                        public void onSuccess(AuthResult authResult) {
-//                            FirebaseUser user =fAuth.getCurrentUser();
-//                            Toast.makeText(Register.this, "Account Created", Toast.LENGTH_LONG).show();
-//                            DocumentReference df = fStore.collection("Users").document(user.getUid());
-//                            Map<String,Object> userInfo = new HashMap<>();
-//
-//                            userInfo.put("FullName", fullName.getText().toString());
-//                            userInfo.put("UserEmail", email.getText().toString());
-//                            userInfo.put("Password", password.getText().toString());
-//                            userInfo.put("Phone", phone.getText().toString());
-//
-//                            // specify if the user is admin
-//                            userInfo.put("isUser", "1");
-//
-//                            df.set(userInfo);
-//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-//                            finish();
-//
-//
-//
-//                        }
-//                    }).addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//
-//                            Toast.makeText(Register.this, "Failed to Create Account", Toast.LENGTH_LONG).show();
-//
-//
-//                        }
-//                    });
+                    fAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            FirebaseUser user =fAuth.getCurrentUser();
+                            Toast.makeText(Register.this, "Account Created", Toast.LENGTH_LONG).show();
+                            DocumentReference df = fStore.collection("Users").document(user.getUid());
+                            Map<String,Object> userInfo = new HashMap<>();
+
+                            userInfo.put("FullName", fullName.getText().toString());
+                            userInfo.put("UserEmail", email.getText().toString());
+                            userInfo.put("Password", password.getText().toString());
+                            userInfo.put("Phone", phone.getText().toString());
+
+                            // specify if the user is admin
+                            userInfo.put("isUser", "1");
+
+                            df.set(userInfo);
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            finish();
+
+
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                            Toast.makeText(Register.this, "Failed to Create Account", Toast.LENGTH_LONG).show();
+
+
+                        }
+                    });
 
                     // realtime
 
@@ -112,7 +112,7 @@ public class Register extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
 
-                            uploadData();
+
 
 
                             // in on success method we are hiding our progress bar and opening a login activity.
@@ -156,45 +156,5 @@ public class Register extends AppCompatActivity {
     }
 
 
-    public void uploadData(){
 
-        FirebaseUser user =fAuth.getCurrentUser();
-
-        //    DocumentReference df = fStore.collection("Users").document(user.getUid());
-
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(user.getUid());
-
-        //Map<String,Object> userInfo = new HashMap<>();
-
-//        userInfo.put("FullName", fullName.getText().toString());
-//        userInfo.put("UserEmail", email.getText().toString());
-//        userInfo.put("Password", password.getText().toString());
-//        userInfo.put("Phone", phone.getText().toString());
-
-        String FullName = fullName.getText().toString();
-        String UserEmail = email.getText().toString();
-        String Password = password.getText().toString();
-        String Phone = phone.getText().toString();
-        //String isUser ;
-
-        DataClass dataClass = new DataClass(FullName,UserEmail,Password, Phone);
-        //We are changing the child from title to currentDate,
-        // because we will be updating title as well and it may affect child value.
-        String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("‘AppUsers").child(currentDate)
-                .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(Register.this, "Saved", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Register.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
 }
