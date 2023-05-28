@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -96,15 +97,57 @@ public class activity_upload extends AppCompatActivity {
             }
         });
     }
+//    public void uploadData(){
+//        String title = uploadTopic.getText().toString();
+//        String desc = uploadDesc.getText().toString();
+//        String lang = uploadLang.getText().toString();
+//        DataClass dataClass = new DataClass(title, desc, lang, imageURL);
+//        //We are changing the child from title to currentDate,
+//        // because we will be updating title as well and it may affect child value.
+//        String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+//        FirebaseDatabase.getInstance().getReference("Android Tutorials").child(currentDate)
+//                .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()){
+//                            Toast.makeText(activity_upload.this, "Saved", Toast.LENGTH_SHORT).show();
+//                            finish();
+//                        }
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(activity_upload.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
+
+
     public void uploadData(){
+
+ //         FirebaseUser user =fAuth.getCurrentUser();
+
+        //    DocumentReference df = fStore.collection("Users").document(user.getUid());
+
+       // StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(user.getUid());
+
+        // Map<String,Object> userInfo = new HashMap<>();
+
+//        userInfo.put("FullName", fullName.getText().toString());
+//        userInfo.put("UserEmail", email.getText().toString());
+//        userInfo.put("Password", password.getText().toString());
+//        userInfo.put("Phone", phone.getText().toString());
+
         String title = uploadTopic.getText().toString();
         String desc = uploadDesc.getText().toString();
         String lang = uploadLang.getText().toString();
         DataClass dataClass = new DataClass(title, desc, lang, imageURL);
+        //String isUser ;
+
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("Android Tutorials").child(currentDate)
+        FirebaseDatabase.getInstance().getReference("CompanyOffers").child(currentDate)
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
