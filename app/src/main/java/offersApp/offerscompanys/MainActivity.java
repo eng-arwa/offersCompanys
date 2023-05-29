@@ -12,7 +12,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.github.clans.fab.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         dataList = new ArrayList<>();
         adapter = new MyAdapter(MainActivity.this, dataList);
         recyclerView.setAdapter(adapter);
-        databaseReference = FirebaseDatabase.getInstance().getReference("RecyclerView");
+        databaseReference = FirebaseDatabase.getInstance().getReference("CompanyOffers");
         dialog.show();
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/baseline_home_24"/>
+
+    <item
+        android:id="@+id/share"
+        android:title="Shorts"
+        android:icon="@drawable/baseline_share_24"/>
+
+    <item
+        android:id="@+id/fab2"
+        android:title=""
+        android:enabled="false"
+
+        />
+
+    <item
+        android:id="@+id/setting"
+        android:title="Subscriptions"
+        android:icon="@drawable/baseline_settings_24"/>
+
+    <item
+        android:id="@+id/normalUser"
+        android:title="Library"
+        android:icon="@drawable/baseline_person_24"/>
+
+</menu>

@@ -2,17 +2,15 @@ package offersApp.offerscompanys;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import offersApp.offerscompanys.databinding.ActivityLoginBinding;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,7 +23,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class Login extends AppCompatActivity {
 
     EditText email,password;
-    Button loginBtn,gotoRegister;
+    Button loginBtn;
+    TextView gotoRegister;
     boolean valid = true;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -48,7 +47,8 @@ public class Login extends AppCompatActivity {
         gotoRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Register.class));
+//                startActivity(new Intent(getApplicationContext(), SignupActivity));
+                setContentView(R.layout.activity_signup);
             }
         });
 

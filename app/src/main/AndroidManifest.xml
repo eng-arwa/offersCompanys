@@ -27,7 +27,7 @@
                     android:value="" />
             </activity>
             <activity
-                android:name=".Signup"
+                android:name=".SignupActivity"
                 android:exported="true">
 
                 <!-- <intent-filter> -->
@@ -45,25 +45,31 @@
                 android:exported="false" />
             <activity
                 android:name=".activity_upload"
-                android:exported="false"
+                android:exported="true"
                 android:label="@string/title_activity_upload"
-                android:theme="@style/Theme.OffersCompanys" />
+                android:theme="@style/Theme.OffersCompanys" >
+
+            </activity>
             <activity
                 android:name=".Login"
                 android:exported="true"
                 android:label="@string/title_activity_login"
                 android:theme="@style/Theme.OffersCompanys">
+
+
+            </activity>
+            <activity
+                android:name=".MainActivity"
+                android:exported="true"
+                android:label="@string/app_name"
+                android:theme="@style/Theme.OffersCompanys" >
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
 
                     <category android:name="android.intent.category.LAUNCHER" />
                 </intent-filter>
             </activity>
-            <activity
-                android:name=".MainActivity"
-                android:exported="true"
-                android:label="@string/app_name"
-                android:theme="@style/Theme.OffersCompanys" />
+
         </application>
 
         <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

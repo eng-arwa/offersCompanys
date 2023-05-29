@@ -37,7 +37,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_name"
+                android:id="@+id/name"
                 android:background="@drawable/custom_edittext"
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
@@ -49,7 +49,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_email"
+                android:id="@+id/email"
                 android:background="@drawable/custom_edittext"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
@@ -62,7 +62,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_phone"
+                android:id="@+id/phone"
                 android:background="@drawable/custom_edittext"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
@@ -73,7 +73,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_IdentityNumber"
+                android:id="@+id/IdentityNumber"
                 android:background="@drawable/custom_edittext"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
@@ -84,7 +84,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_Adress"
+                android:id="@+id/adress"
                 android:background="@drawable/custom_edittext"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
@@ -96,7 +96,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/signup_password"
+                android:id="@+id/password"
                 android:background="@drawable/custom_edittext"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
@@ -110,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="Sign Up"
-                android:id="@+id/signup_button"
+                android:id="@+id/registerBtn"
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/lavender"
@@ -119,7 +119,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/loginRedirectText"
+                android:id="@+id/goToLogin"
                 android:text="Already an user? Login"
                 android:layout_gravity="center"
                 android:padding="8dp"
