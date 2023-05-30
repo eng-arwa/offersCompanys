@@ -45,6 +45,7 @@ public class activity_upload extends AppCompatActivity {
         uploadTopic = findViewById(R.id.uploadTopic);
         uploadLang = findViewById(R.id.uploadLang);
         saveButton = findViewById(R.id.saveButton);
+
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {

@@ -33,13 +33,13 @@ public class DataClass {
         return dataImage;
     }
 
-    public DataClass(String dataTitle, String dataDesc, String dataLang, String dataImage) {
+    public DataClass(String dataTitle, String dataDesc, String dataLang, String dataImage, String identityNumber, String address, String isApproved, String isMarketer) {
         this.dataTitle = dataTitle;
         this.dataDesc = dataDesc;
         this.dataLang = dataLang;
         this.dataImage = dataImage;
     }
-    public DataClass(){
+    public DataClass(String title, String desc, String lang, String imageUrl){
 
     }
 }

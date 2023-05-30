@@ -24,7 +24,7 @@ public class Login extends AppCompatActivity {
 
     EditText email,password;
     Button loginBtn;
-    TextView gotoRegister;
+    Button gotoRegister;
     boolean valid = true;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -39,7 +39,7 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.username);
         password = findViewById(R.id.password);
         loginBtn = findViewById(R.id.loginButton);
-        gotoRegister = findViewById(R.id.RegisterButton);
+        gotoRegister = findViewById(R.id.registerButton);
 
 
 
@@ -47,8 +47,8 @@ public class Login extends AppCompatActivity {
         gotoRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(getApplicationContext(), SignupActivity));
-                setContentView(R.layout.activity_signup);
+            startActivity(new Intent(getApplicationContext(), Register.class));
+               // setContentView(R.layout.activity_signup);
             }
         });
 
