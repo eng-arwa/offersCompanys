@@ -2,6 +2,8 @@ package offersApp.offerscompanys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import offersApp.offerscompanys.model.MarketerMembershipRequestAdmin;
+import offersApp.offerscompanys.model.MarketerMembershipRequestMarketer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,22 +16,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 
 
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
@@ -75,7 +71,9 @@ public class Register extends AppCompatActivity {
                 if (valid) {
                     // registration process
 
-                    uploadDataToAdminToApprove();
+                   // uploadDataToAdminToApprove();
+//                    approvedUsers();
+                    createUser();
 
                    // approvedUsers();
 
@@ -196,8 +194,11 @@ public class Register extends AppCompatActivity {
         String IsApproved = "0";
         String IsMarketer = "1";
 
-            MarketerMembershipRequest mrketerMembershipRequest = new MarketerMembershipRequest(FullName, Email, Password, Phone,IdentityNumber,Address,IsApproved,IsMarketer);
-        //We are changing the child from title to currentDate,
+           // MarketerMembershipRequestAdmin mrketerMembershipRequest = new MarketerMembershipRequestAdmin(FullName, Email, Password, Phone,IdentityNumber,Address,IsApproved,IsMarketer);
+
+            MarketerMembershipRequestMarketer mrketerMembershipRequest = new MarketerMembershipRequestMarketer(FullName, Email, Password, Phone,IdentityNumber,Address,IsApproved,IsMarketer);
+
+            //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
         FirebaseDatabase.getInstance().getReference("MarketerMembershipRequest").child(currentDate)
@@ -216,11 +217,31 @@ public class Register extends AppCompatActivity {
                     }
                 });
     }
+public void createUser(){
+fAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    @Override
+    public void onComplete(@NonNull Task<AuthResult> task) {
+        if (task.isSuccessful()){
+            //createAdminUser();
+            createMarketerUser();
+            Toast.makeText(Register.this, "Your Account has created Successfully", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+    }
+}).addOnFailureListener(new OnFailureListener() {
+    @Override
+    public void onFailure(@NonNull Exception e) {
+        Toast.makeText(Register.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
 
 
-    public void approvedUsers(){
+    }
+});
 
-               fAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(task -> {
+}
+
+    public void createAdminUser(){
+
 
         String FullName = fullName.getText().toString();
         String Email = email.getText().toString();
@@ -229,18 +250,23 @@ public class Register extends AppCompatActivity {
         String IdentityNumber = identityNumber.getText().toString();
         String Address = address.getText().toString();
         //String IsApproved = "1";
-//        String IsMarketer = "1";
+      // String IsMarketer = "1";
        String IsAdmin = "1";
 
-        MarketerMembershipRequest mrketerMembershipRequest = new MarketerMembershipRequest(FullName, Email, Password, Phone,IdentityNumber,Address,IsAdmin);
-        //We are changing the child from title to currentDate,
+  MarketerMembershipRequestAdmin mrketerMembershipRequest = new MarketerMembershipRequestAdmin(FullName, Email, Password, Phone,IdentityNumber,Address,IsAdmin);
+
+                 //  MarketerMembershipRequestMarketer mrketerMembershipRequest = new MarketerMembershipRequestMarketer(FullName, Email, Password, Phone,IdentityNumber,Address,IsMarketer);
+
+                   //We are changing the child from title to currentDate,
+
         // because we will be updating title as well and it may affect child value.
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("Users").child(currentDate)
+        FirebaseDatabase.getInstance().getReference("Users").child("Admin").child(fAuth.getUid())
                 .setValue(mrketerMembershipRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
+//                            FirebaseUser user = fAuth.getCurrentUser();
                             Toast.makeText(Register.this, "Your Request has been sent to Admin to be approved", Toast.LENGTH_SHORT).show();
                             finish();
                         }
@@ -253,7 +279,50 @@ public class Register extends AppCompatActivity {
 
                 });
 
-    });
+
+
+    }
+
+    public void createMarketerUser(){
+
+
+        String FullName = fullName.getText().toString();
+        String Email = email.getText().toString();
+        String Password = password.getText().toString();
+        String Phone = phone.getText().toString();
+        String IdentityNumber = identityNumber.getText().toString();
+        String Address = address.getText().toString();
+        //String IsApproved = "1";
+         String IsMarketer = "1";
+        //String IsAdmin = "1";
+
+       // MarketerMembershipRequestAdmin mrketerMembershipRequest = new MarketerMembershipRequestAdmin(FullName, Email, Password, Phone,IdentityNumber,Address,IsAdmin);
+
+         MarketerMembershipRequestMarketer mrketerMembershipRequest = new MarketerMembershipRequestMarketer(FullName, Email, Password, Phone,IdentityNumber,Address,IsMarketer);
+
+        //We are changing the child from title to currentDate,
+
+        // because we will be updating title as well and it may affect child value.
+        String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+        FirebaseDatabase.getInstance().getReference("Users").child("Marketer").child(fAuth.getUid())
+                .setValue(mrketerMembershipRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+//                            FirebaseUser user = fAuth.getCurrentUser();
+                            Toast.makeText(Register.this, "Your Request has been sent to Admin to be approved", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Register.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+
+
 
     }
 

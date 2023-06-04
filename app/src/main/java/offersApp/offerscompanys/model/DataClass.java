@@ -1,4 +1,4 @@
-package offersApp.offerscompanys;
+package offersApp.offerscompanys.model;
 
 
 public class DataClass {

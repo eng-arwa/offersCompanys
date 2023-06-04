@@ -6,17 +6,26 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import offersApp.offerscompanys.model.MarketerMembershipRequestMarketer;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,16 +34,24 @@ public class Login extends AppCompatActivity {
 
     EditText email,password;
     Button loginBtn;
-    Button gotoRegister;
+    TextView gotoRegister;
     boolean valid = true;
+
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mDbRef;
+    FirebaseUser user;
+    //String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 //        start
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+
+
+
 
 
         bottomNavigationView.setSelectedItemId(R.id.account);
@@ -73,10 +90,18 @@ public class Login extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
+//         fAuth.getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+//        assert user != null;
+//        String uid = user.getUid();
+
         email = findViewById(R.id.username);
         password = findViewById(R.id.password);
         loginBtn = findViewById(R.id.loginButton);
-        gotoRegister = findViewById(R.id.registerButton);
+        gotoRegister = findViewById(R.id.RegisterButton);
+
+
 
 
 
@@ -94,6 +119,87 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+                Query userType= reference.orderByChild("Marketer");
+
+
+                //DatabaseReference userType = FirebaseDatabase.getInstance().getReference("Users").child("Marketer").orderByChild("isMarketer").equalTo(1);
+
+
+                userType.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                     //Log.d("TAG", "onSuccess:IsAdmin " + userType.get());
+
+                        if (snapshot.exists()){
+
+                           // String dbUserTypeAsAdmin = snapshot.child("Admin").child("isAdmin").getValue(String.class);
+                           // String dbUserTypeAsMarketer = snapshot.child("Marketer").child("isMarketer").getValue(String.class);
+
+                            String fullName = snapshot.child("Marketer").child(user.getUid()).child("fullName").getValue(String.class);
+                            String isMarketer = snapshot.child("Marketer").child(user.getUid()).child("isMarketer").getValue(String.class);
+
+                            String isAdmin = snapshot.child("Admin").child(user.getUid()).child("isAdmin").getValue(String.class);
+
+                            if (isMarketer != null){
+
+
+                                Toast.makeText(Login.this, "You Logged as Marketer", Toast.LENGTH_LONG).show();
+
+                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                    finish();
+                            }
+
+
+                            if (isAdmin != null){
+
+
+                                Toast.makeText(Login.this, "You Logged as Admin", Toast.LENGTH_LONG).show();
+
+                                startActivity(new Intent(getApplicationContext(),Admin.class));
+                                    finish();
+                            }
+
+
+//                            for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+//                                for (DataSnapshot item : itemSnapshot.getChildren()) {
+//                                    MarketerMembershipRequestMarketer marketerMembershipRequestMarketer = item.getValue(MarketerMembershipRequestMarketer.class);
+//                                    marketerMembershipRequestMarketer.setKey(item.getKey());
+//                                    dataList.add(marketerMembershipRequestMarketer);
+//                                }
+//                            }
+//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//                            finish();
+
+//                            if (dbUserTypeAsAdmin != null){
+//
+//
+//                                Toast.makeText(Login.this, "You Logged as Admin", Toast.LENGTH_LONG).show();
+//
+//                                startActivity(new Intent(getApplicationContext(),Admin.class));
+//                                    finish();
+//                            }
+
+
+//                                if (dbUserTypeAsMarketer != null){
+//                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//                                    finish();
+//                                }
+
+
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
                 checkField(email);
                 checkField(password);
 
@@ -103,9 +209,14 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
 
+                            //Toast.makeText(Login.this, IsAdmin.toString(), Toast.LENGTH_LONG).show();
+
+
+//                            Log.d("TAG", "onSuccess:IsAdmin " + IsAdmin);
+
                             Toast.makeText(Login.this, "Logged Successfully", Toast.LENGTH_LONG).show();
 
-                            checkUserAccessLevel(authResult.getUser().getUid());
+                           // checkUserAccessLevel(authResult.getUser().getUid());
 
 
                         }
@@ -130,6 +241,13 @@ public class Login extends AppCompatActivity {
 
         DocumentReference df = fStore.collection("Users").document(uid);
 
+       // Query IsAdmin= reference.orderByChild("isAdmin").equalTo("1");
+
+
+
+
+
+
         //extract data from db document
         df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -138,18 +256,39 @@ public class Login extends AppCompatActivity {
 
                 // identify User Access
 
-                if (documentSnapshot.getString("isAdmin") != null){
-                    startActivity(new Intent(getApplicationContext(),Admin.class));
-                    finish();
-                }
 
-                if (documentSnapshot.getString("isUser") != null){
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                    finish();
-                }
 
             }
         });
+
+
+        //realtime get data
+
+//        DatabaseReference rootRef = FirebaseDatabase.getInstance("Users").getReference(uid);
+//        DatabaseReference isMarketer = rootRef.child("Users").child("isMarketer");
+//        ValueEventListener valueEventListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String totalIncome = "";
+//                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+//                    totalIncome = totalIncome + ds.child("Income").getValue(String.class) + " ";
+//
+//                }
+//                Log.d("TAG", totalIncome);
+//                //textView.setText(totalIncome);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//              //  Log.d("TAG", databaseError.getMessage()); //Don't ignore errors!
+//
+//            }
+//
+//
+//        };
+//        juneRef.addListenerForSingleValueEvent(valueEventListener);
+
+
     }
 
 

@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import offersApp.offerscompanys.model.DataClass;
+import offersApp.offerscompanys.model.usersDataLogin;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -113,13 +115,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
+//                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+//                    for (DataSnapshot item : itemSnapshot.getChildren()) {
+//                        DataClass dataClass = item.getValue(DataClass.class);
+//                        dataClass.setKey(item.getKey());
+//                        dataList.add(dataClass);
+//                    }
+//
+//                }
+
                 for (DataSnapshot itemSnapshot: snapshot.getChildren()){
                     for (DataSnapshot item : itemSnapshot.getChildren()) {
-                        DataClass dataClass = item.getValue(DataClass.class);
-                        dataClass.setKey(itemSnapshot.getKey());
-                        dataList.add(dataClass);
+//                        DataClass dataClass = item.getValue(DataClass.class);
+//                        dataClass.setKey(item.getKey());
+//                        dataList.add(dataClass);
                     }
-
                 }
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();

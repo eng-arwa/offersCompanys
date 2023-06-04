@@ -1,6 +1,6 @@
-package offersApp.offerscompanys;
+package offersApp.offerscompanys.model;
 
-public class MarketerMembershipRequest {
+public class MarketerMembershipRequestAdmin {
     private String FullName;
     private String  Email;
     private String Password;
@@ -8,24 +8,20 @@ public class MarketerMembershipRequest {
     private String IdentityNumber;
     private String Address;
     private String IsApproved;
-    private String IsAdmin;
+   private String IsAdmin;
 
-    public MarketerMembershipRequest(String isApproved) {
+
+
+
+
+
+    public MarketerMembershipRequestAdmin(String isApproved) {
         IsApproved = isApproved;
     }
 
-    public MarketerMembershipRequest(String fullName, String email, String password, String phone, String identityNumber, String address, String isApproved, String isMarketer) {
-        FullName = fullName;
-        Email = email;
-        Password = password;
-        Phone = phone;
-        IdentityNumber = identityNumber;
-        Address = address;
-        IsApproved = isApproved;
-        IsMarketer = isMarketer;
-    }
 
-    public MarketerMembershipRequest(String fullName, String email, String password, String phone, String identityNumber, String address, String isAdmin) {
+
+    public MarketerMembershipRequestAdmin(String fullName, String email, String password, String phone, String identityNumber, String address, String isAdmin) {
         FullName = fullName;
         Email = email;
         Password = password;
@@ -67,18 +63,16 @@ public class MarketerMembershipRequest {
         return IsApproved;
     }
 
-    public String getIsMarketer() {
-        return IsMarketer;
-    }
+
 
     public void setIsAdmin(String isAdmin) {
         IsAdmin = isAdmin;
     }
 
+
     public String getIsAdmin() {
         return IsAdmin;
     }
 
-    private String IsMarketer;
 
 }
