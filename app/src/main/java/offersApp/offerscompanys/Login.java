@@ -14,8 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import offersApp.offerscompanys.model.MarketerMembershipRequestMarketer;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -123,81 +125,100 @@ public class Login extends AppCompatActivity {
                 Query userType= reference.orderByChild("Marketer");
 
 
+
+
                 //DatabaseReference userType = FirebaseDatabase.getInstance().getReference("Users").child("Marketer").orderByChild("isMarketer").equalTo(1);
 
 
-                userType.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                     //Log.d("TAG", "onSuccess:IsAdmin " + userType.get());
-
-                        if (snapshot.exists()){
-
-                           // String dbUserTypeAsAdmin = snapshot.child("Admin").child("isAdmin").getValue(String.class);
-                           // String dbUserTypeAsMarketer = snapshot.child("Marketer").child("isMarketer").getValue(String.class);
-
-                            String fullName = snapshot.child("Marketer").child(user.getUid()).child("fullName").getValue(String.class);
-                            String isMarketer = snapshot.child("Marketer").child(user.getUid()).child("isMarketer").getValue(String.class);
-
-                            String isAdmin = snapshot.child("Admin").child(user.getUid()).child("isAdmin").getValue(String.class);
-
-                            if (isMarketer != null){
-
-
-                                Toast.makeText(Login.this, "You Logged as Marketer", Toast.LENGTH_LONG).show();
-
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                                    finish();
-                            }
-
-
-                            if (isAdmin != null){
-
-
-                                Toast.makeText(Login.this, "You Logged as Admin", Toast.LENGTH_LONG).show();
-
-                                startActivity(new Intent(getApplicationContext(),Admin.class));
-                                    finish();
-                            }
-
-
-//                            for (DataSnapshot itemSnapshot: snapshot.getChildren()){
-//                                for (DataSnapshot item : itemSnapshot.getChildren()) {
-//                                    MarketerMembershipRequestMarketer marketerMembershipRequestMarketer = item.getValue(MarketerMembershipRequestMarketer.class);
-//                                    marketerMembershipRequestMarketer.setKey(item.getKey());
-//                                    dataList.add(marketerMembershipRequestMarketer);
-//                                }
-//                            }
-//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//                         .setValue(databaseReference).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()){
+//                            Toast.makeText(Login.this, "Your Request has been sent to Admin to be approved", Toast.LENGTH_SHORT).show();
 //                            finish();
+//                        }
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(Login.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
 
-//                            if (dbUserTypeAsAdmin != null){
+
+//
+//                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                     //Log.d("TAG", "onSuccess:IsAdmin " + userType.get());
+//
+//                        if (snapshot.exists()){
+//
+//                           // String dbUserTypeAsAdmin = snapshot.child("Admin").child("isAdmin").getValue(String.class);
+//                           // String dbUserTypeAsMarketer = snapshot.child("Marketer").child("isMarketer").getValue(String.class);
+//
+////                            String fullName = snapshot.child("Marketer").child(user.getUid()).child("fullName").getValue(String.class);
+//                            String isMarketer = snapshot.child("isMarketer").getValue(String.class);
+//
+////                            String isAdmin = snapshot.child("Admin").child(user.getUid()).child("isAdmin").getValue(String.class);
+//
+//                            if (isMarketer != null){
 //
 //
-//                                Toast.makeText(Login.this, "You Logged as Admin", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(Login.this, "You Logged as Marketer", Toast.LENGTH_LONG).show();
 //
-//                                startActivity(new Intent(getApplicationContext(),Admin.class));
+//                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
 //                                    finish();
 //                            }
-
-
-//                                if (dbUserTypeAsMarketer != null){
-//                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
-//                                    finish();
-//                                }
-
-
-
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+//
+//
+////                            if (isAdmin != null){
+////
+////
+////                                Toast.makeText(Login.this, "You Logged as Admin", Toast.LENGTH_LONG).show();
+////
+////                                startActivity(new Intent(getApplicationContext(),Admin.class));
+////                                    finish();
+////                            }
+//
+//
+////                            for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+////                                for (DataSnapshot item : itemSnapshot.getChildren()) {
+////                                    MarketerMembershipRequestMarketer marketerMembershipRequestMarketer = item.getValue(MarketerMembershipRequestMarketer.class);
+////                                    marketerMembershipRequestMarketer.setKey(item.getKey());
+////                                    dataList.add(marketerMembershipRequestMarketer);
+////                                }
+////                            }
+////                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+////                            finish();
+//
+////                            if (dbUserTypeAsAdmin != null){
+////
+////
+////                                Toast.makeText(Login.this, "You Logged as Admin", Toast.LENGTH_LONG).show();
+////
+////                                startActivity(new Intent(getApplicationContext(),Admin.class));
+////                                    finish();
+////                            }
+//
+//
+////                                if (dbUserTypeAsMarketer != null){
+////                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+////                                    finish();
+////                                }
+//
+//
+//
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
 
 
                 checkField(email);
@@ -205,9 +226,97 @@ public class Login extends AppCompatActivity {
 
                 if (valid){
 
+
+
                     fAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
+
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("UserType");
+
+                               Query UserTypAdmin = databaseReference.orderByChild("UserType").equalTo("isAdmin");
+
+                            if (UserTypAdmin != null) {
+
+
+                                startActivity(new Intent(getApplicationContext(), Admin.class));
+                                finish();
+//                                Query UserTyps = databaseReference.orderByChild("UserType").equalTo("isMarketer");
+
+                            }
+
+                                if(databaseReference != null){
+
+
+                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                    finish();
+
+                                }
+                           // }
+
+
+
+                            ValueEventListener valueEventListener = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    String UserTyp = "";
+//                                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+//                                        UserTyp = ds.child("UserType").getValue(String.class);
+
+                                    //Query UserTyps = databaseReference.orderByChild("UserType").equalTo("isMarketer");
+
+                                   // Toast.makeText(Login.this+ UserTyps , "Logged Successfully", Toast.LENGTH_LONG).show();
+
+
+                                    //   Query UserTypAdmin = databaseReference.orderByChild("UserType").equalTo("isAdmin");
+
+//
+                                   // UserTyp = dataSnapshot.child("UserType").getValue(String.class);
+
+
+
+
+                                    //Log.d("TAG", UserTyp);
+                                    //textView.setText(totalIncome);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    //  Log.d("TAG", databaseError.getMessage()); //Don't ignore errors!
+
+                                }
+
+
+                            };
+                            databaseReference.addListenerForSingleValueEvent(valueEventListener);
+
+
+
+
+
+
+                                      // String isMarketer = authResult.getUser().getUid().child("isMarketer").getValue(String.class);
+
+
+
+//                            if (authResult != null && databaseReference == 'isMarketer' && FirebaseAuth.getInstance().getCurrentUser() != null ){
+//
+//                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//                                  finish();
+//
+//                            }
+
+
+
+//                            if (authResult != null && databaseReference.equals("isAdmin") && FirebaseAuth.getInstance().getCurrentUser() != null) {
+//
+//                                startActivity(new Intent(getApplicationContext(),Admin.class));
+//                                finish();
+//
+//                            }
+
+
 
                             //Toast.makeText(Login.this, IsAdmin.toString(), Toast.LENGTH_LONG).show();
 
