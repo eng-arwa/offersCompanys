@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import offersApp.offerscompanys.model.MarketerMembershipRequestAdmin;
 import offersApp.offerscompanys.model.MarketerMembershipRequestMarketer;
+import offersApp.offerscompanys.model.User;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -196,7 +197,9 @@ public class Register extends AppCompatActivity {
 
            // MarketerMembershipRequestAdmin mrketerMembershipRequest = new MarketerMembershipRequestAdmin(FullName, Email, Password, Phone,IdentityNumber,Address,IsApproved,IsMarketer);
 
+//            MarketerMembershipRequestMarketer mrketerMembershipRequest = new MarketerMembershipRequestMarketer(FullName, Email, Password, Phone,IdentityNumber,Address,IsApproved,IsMarketer);
             MarketerMembershipRequestMarketer mrketerMembershipRequest = new MarketerMembershipRequestMarketer(FullName, Email, Password, Phone,IdentityNumber,Address,IsApproved,IsMarketer);
+
 
             //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
@@ -223,7 +226,7 @@ fAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getTex
     public void onComplete(@NonNull Task<AuthResult> task) {
         if (task.isSuccessful()){
             //createAdminUser();
-            createMarketerUser();
+            createNewUser();
             Toast.makeText(Register.this, "Your Account has created Successfully", Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -325,6 +328,53 @@ fAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getTex
 
 
     }
+
+    public void createNewUser(){
+
+
+        String FullName = fullName.getText().toString();
+        String Email = email.getText().toString();
+        String Password = password.getText().toString();
+        String Phone = phone.getText().toString();
+        String IdentityNumber = identityNumber.getText().toString();
+        String Address = address.getText().toString();
+        //String IsApproved = "1";
+//        String UserType = "isMarketer";
+        String UserType = "isAdmin";
+
+        //String IsAdmin = "1";
+
+        // MarketerMembershipRequestAdmin mrketerMembershipRequest = new MarketerMembershipRequestAdmin(FullName, Email, Password, Phone,IdentityNumber,Address,IsAdmin);
+
+        User user = new User(FullName, Email, Password, Phone,IdentityNumber,Address,UserType);
+
+        //We are changing the child from title to currentDate,
+
+        // because we will be updating title as well and it may affect child value.
+        String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+        FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getUid())
+                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+//                            FirebaseUser user = fAuth.getCurrentUser();
+                            Toast.makeText(Register.this, "You have registered Successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Register.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+
+
+
+    }
+
+
 
 
 }
