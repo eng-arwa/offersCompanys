@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".Detailactivity">
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/detailTitle"
@@ -17,38 +17,43 @@
         android:textSize="24sp"
         android:layout_gravity="center"
         android:layout_marginBottom="12dp"
-        android:textColor="@color/lavender"/>
+        android:textColor="@color/purple"/>
 
     <ImageView
-        android:layout_width="400dp"
-        android:layout_height="200dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:id="@+id/detailImage"
         android:padding="8dp"
         android:layout_gravity="center"
         android:src="@drawable/baseline_image_24"
         android:scaleType="fitXY"/>
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="20dp"
         android:text="Language"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textStyle="bold"
         android:layout_gravity="center"
         android:id="@+id/detailLang"
         android:textSize="18sp"
-        android:textColor="@color/lavender"/>
+        android:textColor="@color/black"/>
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:padding="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+
         android:text="Description"
         android:layout_gravity="center"
         android:id="@+id/detailDesc"
         android:textSize="18sp"
-        android:textColor="@color/lavender"/>
+        android:textColor="@color/black"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -77,17 +82,8 @@
                 app:fab_colorNormal="@color/green"
                 app:fab_size="mini"/>
 
-            <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/deleteButton"
-                android:src="@drawable/baseline_delete_24"
-                app:fab_showShadow="true"
-                app:fab_colorNormal="@color/red"
-                app:fab_size="mini"/>
 
         </com.github.clans.fab.FloatingActionMenu>
 
     </RelativeLayout>
-
 </LinearLayout>

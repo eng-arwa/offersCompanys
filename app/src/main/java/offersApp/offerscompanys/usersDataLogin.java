@@ -1,4 +1,4 @@
-package offersApp.offerscompanys.model;
+package offersApp.offerscompanys;
 
 public interface usersDataLogin {
     String name = "arwa";

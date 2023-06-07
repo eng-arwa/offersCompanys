@@ -3,6 +3,7 @@ package offersApp.offerscompanys;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import offersApp.offerscompanys.model.DataClass;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,10 +38,13 @@ public class activity_upload extends AppCompatActivity {
     EditText uploadTopic, uploadDesc, uploadLang;
     String imageURL;
     Uri uri;
+    SharedPreferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
      setContentView(R.layout.activity_upload);
+         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
         //        start
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
 
@@ -186,7 +189,7 @@ public class activity_upload extends AppCompatActivity {
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("offers").child("yemenmall").child(currentDate)
+        FirebaseDatabase.getInstance().getReference("offers").child(pref.getString("nameUserloined", null) + currentDate)
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

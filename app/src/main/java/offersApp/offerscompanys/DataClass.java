@@ -1,4 +1,4 @@
-package offersApp.offerscompanys.model;
+package offersApp.offerscompanys;
 
 
 public class DataClass {
@@ -33,13 +33,13 @@ public class DataClass {
         return dataImage;
     }
 
-    public DataClass(String dataTitle, String dataDesc, String dataLang, String dataImage, String identityNumber, String address, String isApproved, String isMarketer) {
+    public DataClass(String dataTitle, String dataDesc, String dataLang, String dataImage) {
         this.dataTitle = dataTitle;
         this.dataDesc = dataDesc;
         this.dataLang = dataLang;
         this.dataImage = dataImage;
     }
-    public DataClass(String title, String desc, String lang, String imageUrl){
+    public DataClass(){
 
     }
 }

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/AdminCard"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="10dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:background="@color/white">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/reclogo"
+            android:src="@drawable/baseline_image_24"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rectype"
+            android:text="desc"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_toEndOf="@id/reclogo"
+            android:layout_below="@id/recname"
+            android:layout_marginStart="20dp"
+            android:maxLines="1"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/recadress"
+            android:text="adress"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_toEndOf="@id/recname"
+            android:layout_marginStart="20dp"
+            android:layout_alignTop="@id/recname"
+            android:textAlignment="center"
+            android:maxLines="1"
+            android:layout_marginBottom="12dp"/>
+
+
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:id="@+id/recname"
+            android:text="name"
+            android:textColor="@color/purple"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/reclogo"/>
+
+        <TextView
+            android:id="@+id/recphone"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@id/rectype"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/recname"
+            android:text="phone"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:id="@+id/recidentitynumber"
+            android:text="Identity Number"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_below="@+id/recphone"
+            android:layout_toEndOf="@id/reclogo"/>
+
+        <TextView
+            android:id="@+id/recemail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recidentitynumber"
+            android:layout_marginTop="0dp"
+            android:text="email"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_alignTop="@id/recidentitynumber"
+            android:layout_toEndOf="@id/recidentitynumber"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="5dp"
+
+
+            />
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Created By"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_toEndOf="@id/reclogo"
+            android:layout_below="@+id/recemail"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="5dp"
+
+
+            />
+        <TextView
+            android:id="@+id/RecCreatedBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recidentitynumber"
+            android:layout_marginTop="0dp"
+            android:text="created by"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_alignTop="@id/RecCreatedBy"
+            android:layout_toEndOf="@id/recidentitynumber"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="5dp"
+
+
+            />
+
+        <ImageButton
+            android:clickable="true"
+            android:id="@+id/deleteCompany"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="click"
+            android:padding="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/lavender_border2"
+            android:backgroundTint="@color/purple"
+            android:layout_marginBottom="8dp"
+            android:pointerIcon="hand"
+            android:src="@drawable/baseline_close_24" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

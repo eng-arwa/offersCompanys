@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import offersApp.offerscompanys.model.DataClass;
 
 import com.bumptech.glide.Glide;
 
@@ -43,6 +42,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recDesc.setText(dataList.get(position).getDataDesc());
         holder.recLang.setText(dataList.get(position).getDataLang());
 
+
+
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +56,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 context.startActivity(intent);
             }
         });
+
     }
+
 
     @Override
     public int getItemCount() {

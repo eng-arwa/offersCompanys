@@ -21,7 +21,7 @@
 
     <style name="roundedImageViewRounded">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
+        <item name="cornerSize">30%</item>
     </style>
 
     <style name="Theme.OffersCompanys" parent="Base.Theme.OffersCompanys" />
@@ -40,6 +40,8 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+
+
     </style>
 
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">

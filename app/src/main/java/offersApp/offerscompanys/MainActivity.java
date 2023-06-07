@@ -1,6 +1,7 @@
 package offersApp.offerscompanys;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -11,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import offersApp.offerscompanys.model.DataClass;
-import offersApp.offerscompanys.model.usersDataLogin;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -25,22 +24,27 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
 //    FloatingActionButton fab;
     DatabaseReference databaseReference;
-    ValueEventListener eventListener;
+    ValueEventListener eventListener,eventListener2;
     RecyclerView recyclerView;
     List<DataClass> dataList;
     MyAdapter adapter;
     SearchView searchView;
     Button normalUserBtn;
-
+    SharedPreferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
 
-        //  start
+        //  start navigation
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
 
@@ -66,36 +70,56 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.add:
-                    if(usersDataLogin.name != ""){
-                        startActivity(new Intent(getApplicationContext(), activity_upload.class));
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        finish();
-                        return true;
-                    }else{
+
+                    Map<String, ?> entries = pref.getAll();//get all entries from shared preference
+                    Set<String> keys = entries.keySet();//set all key entries into an array of string type
+
+                    //first option
+                    if(!keys.isEmpty()){
+                        //do your staff here
+                        if(pref.getBoolean("isLogined", true)){
+                            if(pref.getString("typeuserlogined", null).equals("marketer")){
+                                startActivity(new Intent(getApplicationContext(), MarketerPanel.class));
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                finish();
+                                return true;
+                            }
+                            else if(pref.getString("typeuserlogined", null).equals("Admin")){
+                                startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                finish();
+                                return true;
+                            }
+                            else if(pref.getString("typeuserlogined", null).equals("Company")){
+                                startActivity(new Intent(getApplicationContext(), AddCompany.class));
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                finish();
+                                return true;
+                            }
+
+                        }
+
+                    }
+                    else if(keys.isEmpty()){
                         Toast.makeText(this, "You no login in yet", Toast.LENGTH_SHORT).show();
-                    };
+                    }
+
+
+
+
+
+
 
 
             }
             return false;
         });
-//  end
+//  end navigation
 
 
         recyclerView = findViewById(R.id.recyclerView);
-//        fab = findViewById(R.id.fab);
         searchView = findViewById(R.id.search);
-//        normalUserBtn= findViewById(R.id.normalUser);
 
-//        normalUserBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FirebaseAuth.getInstance().signOut();
-//
-//                startActivity(new Intent(getApplicationContext(),Login.class));
-//                finish();
-//            }
-//        });
         searchView.clearFocus();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -115,21 +139,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-//                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
-//                    for (DataSnapshot item : itemSnapshot.getChildren()) {
-//                        DataClass dataClass = item.getValue(DataClass.class);
-//                        dataClass.setKey(item.getKey());
-//                        dataList.add(dataClass);
-//                    }
-//
-//                }
-
                 for (DataSnapshot itemSnapshot: snapshot.getChildren()){
-                    for (DataSnapshot item : itemSnapshot.getChildren()) {
+//                    for (DataSnapshot item : itemSnapshot.getChildren()) {
+//
 //                        DataClass dataClass = item.getValue(DataClass.class);
-//                        dataClass.setKey(item.getKey());
-//                        dataList.add(dataClass);
-                    }
+////                        dataClass.setKey(item.getKey());
+////                        dataList.add(dataClass);
+//
+//                    }
+                    DataClass dataClass = itemSnapshot.getValue(DataClass.class);
+                    dataClass.setKey(itemSnapshot.getKey());
+                    dataList.add(dataClass);
                 }
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();
@@ -139,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

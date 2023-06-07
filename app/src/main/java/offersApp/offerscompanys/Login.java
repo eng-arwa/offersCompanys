@@ -1,115 +1,104 @@
 package offersApp.offerscompanys;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import offersApp.offerscompanys.model.MarketerMembershipRequestMarketer;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Login extends AppCompatActivity {
+import java.util.List;
+import java.util.Map;
 
-    EditText email,password;
+public class Login extends AppCompatActivity {
+//    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+//    SharedPreferences.Editor editor = pref.edit();
+    EditText username,password;
     Button loginBtn;
     TextView gotoRegister;
     boolean valid = true;
-
+    DatabaseReference databaseReference;
+    ValueEventListener eventListener;
+    List<DataAdmin> dataList;
+    MyAdapterMarkter adapter;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDbRef;
     FirebaseUser user;
     //String uid;
+    String fullname,keyuser,userpassword,usertype;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 //        start
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-
-
-
-
-
-        bottomNavigationView.setSelectedItemId(R.id.account);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.homepage:
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-                case R.id.setting:
-                    startActivity(new Intent(getApplicationContext(), Login.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-                case R.id.share:
-                    startActivity(new Intent(getApplicationContext(), activity_upload.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-                case R.id.account:
-                    startActivity(new Intent(getApplicationContext(), Login.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-                case R.id.add:
-                    startActivity(new Intent(getApplicationContext(), Login.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-            }
-            return false;
-        });
+//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+//
+//
+//
+//
+//
+//        bottomNavigationView.setSelectedItemId(R.id.account);
+//        bottomNavigationView.setOnItemSelectedListener(item -> {
+//            switch (item.getItemId()) {
+//                case R.id.homepage:
+//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.setting:
+//                    startActivity(new Intent(getApplicationContext(), Login.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.share:
+//                    startActivity(new Intent(getApplicationContext(), activity_upload.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.account:
+//                    startActivity(new Intent(getApplicationContext(), Login.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.add:
+//                    startActivity(new Intent(getApplicationContext(), Login.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//            }
+//            return false;
+//        });
 //        end
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref",0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
 
-        fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
-
-//         fAuth.getCurrentUser();
-        user = FirebaseAuth.getInstance().getCurrentUser();
-
-//        assert user != null;
-//        String uid = user.getUid();
-
-        email = findViewById(R.id.username);
-        password = findViewById(R.id.password);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.userpass);
         loginBtn = findViewById(R.id.loginButton);
         gotoRegister = findViewById(R.id.RegisterButton);
-
-
-
 
 
 
         gotoRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            startActivity(new Intent(getApplicationContext(), Register.class));
+            startActivity(new Intent(getApplicationContext(), SignupActivity.class));
                // setContentView(R.layout.activity_signup);
             }
         });
@@ -118,178 +107,97 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-                Query userType= reference.orderByChild("Marketer");
-
-
-                //DatabaseReference userType = FirebaseDatabase.getInstance().getReference("Users").child("Marketer").orderByChild("isMarketer").equalTo(1);
-
-
-                userType.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                     //Log.d("TAG", "onSuccess:IsAdmin " + userType.get());
-
-                        if (snapshot.exists()){
-
-                           // String dbUserTypeAsAdmin = snapshot.child("Admin").child("isAdmin").getValue(String.class);
-                           // String dbUserTypeAsMarketer = snapshot.child("Marketer").child("isMarketer").getValue(String.class);
-
-                            String fullName = snapshot.child("Marketer").child(user.getUid()).child("fullName").getValue(String.class);
-                            String isMarketer = snapshot.child("Marketer").child(user.getUid()).child("isMarketer").getValue(String.class);
-
-                            String isAdmin = snapshot.child("Admin").child(user.getUid()).child("isAdmin").getValue(String.class);
-
-                            if (isMarketer != null){
-
-
-                                Toast.makeText(Login.this, "You Logged as Marketer", Toast.LENGTH_LONG).show();
-
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                                    finish();
-                            }
-
-
-                            if (isAdmin != null){
-
-
-                                Toast.makeText(Login.this, "You Logged as Admin", Toast.LENGTH_LONG).show();
-
-                                startActivity(new Intent(getApplicationContext(),Admin.class));
-                                    finish();
-                            }
-
-
-//                            for (DataSnapshot itemSnapshot: snapshot.getChildren()){
-//                                for (DataSnapshot item : itemSnapshot.getChildren()) {
-//                                    MarketerMembershipRequestMarketer marketerMembershipRequestMarketer = item.getValue(MarketerMembershipRequestMarketer.class);
-//                                    marketerMembershipRequestMarketer.setKey(item.getKey());
-//                                    dataList.add(marketerMembershipRequestMarketer);
-//                                }
-//                            }
-//                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-//                            finish();
-
-//                            if (dbUserTypeAsAdmin != null){
-//
-//
-//                                Toast.makeText(Login.this, "You Logged as Admin", Toast.LENGTH_LONG).show();
-//
-//                                startActivity(new Intent(getApplicationContext(),Admin.class));
-//                                    finish();
-//                            }
-
-
-//                                if (dbUserTypeAsMarketer != null){
-//                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
-//                                    finish();
-//                                }
-
-
-
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
-                checkField(email);
+                checkField(username);
                 checkField(password);
+                if(checkField(username)&& checkField(password)){
+                    String name=username.getText().toString();
+                    String pass=password.getText().toString();
 
-                if (valid){
 
-                    fAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//                    databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+//start
+                    DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference users = root.child("Users");
+                    users.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onSuccess(AuthResult authResult) {
+                        public void onDataChange(DataSnapshot snapshot) {
 
-                            //Toast.makeText(Login.this, IsAdmin.toString(), Toast.LENGTH_LONG).show();
+                            step:
+                            for(DataSnapshot snapshotinstace:snapshot.getChildren()){
+
+                                Map<String, Object> Userdata =
+                                        (Map<String, Object>) snapshotinstace.getValue();
+                                 keyuser=snapshotinstace.getKey();
+                                fullname =(String) Userdata.get("fullName");
+                                userpassword =(String) Userdata.get("password");
+                                usertype =(String) Userdata.get("datausertype");
 
 
-//                            Log.d("TAG", "onSuccess:IsAdmin " + IsAdmin);
 
-                            Toast.makeText(Login.this, "Logged Successfully", Toast.LENGTH_LONG).show();
 
-                           // checkUserAccessLevel(authResult.getUser().getUid());
 
+                                 if(name.trim().equals(fullname) || pass.trim().equals(userpassword)){
+
+                                    if(name.trim().equals(fullname) && !(pass.trim().equals(userpassword))){
+//                                        Toast.makeText(Login.this, "Passwotd Incooret", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if(!(name.trim().equals(fullname)) && pass.trim().equals(userpassword)){
+//                                        Toast.makeText(Login.this, "name Incooret", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if (name.trim().equals(fullname) && pass.trim().equals(userpassword)) {
+                                        editor.clear();
+                                        editor.commit();
+                                        keyuser=snapshotinstace.getKey();
+                                        Toast.makeText(Login.this, keyuser, Toast.LENGTH_SHORT).show();
+                                        editor.putBoolean("isLogined", true); // Storing boolean - true/false
+                                        editor.putString("nameuserlogined", fullname); // Storing string
+                                        editor.putString("passworduserlogined", userpassword); // Storing integer
+                                        editor.putString("typeuserlogined",  usertype); // Storing float// Storing long
+                                        editor.putString("keyuser",  keyuser); // Storing float// Storing long
+
+                                        editor.commit(); // commit changes
+
+                                        if (usertype.trim().equals("marketer")){
+//                                            Toast.makeText(Login.this, "yes", Toast.LENGTH_SHORT).show();
+
+
+                                        }
+
+                                        break step;
+                                    }
+
+
+                                }
+                                else{
+
+                                    Toast.makeText(Login.this, "sorry you are not login yet", Toast.LENGTH_SHORT).show();
+
+                                }
+
+
+                            }
 
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
+
                         @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            Toast.makeText(Login.this, "There is an error in login", Toast.LENGTH_LONG).show();
-
+                        public void onCancelled(DatabaseError databaseError) {
 
                         }
                     });
 
+//                    end
+
+
                 }
 
-            }
-        });
-
-    }
-
-    private void checkUserAccessLevel(String uid) {
-
-        DocumentReference df = fStore.collection("Users").document(uid);
-
-       // Query IsAdmin= reference.orderByChild("isAdmin").equalTo("1");
-
-
-
-
-
-
-        //extract data from db document
-        df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.d("TAG", "onSuccess: " + documentSnapshot.getData());
-
-                // identify User Access
-
 
 
             }
         });
 
-
-        //realtime get data
-
-//        DatabaseReference rootRef = FirebaseDatabase.getInstance("Users").getReference(uid);
-//        DatabaseReference isMarketer = rootRef.child("Users").child("isMarketer");
-//        ValueEventListener valueEventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                String totalIncome = "";
-//                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-//                    totalIncome = totalIncome + ds.child("Income").getValue(String.class) + " ";
-//
-//                }
-//                Log.d("TAG", totalIncome);
-//                //textView.setText(totalIncome);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//              //  Log.d("TAG", databaseError.getMessage()); //Don't ignore errors!
-//
-//            }
-//
-//
-//        };
-//        juneRef.addListenerForSingleValueEvent(valueEventListener);
-
-
     }
+
+
 
 
 
@@ -304,14 +212,4 @@ public class Login extends AppCompatActivity {
         return valid;
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            finish();
-
-        }
-    }
 }

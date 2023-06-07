@@ -5,17 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 public class Detailactivity extends AppCompatActivity {
 
@@ -31,8 +27,11 @@ public class Detailactivity extends AppCompatActivity {
         detailDesc = findViewById(R.id.detailDesc);
         detailImage = findViewById(R.id.detailImage);
         detailTitle = findViewById(R.id.detailTitle);
-        deleteButton = findViewById(R.id.deleteButton);
+//        deleteButton = findViewById(R.id.fab);
+//        deleteButton.setContentDescription("content description");
         editButton = findViewById(R.id.editButton);
+//        editButton.setContentDescription("content description");
+
         detailLang = findViewById(R.id.detailLang);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
@@ -43,23 +42,19 @@ public class Detailactivity extends AppCompatActivity {
             imageUrl = bundle.getString("Image");
             Glide.with(this).load(bundle.getString("Image")).into(detailImage);
         }
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+        detailImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("offers");
-                FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
-                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        reference.child(key).removeValue();
-                        Toast.makeText(Detailactivity.this, "Deleted", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        finish();
-                    }
-                });
+                DatabaseReference reference1;
+
+                reference.child(key).removeValue();
             }
         });
+
+//
+
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
