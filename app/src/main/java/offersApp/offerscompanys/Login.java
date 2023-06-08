@@ -32,8 +32,8 @@ public class Login extends AppCompat {
     //    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
 //    SharedPreferences.Editor editor = pref.edit();
     EditText username,password;
-    Button loginBtn,arButton,enButton;
-    TextView gotoRegister, loginTitle;
+    Button loginBtn;
+    TextView gotoRegister;
     boolean valid = true;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
@@ -91,13 +91,7 @@ public class Login extends AppCompat {
 //        });
 //        end
 
-        enButton= findViewById(R.id.enButton);
 
-        arButton = findViewById(R.id.arButton);
-
-        loginTitle = findViewById(R.id.loginText);
-
-        LanguageManager lang = new LanguageManager(this);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref",0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
@@ -212,22 +206,6 @@ public class Login extends AppCompat {
             }
         });
 
-        enButton.setOnClickListener(view ->
-        {
-
-            lang.updateResource("en");
-            recreate();
-
-        });
-
-        arButton.setOnClickListener(view ->
-        {
-
-            lang.updateResource("ar");
-            recreate();
-
-
-        });
 
 //        enButton.setOnClickListener(new View.OnClickListener() {
 //            @Override

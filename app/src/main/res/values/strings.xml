@@ -9,6 +9,116 @@
     <string name="Username">User Name</string>
 
 
+// setting
+
+    // Home
+
+    <string name="SearchTitle">Search...</string>
+
+    <string name="AllOffers">All Offers</string>
+
+
+    // marketers
+
+    <string name="AllMarketers">All Marketers</string>
+
+
+// company
+
+    <string name="RegisterCompany">Register Company</string>
+
+    <string name="uploadLogo">Upload Logo</string>
+
+    <string name="Entertopicname">Enter a topic name</string>
+
+    <string name="EnterPassword">Enter Password</string>
+
+    <string name="EnterAddress">Enter Address</string>
+
+    <string name="EnterCompanyType">Enter Company Type</string>
+
+    <string name="IdentityNumberofCompany">Enter Company Identity</string>
+
+    <string name="EnterPhone">Enter Phone</string>
+
+    <string name="EnterEmail">Enter Email</string>
+
+    <string name="EnterMarketerName">Enter Marketer Name</string>
+
+    // Signup
+
+    <string name="Name">Name</string>
+
+
+
+    <string name="Email">Email</string>
+
+
+    <string name="Phone">Phone</string>
+
+
+    <string name="IdentityCardNumber">Identity Card Number</string>
+
+
+    <string name="Address">Address</string>
+
+
+
+
+    <string name="AlreadyanuserLogin">Already an user? Login</string>
+
+    // Update
+
+
+    <string name="Update">Update</string>
+
+    <string name="Enterlanguage">Enter language</string>
+
+    <string name="Enterdescription">Enter description</string>
+
+    <string name="UpdateData">Update Data</string>
+
+
+
+
+
+
+
+
+
+    // Buttons
+
+    <string name="Save">Save</string>
+
+    <string name="backtoHome">Back to Home</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Bottom Nav
+
+    <string name="Home">Home</string>
+
+    <string name="Share">Share</string>
+
+
+
+
+
+
     // Signup Activity
 
     <string name="SignUp">Sign Up</string>

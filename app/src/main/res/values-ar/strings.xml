@@ -9,7 +9,99 @@
     <string name="AR">العربية</string>
     <string name="Username">اسم المستخدم</string>
     <string name="Password">كلمة السر</string>
-    <string name="loginButton">زر الدخول</string>
+    <string name="loginButton">دخول</string>
+
+    // Setting
+
+    <string name="action_settings">الاعدادات</string>
+
+    // Home
+
+    <string name="SearchTitle">البحث...</string>
+
+    <string name="AllOffers">كل العروض</string>
+
+    // marketers
+
+    <string name="AllMarketers">كل المسوقين</string>
+
+
+
+    // company
+
+    <string name="RegisterCompany">تسجيل الشركة</string>
+
+    <string name="uploadLogo">رفع الشعار</string>
+
+    <string name="Entertopicname">ادخل اسم العنوان</string>
+
+    <string name="EnterPassword">ادخل كلمة السر</string>
+
+    <string name="EnterAddress">ادخل العنوان</string>
+
+    <string name="EnterCompanyType">ادخل نوع الشركة</string>
+
+    <string name="IdentityNumberofCompany">ادخل رقم الشركة </string>
+
+    <string name="EnterPhone">ادخل رقم الهاتف</string>
+
+    <string name="EnterEmail">ادخل الايميل</string>
+
+    <string name="EnterMarketerName">ادخل اسم المسوق</string>
+
+
+
+    // Signup
+
+    <string name="Name">الاسم</string>
+
+
+
+    <string name="Email">الايميل</string>
+
+
+    <string name="Phone">رقم العاتف</string>
+
+
+    <string name="IdentityCardNumber">رقم الهوية</string>
+
+
+    <string name="Address">العنوان</string>
+
+    <string name="AlreadyanuserLogin">اذا كان لديك حساب مسبقاً , قم بتسجيل الدخول</string>
+
+    // Update
+
+
+    <string name="Update">تعديل</string>
+
+    <string name="Enterlanguage">ادخل اللغة</string>
+
+    <string name="Enterdescription">ادخل الشرح</string>
+
+    <string name="UpdateData">تحديث البيانات</string>
+
+
+
+
+
+
+    // Buttons
+
+    <string name="Save">حفظ</string>
+
+    <string name="backtoHome">الرجوع للقائمة الرئيسية</string>
+
+
+    // Bottom Nav
+
+    <string name="Home">القائمة الرئيسية</string>
+
+    <string name="Share">مشاركة</string>
+
+
+
+
 
     // Signup Activity
 
