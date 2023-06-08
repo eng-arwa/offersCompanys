@@ -72,13 +72,9 @@ public class RequestSignUp extends AppCompatActivity {
             return false;
         });
 
-//        end navigation
-        recyclerView = findViewById(R.id.recyclerView);
-//        View inflatedView = getLayoutInflater().inflate(R.layout.recycler_markter,null);
-//        deletemarkter = (ImageButton) inflatedView.findViewById(R.id.D_markter);
-
-
-//        fab = findViewById(R.id.fab);
+        recyclerView = findViewById(R.id.recyclerViewrequest);
+//
+//
         GridLayoutManager gridLayoutManager = new GridLayoutManager(RequestSignUp.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
         AlertDialog.Builder builder = new AlertDialog.Builder(RequestSignUp.this);
@@ -86,7 +82,7 @@ public class RequestSignUp extends AppCompatActivity {
         builder.setView(R.layout.progress_layout);
         AlertDialog dialog = builder.create();
         dialog.show();
-        dataList = new ArrayList<DataMarkter>();
+        dataList = new ArrayList<>();
         adapter = new MyAdapterRequest(RequestSignUp.this, dataList);
         recyclerView.setAdapter(adapter);
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
@@ -98,16 +94,26 @@ public class RequestSignUp extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
                 for (DataSnapshot itemSnapshot: snapshot.getChildren()){
-                    for(DataSnapshot item:itemSnapshot.getChildren()) {
-                        DataMarkter dataClass = item.getValue(DataMarkter.class);
+
+
+
+                    if(itemSnapshot.child("datausertype").getValue().toString().equals("marketer")){
+//
+                        DataMarkter dataClass = itemSnapshot.getValue(DataMarkter.class);
                         dataClass.setKey(itemSnapshot.getKey());
-                        Toast.makeText(RequestSignUp.this, dataClass.toString(), Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(RequestSignUp.this,dataClass.toString(), Toast.LENGTH_LONG).show();
+
+                        dataList.add(dataClass);
+
                     }
-//                    dataList.add(dataClass);
+
+                    adapter.notifyDataSetChanged();
+                    dialog.dismiss();
+
 
                 }
-                adapter.notifyDataSetChanged();
-                dialog.dismiss();
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

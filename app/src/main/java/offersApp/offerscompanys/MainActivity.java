@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,14 +36,17 @@ public class MainActivity extends AppCompatActivity {
     List<DataClass> dataList;
     MyAdapter adapter;
     SearchView searchView;
+    TextView count;
     Button normalUserBtn;
     SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
+        count=findViewById(R.id.count);
 
         //  start navigation
 
@@ -77,27 +81,28 @@ public class MainActivity extends AppCompatActivity {
                     //first option
                     if(!keys.isEmpty()){
                         //do your staff here
-                        if(pref.getBoolean("isLogined", true)){
+                        Toast.makeText(this, pref.getString("typeuserlogined", null), Toast.LENGTH_SHORT).show();
+
                             if(pref.getString("typeuserlogined", null).equals("marketer")){
                                 startActivity(new Intent(getApplicationContext(), MarketerPanel.class));
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 finish();
                                 return true;
                             }
-                            else if(pref.getString("typeuserlogined", null).equals("Admin")){
+                            else if(pref.getString("typeuserlogined", null).equals("admin")){
                                 startActivity(new Intent(getApplicationContext(), AdminActivity.class));
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 finish();
                                 return true;
                             }
-                            else if(pref.getString("typeuserlogined", null).equals("Company")){
+                            else if(pref.getString("typeuserlogined", null).equals("company")){
                                 startActivity(new Intent(getApplicationContext(), AddCompany.class));
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 finish();
                                 return true;
                             }
 
-                        }
+
 
                     }
                     else if(keys.isEmpty()){
@@ -150,15 +155,22 @@ public class MainActivity extends AppCompatActivity {
                     DataClass dataClass = itemSnapshot.getValue(DataClass.class);
                     dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
+                    String c= String.valueOf(adapter.getItemCount());
+                    count.setText(c.toString());
                 }
+
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
             @Override
+
             public void onCancelled(@NonNull DatabaseError error) {
                 dialog.dismiss();
             }
         });
+
+
+//        Toast.makeText(this, (String)count, Toast.LENGTH_SHORT).show();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -182,9 +194,9 @@ public class MainActivity extends AppCompatActivity {
     public void searchList(String text){
         ArrayList<DataClass> searchList = new ArrayList<>();
         for (DataClass dataClass: dataList){
-//            if (dataClass.getDataTitle().toLowerCase().contains(text.toLowerCase())){
-//                searchList.add(dataClass);
-//            }
+          if (dataClass.getDataTitle().toLowerCase().contains(text.toLowerCase())){
+              searchList.add(dataClass);
+           }
         }
         adapter.searchDataList(searchList);
     }

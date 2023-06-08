@@ -33,7 +33,7 @@ public class MarketerList extends AppCompatActivity {
     ValueEventListener eventListener;
     RecyclerView recyclerView;
     List<DataMarkter> dataList;
-    MyAdapterMarkter adapter;
+    AdapterMarketer adapter;
     ImageButton deletemarkter;
     SearchView searchView;
     Button normalUserBtn;
@@ -88,7 +88,7 @@ public class MarketerList extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
         dataList = new ArrayList<>();
-        adapter = new MyAdapterMarkter(MarketerList.this, dataList);
+        adapter = new AdapterMarketer(MarketerList.this, dataList);
         recyclerView.setAdapter(adapter);
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
@@ -99,20 +99,26 @@ public class MarketerList extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
                 for (DataSnapshot itemSnapshot: snapshot.getChildren()){
-                    DataMarkter dataClass = itemSnapshot.getValue(DataMarkter.class);
+
 
 
                    if(itemSnapshot.child("datausertype").getValue().toString().equals("marketer")){
-                    Toast.makeText(MarketerList.this, itemSnapshot.getValue(DataMarkter.class).toString(), Toast.LENGTH_LONG).show();
-                    dataClass.setKey(itemSnapshot.getKey());
-                    dataList.add(itemSnapshot.getValue(DataMarkter.class));
+//
+                       DataMarkter dataClass = itemSnapshot.getValue(DataMarkter.class);
+                       dataClass.setKey(itemSnapshot.getKey());
+
+                       Toast.makeText(MarketerList.this,dataClass.toString(), Toast.LENGTH_LONG).show();
+
+                       dataList.add(dataClass);
+
                     }
 
+                    adapter.notifyDataSetChanged();
+                    dialog.dismiss();
 
 
                 }
-                adapter.notifyDataSetChanged();
-                dialog.dismiss();
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

@@ -173,9 +173,9 @@
                 android:layout_toEndOf="@+id/icon"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="approve"
+                android:text="Approve"
                 android:backgroundTint="@color/lavender"
-                android:background="@drawable/lavender_border"/>
+               />
         <Button
             android:id="@+id/rejacted"
             android:layout_width="100dp"
@@ -184,10 +184,9 @@
             android:layout_marginBottom="20dp"
             android:layout_below="@id/Requestadress"
             android:layout_marginStart="20dp"
-            android:backgroundTint="@color/purple"
-            android:text="Rected"
-            android:layout_toEndOf="@+id/approved"
-            android:background="@drawable/lavender_border"/>
+            android:backgroundTint="#DDCF1818"
+            android:text="Reject"
+            android:layout_toEndOf="@+id/approved"/>
 
 
 

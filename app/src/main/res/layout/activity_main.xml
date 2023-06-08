@@ -24,11 +24,37 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"
-        android:layout_below="@id/search"
+        android:layout_below="@id/count"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView"
         android:scrollbars="vertical"/>
+
+    <TextView
+        android:layout_width="320dp"
+        android:id="@+id/textoffers"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:paddingStart="10dp"
+        android:text=" All Offers "
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search"/>
+    <TextView
+        android:layout_width="80dp"
+        android:text="30"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:id="@+id/count"
+        android:padding="5dp"
+
+        android:layout_marginTop="20dp"
+        android:background="@drawable/lavender_border"
+        android:backgroundTint="@color/lavender"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/textoffers"
+        android:layout_below="@id/search"/>
 
 <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--        android:id="@+id/fab"-->
@@ -65,7 +91,10 @@
         app:itemIconTint="@drawable/item_selector"
         app:itemRippleColor="@android:color/transparent"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/bottom_menu" />
+        app:menu="@menu/bottom_menu" >
+
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </RelativeLayout>

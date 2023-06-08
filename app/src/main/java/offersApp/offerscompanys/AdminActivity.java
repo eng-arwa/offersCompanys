@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -39,6 +40,7 @@ public class AdminActivity extends AppCompatActivity {
     Button normalUserBtn;
     String imageUrl = "";
     CardView card;
+    TextView countcompany;
     String key = "";
     private AppBarConfiguration appBarConfiguration;
     private ActivityAdmin2Binding binding;
@@ -50,7 +52,7 @@ public class AdminActivity extends AppCompatActivity {
         binding = ActivityAdmin2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
+        countcompany=findViewById(R.id.countcompany);
 
 //        start
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation2);
@@ -79,6 +81,12 @@ public class AdminActivity extends AppCompatActivity {
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         finish();
                         return true;
+                case R.id.Request:
+
+                    startActivity(new Intent(getApplicationContext(), RequestSignUp.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+                    return true;
 
 
 
@@ -86,7 +94,7 @@ public class AdminActivity extends AppCompatActivity {
             return false;
         });
 //        end navigation
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerViewadmin);
         card=findViewById(R.id.AdminCard);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(AdminActivity.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -112,7 +120,8 @@ public class AdminActivity extends AppCompatActivity {
                     DataAdmin dataClass = itemSnapshot.getValue(DataAdmin.class);
                     dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
-
+                    String c= String.valueOf(adapter.getItemCount());
+                    countcompany.setText(c.toString());
 
 
                 }
@@ -124,10 +133,27 @@ public class AdminActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
-
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
+            }
+        });
 
     }
-
+    public void searchList(String text){
+        ArrayList<DataAdmin> searchList = new ArrayList<>();
+        for (DataAdmin dataClass: dataList){
+            if (dataClass.getFullName().toLowerCase().contains(text.toLowerCase())){
+                searchList.add(dataClass);
+            }
+        }
+        adapter.searchDataList(searchList);
+    }
 
 }

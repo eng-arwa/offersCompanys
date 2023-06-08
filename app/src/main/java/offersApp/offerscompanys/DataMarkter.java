@@ -5,6 +5,7 @@ public class DataMarkter {
 
     private String fullName;
     private String phone;
+    private  String datalogo;
 
     private String password;
     private String adress;
@@ -21,6 +22,9 @@ public class DataMarkter {
 
     public void setKey(String key) {
         this.key = key;
+    }
+    public String getDatalogo() {
+        return datalogo;
     }
 
     public String getFullName() {
@@ -63,24 +67,22 @@ public class DataMarkter {
         this.identityNumber=dataidentity;
 
     }
-//    public DataMarkter(String dataname, String dataphone, String dataemail,
-//                       String dataadress, String dataidentity) {
-//        this.fullName= dataname;
-//        this.phone = dataphone;
-//        this.email = dataemail;
-//        this.adress=dataadress;
-//        this.identityNumber=dataidentity;
-//
-//    }
-//    public DataMarkter(String dataname,
-//                       String dataadress) {
-//        this.fullName= dataname;
-//
-//        this.adress=dataadress;
-//
-//    }
-//    public DataMarkter(){
-//
-//    }
+    public DataMarkter(String dataname, String dataphone, String dataemail,
+                       String dataadress, String dataidentity) {
+        this.fullName= dataname;
+        this.phone = dataphone;
+        this.email = dataemail;
+        this.adress=dataadress;
+        this.identityNumber=dataidentity;
+
+    }
+    public DataMarkter(String dataname,
+                       String dataadress) {
+        this.fullName= dataname;
+
+        this.adress=dataadress;
+
+    }
+
     public DataMarkter(){}
 }

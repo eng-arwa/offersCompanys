@@ -10,20 +10,29 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> {
-
+    ValueEventListener eventListener;
     private Context context;
+    Object user ;
+    int i=0;
     private List<DataMarkter> dataList;
 
     public MyAdapterRequest(Context context, List<DataMarkter> dataList) {
@@ -40,12 +49,14 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolderRequest holder, int position) {
-        holder.fullName.setText(dataList.get(position).getFullName());
-        holder.phone.setText(dataList.get(position).getPhone());
-        holder.email.setText(dataList.get(position).getEmail());
-        holder.adress.setText(dataList.get(position).getAdress());
-        holder.password.setText(dataList.get(position).getPassword());
-        holder.identityNumber.setText(dataList.get(position).getIdentityNumber());
+        try {
+            holder.fullName.setText(dataList.get(position).getFullName());
+            holder.phone.setText(dataList.get(position).getPhone());
+            holder.adress.setText(dataList.get(position).getAdress());
+            holder.email.setText(dataList.get(position).getEmail());
+            holder.identityNumber.setText(dataList.get(position).getIdentityNumber());
+
+        }catch (Exception error){}
 
 
         holder.recCard.setOnClickListener(new View.OnClickListener() {
@@ -74,11 +85,43 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
             }
         });
         holder.approve.setOnClickListener(new View.OnClickListener() {
+
+            private Object object;
+
             @Override
             public void onClick(View view) {
 
+                String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+
                 String key=dataList.get(holder.getAdapterPosition()).getKey();
-                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("RequestSignup").child(key);
+                DataMarkter dataClass = new DataMarkter(
+                        dataList.get(holder.getAdapterPosition()).getFullName(),
+                        dataList.get(holder.getAdapterPosition()).getPhone(),
+                        dataList.get(holder.getAdapterPosition()).getPassword(),
+                        dataList.get(holder.getAdapterPosition()).getAdress(),
+                        dataList.get(holder.getAdapterPosition()).getEmail(),
+                        dataList.get(holder.getAdapterPosition()).getIdentityNumber());
+
+                Toast.makeText(context, dataList.get(holder.getAdapterPosition()).getDatausertype(), Toast.LENGTH_LONG).show();
+                FirebaseDatabase.getInstance().getReference("Users").child(currentDate)
+                        .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(context, "saved", Toast.LENGTH_SHORT).show();
+                                    final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("RequestSignup");
+                                    reference.child(key).removeValue();
+
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, "failer", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
 
 
 //               end

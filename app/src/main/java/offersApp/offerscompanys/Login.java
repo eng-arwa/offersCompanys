@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity {
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
     List<DataAdmin> dataList;
-    MyAdapterMarkter adapter;
+    AdapterMarketer adapter;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     private FirebaseDatabase mDatabase;
