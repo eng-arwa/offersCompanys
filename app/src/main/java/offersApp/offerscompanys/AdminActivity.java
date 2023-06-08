@@ -95,6 +95,7 @@ public class AdminActivity extends AppCompatActivity {
         });
 //        end navigation
         recyclerView = findViewById(R.id.recyclerViewadmin);
+        searchView=findViewById(R.id.searchcompanyadmin);
         card=findViewById(R.id.AdminCard);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(AdminActivity.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);

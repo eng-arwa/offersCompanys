@@ -37,6 +37,7 @@ public class AddCompany extends AppCompatActivity {
     Button saveButton;
     EditText companyphone,passwordcopmany,companyemail,CreatedBy,companyidentitiy,companytype,companyadress, companyname,BackLink;
     String imageURL;
+    boolean valid;
 
     FirebaseAuth fAuth;
     Uri uri;
@@ -92,29 +93,42 @@ public class AddCompany extends AppCompatActivity {
 
     }
     public void saveData(){
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
-                .child(uri.getLastPathSegment());
-        AlertDialog.Builder builder = new AlertDialog.Builder(AddCompany.this);
-        builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete());
-                Uri urlImage = uriTask.getResult();
-                imageURL = urlImage.toString();
-                uploadData();
-                dialog.dismiss();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                dialog.dismiss();
-            }
-        });
+        checkField(companyadress);
+        checkField(companyemail);
+        checkField(companyphone);
+        checkField(companyname);
+        checkField(companyidentitiy);
+        checkField(companyadress);
+        checkField(passwordcopmany);
+        checkField(companytype);
+
+        if(valid){
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
+                    .child(uri.getLastPathSegment());
+            AlertDialog.Builder builder = new AlertDialog.Builder(AddCompany.this);
+            builder.setCancelable(false);
+            builder.setView(R.layout.progress_layout);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!uriTask.isComplete());
+                    Uri urlImage = uriTask.getResult();
+                    imageURL = urlImage.toString();
+                    uploadData();
+                    dialog.dismiss();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    dialog.dismiss();
+                }
+            });
+
+        }
+
     }
     public void uploadData(){
 
@@ -130,6 +144,8 @@ public class AddCompany extends AppCompatActivity {
 //        userInfo.put("UserEmail", email.getText().toString());
 //        userInfo.put("Password", password.getText().toString());
 //        userInfo.put("Phone", phone.getText().toString());
+
+
 
         String c_name = companyname.getText().toString();
         String c_type = companytype.getText().toString();
@@ -176,4 +192,15 @@ public class AddCompany extends AppCompatActivity {
                 });
 
     }
+    public boolean checkField(EditText textField){
+        if(textField.getText().toString().isEmpty()){
+            textField.setError("Error");
+            valid = false;
+        }else {
+            valid = true;
+        }
+
+        return valid;
+    }
+
 }

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterMarketer extends RecyclerView.Adapter<HolderMarkter>{
@@ -50,6 +51,10 @@ public class AdapterMarketer extends RecyclerView.Adapter<HolderMarkter>{
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+    public void searchDataList(ArrayList<DataMarkter> searchList){
+        dataList = searchList;
+        notifyDataSetChanged();
     }
 }
 class HolderMarkter extends RecyclerView.ViewHolder{

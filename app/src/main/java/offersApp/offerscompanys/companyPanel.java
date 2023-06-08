@@ -54,8 +54,7 @@ public class companyPanel extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.share:
-                    startActivity(new Intent(getApplicationContext(), activity_upload.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    share();
                     finish();
                     return true;
                 case R.id.account:
@@ -153,5 +152,12 @@ public class companyPanel extends AppCompatActivity {
         }
         adapter.searchDataList(searchList);
     }
-
+    public void share() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Here is the share content body";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
 }

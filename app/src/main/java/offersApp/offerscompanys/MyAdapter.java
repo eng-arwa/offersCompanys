@@ -2,7 +2,6 @@ package offersApp.offerscompanys;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,18 +43,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
 
 
-        holder.recCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, Detailactivity.class);
-                intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
-                intent.putExtra("Description", dataList.get(holder.getAdapterPosition()).getDataDesc());
-                intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
-                intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
-                intent.putExtra("Language", dataList.get(holder.getAdapterPosition()).getDataLang());
-                context.startActivity(intent);
-            }
-        });
+//        holder.recCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, Detailactivity.class);
+//                intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
+//                intent.putExtra("Description", dataList.get(holder.getAdapterPosition()).getDataDesc());
+//                intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
+//                intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
+//                intent.putExtra("Language", dataList.get(holder.getAdapterPosition()).getDataLang());
+//                context.startActivity(intent);
+//            }
+//        });
 
     }
 
