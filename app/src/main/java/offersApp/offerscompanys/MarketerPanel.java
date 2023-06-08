@@ -60,9 +60,7 @@ public class MarketerPanel extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.share:
-                    startActivity(new Intent(getApplicationContext(), activity_upload.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
+                   share();
                     return true;
                 case R.id.account:
                     startActivity(new Intent(getApplicationContext(), Login.class));
@@ -91,6 +89,7 @@ public class MarketerPanel extends AppCompatActivity {
 
 //        recycler
         recyclerView = findViewById(R.id.recyclerViewmarkter);
+        searchView=findViewById(R.id.searchcompany);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MarketerPanel.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -138,9 +137,37 @@ public class MarketerPanel extends AppCompatActivity {
             }
         });
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
+            }
+        });
 
 
 
-
+    }
+    public void share() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Here is the share content body";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+    public void searchList(String text){
+        ArrayList<DataAdmin> searchList = new ArrayList<>();
+        for (DataAdmin dataClass: dataList){
+            if (dataClass.getFullName().toLowerCase().contains(text.toLowerCase())){
+                searchList.add(dataClass);
+            }
+        }
+        adapter.searchDataList(searchList);
     }
 }

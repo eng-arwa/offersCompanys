@@ -9,15 +9,53 @@
 
 
 
-
-
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:id="@+id/searchmaeketer"
+        app:iconifiedByDefault="false"
+        app:searchHintIcon="@null"
+        app:queryHint="Search..."
+        android:focusable="false"
+        app:closeIcon="@drawable/baseline_close_24"
+        app:searchIcon="@drawable/baseline_search_24"
+        android:background="@drawable/search_border"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"
-
+        android:layout_below="@+id/textoffers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerListMarketer"
         android:scrollbars="vertical"/>
+    <TextView
+        android:layout_width="320dp"
+        android:id="@+id/textoffers"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:paddingStart="10dp"
+        android:text=" All Marketers "
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchmaeketer"/>
+    <TextView
+        android:layout_width="80dp"
+        android:text="30"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:id="@+id/countmarkter"
+        android:padding="5dp"
+
+        android:layout_marginTop="20dp"
+        android:background="@drawable/lavender_border"
+        android:backgroundTint="@color/lavender"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/textoffers"
+        android:layout_below="@id/searchmaeketer"/>
+
 
     <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
     <!--        android:id="@+id/fab"-->

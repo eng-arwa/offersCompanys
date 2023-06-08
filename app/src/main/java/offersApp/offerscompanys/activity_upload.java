@@ -63,9 +63,7 @@ public class activity_upload extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.share:
-                    startActivity(new Intent(getApplicationContext(), activity_upload.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
+                   share();
                     return true;
                 case R.id.account:
                     startActivity(new Intent(getApplicationContext(), Login.class));
@@ -204,5 +202,13 @@ public class activity_upload extends AppCompatActivity {
                         Toast.makeText(activity_upload.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    public void share() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Here is the share content body";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 }

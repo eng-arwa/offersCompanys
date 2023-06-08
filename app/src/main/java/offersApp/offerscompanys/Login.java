@@ -40,51 +40,13 @@ public class Login extends AppCompatActivity {
     private DatabaseReference mDbRef;
     FirebaseUser user;
     //String uid;
-    String fullname,keyuser,userpassword,usertype;
+    String fullname,keyuser,userpassword,usertype, statelogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        start
-//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-//
-//
-//
-//
-//
-//        bottomNavigationView.setSelectedItemId(R.id.account);
-//        bottomNavigationView.setOnItemSelectedListener(item -> {
-//            switch (item.getItemId()) {
-//                case R.id.homepage:
-//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                    finish();
-//                    return true;
-//                case R.id.setting:
-//                    startActivity(new Intent(getApplicationContext(), Login.class));
-//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                    finish();
-//                    return true;
-//                case R.id.share:
-//                    startActivity(new Intent(getApplicationContext(), activity_upload.class));
-//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                    finish();
-//                    return true;
-//                case R.id.account:
-//                    startActivity(new Intent(getApplicationContext(), Login.class));
-//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                    finish();
-//                    return true;
-//                case R.id.add:
-//                    startActivity(new Intent(getApplicationContext(), Login.class));
-//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                    finish();
-//                    return true;
-//            }
-//            return false;
-//        });
-//        end
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref",0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
 
@@ -105,8 +67,11 @@ public class Login extends AppCompatActivity {
 
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
+
                 checkField(username);
                 checkField(password);
                 if(checkField(username)&& checkField(password)){
@@ -136,19 +101,24 @@ public class Login extends AppCompatActivity {
 
 
 
-                                 if(name.trim().equals(fullname) || pass.trim().equals(userpassword)){
 
-                                    if(name.trim().equals(fullname) && !(pass.trim().equals(userpassword))){
-//                                        Toast.makeText(Login.this, "Passwotd Incooret", Toast.LENGTH_SHORT).show();
+//                                     if(!(name.trim().equals(fullname)) && !(pass.trim().equals(userpassword))){
+//
+//
+//                                    statelogin="sorry you are not login yet";
+//
+//                                     }
+                                     if(name.trim().equals(fullname) && !pass.trim().equals(userpassword)){
+                                        statelogin="Passwotd Incooret";
                                     }
                                     else if(!(name.trim().equals(fullname)) && pass.trim().equals(userpassword)){
-//                                        Toast.makeText(Login.this, "name Incooret", Toast.LENGTH_SHORT).show();
+
+                                       statelogin="name Incooret";
                                     }
                                     else if (name.trim().equals(fullname) && pass.trim().equals(userpassword)) {
                                         editor.clear();
                                         editor.commit();
                                         keyuser=snapshotinstace.getKey();
-                                        Toast.makeText(Login.this, keyuser, Toast.LENGTH_SHORT).show();
                                         editor.putBoolean("isLogined", true); // Storing boolean - true/false
                                         editor.putString("nameuserlogined", fullname); // Storing string
                                         editor.putString("passworduserlogined", userpassword); // Storing integer
@@ -157,8 +127,10 @@ public class Login extends AppCompatActivity {
 
                                         editor.commit(); // commit changes
 
-                                        if (usertype.trim().equals("marketer")){
-//                                            Toast.makeText(Login.this, "yes", Toast.LENGTH_SHORT).show();
+                                        if (usertype.trim().equals("marketer") || usertype.trim().equals("admin") || usertype.trim().equals("company")){
+
+                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
 
 
                                         }
@@ -167,25 +139,28 @@ public class Login extends AppCompatActivity {
                                     }
 
 
-                                }
-                                else{
 
-                                    Toast.makeText(Login.this, "sorry you are not login yet", Toast.LENGTH_SHORT).show();
 
-                                }
+
 
 
                             }
+                            Toast.makeText(Login.this, statelogin, Toast.LENGTH_SHORT).show();
+
 
                         }
+
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
                         }
+
+
                     });
 
 //                    end
+
 
 
                 }
@@ -211,5 +186,6 @@ public class Login extends AppCompatActivity {
 
         return valid;
     }
+
 
 }

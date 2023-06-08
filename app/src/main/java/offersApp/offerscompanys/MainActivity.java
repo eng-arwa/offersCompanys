@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
-        count=findViewById(R.id.count);
+        count = findViewById(R.id.count);
 
         //  start navigation
 
@@ -64,9 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.share:
-                    startActivity(new Intent(getApplicationContext(), activity_upload.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
+                    share();
                     return true;
                 case R.id.account:
                     startActivity(new Intent(getApplicationContext(), Login.class));
@@ -79,41 +77,31 @@ public class MainActivity extends AppCompatActivity {
                     Set<String> keys = entries.keySet();//set all key entries into an array of string type
 
                     //first option
-                    if(!keys.isEmpty()){
+                    if (!keys.isEmpty()) {
                         //do your staff here
                         Toast.makeText(this, pref.getString("typeuserlogined", null), Toast.LENGTH_SHORT).show();
 
-                            if(pref.getString("typeuserlogined", null).equals("marketer")){
-                                startActivity(new Intent(getApplicationContext(), MarketerPanel.class));
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                finish();
-                                return true;
-                            }
-                            else if(pref.getString("typeuserlogined", null).equals("admin")){
-                                startActivity(new Intent(getApplicationContext(), AdminActivity.class));
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                finish();
-                                return true;
-                            }
-                            else if(pref.getString("typeuserlogined", null).equals("company")){
-                                startActivity(new Intent(getApplicationContext(), AddCompany.class));
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                finish();
-                                return true;
-                            }
+                        if (pref.getString("typeuserlogined", null).equals("marketer")) {
+                            startActivity(new Intent(getApplicationContext(), MarketerPanel.class));
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            finish();
+                            return true;
+                        } else if (pref.getString("typeuserlogined", null).equals("admin")) {
+                            startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            finish();
+                            return true;
+                        } else if (pref.getString("typeuserlogined", null).equals("company")) {
+                            startActivity(new Intent(getApplicationContext(), AddCompany.class));
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            finish();
+                            return true;
+                        }
 
 
-
-                    }
-                    else if(keys.isEmpty()){
+                    } else if (keys.isEmpty()) {
                         Toast.makeText(this, "You no login in yet", Toast.LENGTH_SHORT).show();
                     }
-
-
-
-
-
-
 
 
             }
@@ -144,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
 //                    for (DataSnapshot item : itemSnapshot.getChildren()) {
 //
 //                        DataClass dataClass = item.getValue(DataClass.class);
@@ -155,13 +143,14 @@ public class MainActivity extends AppCompatActivity {
                     DataClass dataClass = itemSnapshot.getValue(DataClass.class);
                     dataClass.setKey(itemSnapshot.getKey());
                     dataList.add(dataClass);
-                    String c= String.valueOf(adapter.getItemCount());
+                    String c = String.valueOf(adapter.getItemCount());
                     count.setText(c.toString());
                 }
 
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
+
             @Override
 
             public void onCancelled(@NonNull DatabaseError error) {
@@ -177,19 +166,15 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 searchList(newText);
                 return true;
             }
         });
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, activity_upload.class);
-//                startActivity(intent);
-//            }
-//        });
+
+
     }
     public void searchList(String text){
         ArrayList<DataClass> searchList = new ArrayList<>();
@@ -200,6 +185,15 @@ public class MainActivity extends AppCompatActivity {
         }
         adapter.searchDataList(searchList);
     }
+    public void share() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Here is the share content body";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
 
 
 

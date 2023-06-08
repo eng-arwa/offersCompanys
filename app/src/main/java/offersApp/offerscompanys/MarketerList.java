@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,6 @@ import java.util.Calendar;
 import java.util.List;
 
 
-
 public class MarketerList extends AppCompatActivity {
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
@@ -35,6 +35,7 @@ public class MarketerList extends AppCompatActivity {
     List<DataMarkter> dataList;
     AdapterMarketer adapter;
     ImageButton deletemarkter;
+    TextView countmarkter;
     SearchView searchView;
     Button normalUserBtn;
     private AppBarConfiguration appBarConfiguration;
@@ -42,6 +43,7 @@ public class MarketerList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marketer_list);
+        countmarkter=findViewById(R.id.countmarkter);
 
         //        start
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation2);
@@ -78,7 +80,7 @@ public class MarketerList extends AppCompatActivity {
 
 //        end navigation
         recyclerView = findViewById(R.id.recyclerListMarketer);
-//
+      searchView=findViewById(R.id.searchmaeketer);
 //
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MarketerList.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -110,6 +112,8 @@ public class MarketerList extends AppCompatActivity {
                        Toast.makeText(MarketerList.this,dataClass.toString(), Toast.LENGTH_LONG).show();
 
                        dataList.add(dataClass);
+                       String c= String.valueOf(adapter.getItemCount());
+                       countmarkter.setText(c.toString());
 
                     }
 
@@ -125,16 +129,28 @@ public class MarketerList extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-//         deletemarkter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("offers");
-//                DatabaseReference reference1;
-//                Toast.makeText(MarketerList.this, "clicked", Toast.LENGTH_SHORT).show();
-////                reference.child(key).removeValue();
-//            }
-//        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
+            }
+        });
 
     }
+
+    public void searchList(String text){
+        ArrayList<DataMarkter> searchList = new ArrayList<>();
+        for (DataMarkter dataClass: dataList){
+            if (dataClass.getFullName().toLowerCase().contains(text.toLowerCase())){
+                searchList.add(dataClass);
+            }
+        }
+        adapter.searchDataList(searchList);
+    }
+
 }
