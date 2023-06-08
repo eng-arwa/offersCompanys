@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import offersApp.offerscompanys.databinding.ActivitySettingBinding;
 
-public class Setting extends AppCompatActivity {
+public class Setting extends AppCompat {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivitySettingBinding binding;

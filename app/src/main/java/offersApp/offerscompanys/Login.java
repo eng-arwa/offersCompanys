@@ -1,7 +1,11 @@
 package offersApp.offerscompanys;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,14 +25,15 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
-public class Login extends AppCompatActivity {
-//    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+public class Login extends AppCompat {
+    //    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
 //    SharedPreferences.Editor editor = pref.edit();
     EditText username,password;
-    Button loginBtn;
-    TextView gotoRegister;
+    Button loginBtn,arButton,enButton;
+    TextView gotoRegister, loginTitle;
     boolean valid = true;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
@@ -85,6 +90,15 @@ public class Login extends AppCompatActivity {
 //            return false;
 //        });
 //        end
+
+        enButton= findViewById(R.id.enButton);
+
+        arButton = findViewById(R.id.arButton);
+
+        loginTitle = findViewById(R.id.loginText);
+
+        LanguageManager lang = new LanguageManager(this);
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref",0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
 
@@ -98,8 +112,11 @@ public class Login extends AppCompatActivity {
         gotoRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            startActivity(new Intent(getApplicationContext(), SignupActivity.class));
-               // setContentView(R.layout.activity_signup);
+//                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
+//                // setContentView(R.layout.activity_signup);
+
+                Intent intent = new Intent(Login.this, SignupActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -127,7 +144,7 @@ public class Login extends AppCompatActivity {
 
                                 Map<String, Object> Userdata =
                                         (Map<String, Object>) snapshotinstace.getValue();
-                                 keyuser=snapshotinstace.getKey();
+                                keyuser=snapshotinstace.getKey();
                                 fullname =(String) Userdata.get("fullName");
                                 userpassword =(String) Userdata.get("password");
                                 usertype =(String) Userdata.get("datausertype");
@@ -136,7 +153,7 @@ public class Login extends AppCompatActivity {
 
 
 
-                                 if(name.trim().equals(fullname) || pass.trim().equals(userpassword)){
+                                if(name.trim().equals(fullname) || pass.trim().equals(userpassword)){
 
                                     if(name.trim().equals(fullname) && !(pass.trim().equals(userpassword))){
 //                                        Toast.makeText(Login.this, "Passwotd Incooret", Toast.LENGTH_SHORT).show();
@@ -195,7 +212,94 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        enButton.setOnClickListener(view ->
+        {
+
+            lang.updateResource("en");
+            recreate();
+
+        });
+
+        arButton.setOnClickListener(view ->
+        {
+
+            lang.updateResource("ar");
+            recreate();
+
+
+        });
+
+//        enButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                changeLanguage("en");
+//                recreate();
+//
+//            }
+//        });
+//
+//        arButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                changeLanguage("ar");
+//                recreate();
+//
+//            }
+//        });
+
     }
+
+//    private void changeLanguage(String language)
+//    {
+//        Locale locale = new Locale(language);
+//
+//        Locale.setDefault(Locale.forLanguageTag(locale.getLanguage()));
+//
+//        Configuration configuration= new Configuration();
+//
+//        configuration.locale = locale;
+//
+//
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            setSystemLocale(configuration, locale);
+//        }else{
+//            setSystemLocaleLegacy(configuration, locale);
+//        }
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            getApplicationContext().getResources().updateConfiguration(configuration,getApplicationContext().getResources().getDisplayMetrics());
+//
+//    }
+//
+//        // After success we can handle them with shared preference
+//
+//        // Update Items
+//        username.setText(getString(R.string.Username));
+//        loginTitle.setText(getString(R.string.Login));
+//
+//        password.setText(getString(R.string.Password));
+//
+//
+//
+//
+//    }
+//
+//
+
+//    public static void setLanguage(String languageCode){
+//        Locale locale = new Locale(languageCode);
+//        Locale.setDefault(locale);
+//        Configuration config = new Configuration();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            setSystemLocale(config, locale);
+//        }else{
+//            setSystemLocaleLegacy(config, locale);
+//        }
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1)
+//            getApplicationContext().getResources().updateConfiguration(config,
+//                    getApplicationContext().getResources().getDisplayMetrics());
+//    }
+
 
 
 

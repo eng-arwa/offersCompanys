@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="app_name">عروض الشركات</string>
+
+    <string name="Login">تسجيل الدخول</string>
+    <string name="EN">الانجليزية</string>
+    <string name="AR">العربية</string>
+    <string name="Username">اسم المستخدم</string>
+    <string name="Password">كلمة السر</string>
+    <string name="loginButton">زر الدخول</string>
+
+    // Signup Activity
+
+    <string name="SignUp">انشاء حساب </string>
+
+
+
+</resources>
