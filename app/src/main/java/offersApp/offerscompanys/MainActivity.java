@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                     //first option
                     if (!keys.isEmpty()) {
                         //do your staff here
-                        Toast.makeText(this, pref.getString("typeuserlogined", null), Toast.LENGTH_SHORT).show();
 
                         if (pref.getString("typeuserlogined", null).equals("marketer")) {
                             startActivity(new Intent(getApplicationContext(), MarketerPanel.class));
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                             finish();
                             return true;
                         } else if (pref.getString("typeuserlogined", null).equals("company")) {
-                            startActivity(new Intent(getApplicationContext(), AddCompany.class));
+                            startActivity(new Intent(getApplicationContext(), companyPanel.class));
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             finish();
                             return true;

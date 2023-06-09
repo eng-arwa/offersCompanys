@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +39,7 @@ public class MyAdaptercompany extends RecyclerView.Adapter<MyViewHolderCompany> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolderCompany holder, int position) {
         Glide.with(context).load(dataList.get(position).getDataImage()).into(holder.recImage);
+        holder.recTitle.setText(dataList.get(position).getKey());
         holder.recTitle.setText(dataList.get(position).getDataTitle());
         holder.recDesc.setText(dataList.get(position).getDataDesc());
         holder.recLang.setText(dataList.get(position).getDataLang());
@@ -56,6 +58,7 @@ public class MyAdaptercompany extends RecyclerView.Adapter<MyViewHolderCompany> 
                 context.startActivity(intent);
             }
         });
+
 
     }
 
@@ -76,6 +79,7 @@ class MyViewHolderCompany extends RecyclerView.ViewHolder{
     ImageView recImage;
     TextView recTitle, recDesc, recLang;
     CardView recCard;
+    Button edit;
 
     public MyViewHolderCompany(@NonNull View itemView) {
         super(itemView);

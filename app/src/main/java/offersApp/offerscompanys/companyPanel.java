@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -33,10 +34,12 @@ public class companyPanel extends AppCompatActivity {
     SearchView searchView;
     Button normalUserBtn;
     SharedPreferences pref;
+    TextView countoffercompany;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_panel);
+        countoffercompany=findViewById(R.id.companycountoffer);
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
 
@@ -118,6 +121,8 @@ public class companyPanel extends AppCompatActivity {
                         dataClass.setKey(itemSnapshot.getKey());
                         dataList.add(dataClass);
                     }
+                    String c= String.valueOf(adapter.getItemCount());
+                    countoffercompany.setText(c.toString());
 
                 }
                 adapter.notifyDataSetChanged();
@@ -146,9 +151,9 @@ public class companyPanel extends AppCompatActivity {
     public void searchList(String text){
         ArrayList<DataClass> searchList = new ArrayList<>();
         for (DataClass dataClass: dataList){
-//            if (dataClass.getDataTitle().toLowerCase().contains(text.toLowerCase())){
-//                searchList.add(dataClass);
-//            }
+            if (dataClass.getDataTitle().toLowerCase().contains(text.toLowerCase())){
+                searchList.add(dataClass);
+            }
         }
         adapter.searchDataList(searchList);
     }

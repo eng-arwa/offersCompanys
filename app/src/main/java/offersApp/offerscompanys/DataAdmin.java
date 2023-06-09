@@ -82,7 +82,7 @@ public class DataAdmin {
 
         this.datalogo = datalogo;
 
-        this.datausertype="Company";
+        this.datausertype="company";
         this.dataadress=dataadress;
 
     }

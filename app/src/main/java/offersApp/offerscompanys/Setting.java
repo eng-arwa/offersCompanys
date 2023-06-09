@@ -3,21 +3,16 @@ package offersApp.offerscompanys;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.clans.fab.FloatingActionButton;
+import androidx.navigation.ui.AppBarConfiguration;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Map;
 import java.util.Set;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ui.AppBarConfiguration;
-
-import offersApp.offerscompanys.databinding.ActivitySettingBinding;
 
 public class Setting extends AppCompat {
 
@@ -55,10 +50,10 @@ public class Setting extends AppCompat {
         //  start navigation
 
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationSetting);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationsetting);
 
 
-        bottomNavigationView.setSelectedItemId(R.id.homepage);
+        bottomNavigationView.setSelectedItemId(R.id.setting);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.homepage:
@@ -67,12 +62,7 @@ public class Setting extends AppCompat {
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                 case R.id.setting:
-//                    startActivity(new Intent(getApplicationContext(), Setting.class));
 //
-//
-//
-//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                    finish();
                     return true;
                 case R.id.share:
                     share();

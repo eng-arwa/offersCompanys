@@ -1,19 +1,13 @@
 package offersApp.offerscompanys;
 
-import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +19,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class Login extends AppCompat {
@@ -33,7 +26,7 @@ public class Login extends AppCompat {
 //    SharedPreferences.Editor editor = pref.edit();
     EditText username,password;
     Button loginBtn;
-    TextView gotoRegister;
+    TextView gotoRegister ,back,logout;
     boolean valid = true;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
@@ -100,6 +93,8 @@ public class Login extends AppCompat {
         password = findViewById(R.id.userpass);
         loginBtn = findViewById(R.id.loginButton);
         gotoRegister = findViewById(R.id.RegisterButton);
+        back=findViewById(R.id.Back);
+        logout=findViewById(R.id.logout);
 
 
 
@@ -111,6 +106,22 @@ public class Login extends AppCompat {
 
                 Intent intent = new Intent(Login.this, SignupActivity.class);
                 startActivity(intent);
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                // setContentView(R.layout.activity_signup);
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.clear();
+                editor.commit();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
             }
         });
 

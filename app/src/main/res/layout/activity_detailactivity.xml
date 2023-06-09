@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Detailactivity"
+    >
+
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="50dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginStart="20dp"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="20dp">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -20,8 +37,8 @@
         android:textColor="@color/purple"/>
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:id="@+id/detailImage"
         android:padding="8dp"
         android:layout_gravity="center"
@@ -33,9 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="20dp"
-        android:text="Language"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:text="Price"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:id="@+id/detailLang"
@@ -46,8 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
 
         android:text="Description"
         android:layout_gravity="center"
@@ -55,35 +72,17 @@
         android:textSize="18sp"
         android:textColor="@color/black"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <Button
+        android:layout_width="200dp"
+        android:id="@+id/editoffer"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/lavender"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="50dp"
+        android:text="Save Edit"
 
-        <com.github.clans.fab.FloatingActionMenu
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            app:menu_fab_size="normal"
-            android:layout_marginBottom="20dp"
-            android:layout_marginEnd="20dp"
-            app:menu_colorPressed="@color/lavender"
-            app:menu_colorNormal="@color/lavender"
-            app:menu_icon="@drawable/baseline_format_list_bulleted_24"
-            app:menu_openDirection="up"
-            app:menu_showShadow="true">
-
-            <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editButton"
-                android:src="@drawable/baseline_edit_24"
-                app:fab_showShadow="true"
-                app:fab_colorNormal="@color/green"
-                app:fab_size="mini"/>
-
-
-        </com.github.clans.fab.FloatingActionMenu>
-
-    </RelativeLayout>
+        />
 </LinearLayout>
+</androidx.cardview.widget.CardView>
+</RelativeLayout>
