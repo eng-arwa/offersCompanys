@@ -1,7 +1,11 @@
 package offersApp.offerscompanys;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,10 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
-public class Login extends AppCompatActivity {
-//    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+public class Login extends AppCompat {
+    //    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
 //    SharedPreferences.Editor editor = pref.edit();
     EditText username,password;
     Button loginBtn;
@@ -40,12 +45,53 @@ public class Login extends AppCompatActivity {
     private DatabaseReference mDbRef;
     FirebaseUser user;
     //String uid;
-    String fullname,keyuser,userpassword,usertype, statelogin;
+    String fullname,keyuser,userpassword,usertype;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        start
+//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+//
+//
+//
+//
+//
+//        bottomNavigationView.setSelectedItemId(R.id.account);
+//        bottomNavigationView.setOnItemSelectedListener(item -> {
+//            switch (item.getItemId()) {
+//                case R.id.homepage:
+//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.setting:
+//                    startActivity(new Intent(getApplicationContext(), Login.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.share:
+//                    startActivity(new Intent(getApplicationContext(), activity_upload.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.account:
+//                    startActivity(new Intent(getApplicationContext(), Login.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.add:
+//                    startActivity(new Intent(getApplicationContext(), Login.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//            }
+//            return false;
+//        });
+//        end
+
+
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref",0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
@@ -60,18 +106,18 @@ public class Login extends AppCompatActivity {
         gotoRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            startActivity(new Intent(getApplicationContext(), SignupActivity.class));
-               // setContentView(R.layout.activity_signup);
+//                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
+//                // setContentView(R.layout.activity_signup);
+
+                Intent intent = new Intent(Login.this, SignupActivity.class);
+                startActivity(intent);
             }
         });
 
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
-
                 checkField(username);
                 checkField(password);
                 if(checkField(username)&& checkField(password)){
@@ -92,7 +138,7 @@ public class Login extends AppCompatActivity {
 
                                 Map<String, Object> Userdata =
                                         (Map<String, Object>) snapshotinstace.getValue();
-                                 keyuser=snapshotinstace.getKey();
+                                keyuser=snapshotinstace.getKey();
                                 fullname =(String) Userdata.get("fullName");
                                 userpassword =(String) Userdata.get("password");
                                 usertype =(String) Userdata.get("datausertype");
@@ -101,24 +147,19 @@ public class Login extends AppCompatActivity {
 
 
 
+                                if(name.trim().equals(fullname) || pass.trim().equals(userpassword)){
 
-//                                     if(!(name.trim().equals(fullname)) && !(pass.trim().equals(userpassword))){
-//
-//
-//                                    statelogin="sorry you are not login yet";
-//
-//                                     }
-                                     if(name.trim().equals(fullname) && !pass.trim().equals(userpassword)){
-                                        statelogin="Passwotd Incooret";
+                                    if(name.trim().equals(fullname) && !(pass.trim().equals(userpassword))){
+//                                        Toast.makeText(Login.this, "Passwotd Incooret", Toast.LENGTH_SHORT).show();
                                     }
                                     else if(!(name.trim().equals(fullname)) && pass.trim().equals(userpassword)){
-
-                                       statelogin="name Incooret";
+//                                        Toast.makeText(Login.this, "name Incooret", Toast.LENGTH_SHORT).show();
                                     }
                                     else if (name.trim().equals(fullname) && pass.trim().equals(userpassword)) {
                                         editor.clear();
                                         editor.commit();
                                         keyuser=snapshotinstace.getKey();
+                                        Toast.makeText(Login.this, keyuser, Toast.LENGTH_SHORT).show();
                                         editor.putBoolean("isLogined", true); // Storing boolean - true/false
                                         editor.putString("nameuserlogined", fullname); // Storing string
                                         editor.putString("passworduserlogined", userpassword); // Storing integer
@@ -127,10 +168,8 @@ public class Login extends AppCompatActivity {
 
                                         editor.commit(); // commit changes
 
-                                        if (usertype.trim().equals("marketer") || usertype.trim().equals("admin") || usertype.trim().equals("company")){
-
-                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
+                                        if (usertype.trim().equals("marketer")){
+//                                            Toast.makeText(Login.this, "yes", Toast.LENGTH_SHORT).show();
 
 
                                         }
@@ -139,28 +178,25 @@ public class Login extends AppCompatActivity {
                                     }
 
 
+                                }
+                                else{
 
+                                    Toast.makeText(Login.this, "sorry you are not login yet", Toast.LENGTH_SHORT).show();
 
-
+                                }
 
 
                             }
-                            Toast.makeText(Login.this, statelogin, Toast.LENGTH_SHORT).show();
-
 
                         }
-
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
                         }
-
-
                     });
 
 //                    end
-
 
 
                 }
@@ -170,7 +206,78 @@ public class Login extends AppCompatActivity {
             }
         });
 
+
+//        enButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                changeLanguage("en");
+//                recreate();
+//
+//            }
+//        });
+//
+//        arButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                changeLanguage("ar");
+//                recreate();
+//
+//            }
+//        });
+
     }
+
+//    private void changeLanguage(String language)
+//    {
+//        Locale locale = new Locale(language);
+//
+//        Locale.setDefault(Locale.forLanguageTag(locale.getLanguage()));
+//
+//        Configuration configuration= new Configuration();
+//
+//        configuration.locale = locale;
+//
+//
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            setSystemLocale(configuration, locale);
+//        }else{
+//            setSystemLocaleLegacy(configuration, locale);
+//        }
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            getApplicationContext().getResources().updateConfiguration(configuration,getApplicationContext().getResources().getDisplayMetrics());
+//
+//    }
+//
+//        // After success we can handle them with shared preference
+//
+//        // Update Items
+//        username.setText(getString(R.string.Username));
+//        loginTitle.setText(getString(R.string.Login));
+//
+//        password.setText(getString(R.string.Password));
+//
+//
+//
+//
+//    }
+//
+//
+
+//    public static void setLanguage(String languageCode){
+//        Locale locale = new Locale(languageCode);
+//        Locale.setDefault(locale);
+//        Configuration config = new Configuration();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            setSystemLocale(config, locale);
+//        }else{
+//            setSystemLocaleLegacy(config, locale);
+//        }
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1)
+//            getApplicationContext().getResources().updateConfiguration(config,
+//                    getApplicationContext().getResources().getDisplayMetrics());
+//    }
+
 
 
 
@@ -186,6 +293,5 @@ public class Login extends AppCompatActivity {
 
         return valid;
     }
-
 
 }

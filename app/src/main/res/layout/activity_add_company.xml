@@ -33,7 +33,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Register Company"
+                    android:text="@string/RegisterCompany"
                     android:textAlignment="center"
                     android:textColor="@color/purple"
                     android:textSize="30sp" />
@@ -45,7 +45,7 @@
                     android:autofillHints="upload Logo"
                     android:scaleType="fitCenter"
                     android:src="@drawable/baseline_cloud_upload_24"
-                    android:tooltipText="upload Logo Company" />
+                    android:tooltipText="@string/uploadLogo" />
 
                 <EditText
                     android:id="@+id/companyname"
@@ -54,7 +54,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/lavender_border"
                     android:gravity="start|center_vertical"
-                    android:hint="Enter topic name"
+                    android:hint="@string/Entertopicname"
                     android:inputType="text"
                     android:padding="16dp"
                     android:textColor="@color/lavender" />
@@ -66,7 +66,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/lavender_border"
                     android:gravity="start|center_vertical"
-                    android:hint="Enter Password"
+                    android:hint="@string/EnterPassword"
                     android:inputType="textPassword"
                     android:padding="16dp"
                     android:textColor="@color/lavender" />
@@ -78,7 +78,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/lavender_border"
                     android:gravity="start|center_vertical"
-                    android:hint="Enter adress"
+                    android:hint="@string/EnterAddress"
                     android:inputType="textPostalAddress"
                     android:padding="16dp"
                     android:textColor="@color/lavender" />
@@ -91,7 +91,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/lavender_border"
                     android:gravity="start|center_vertical"
-                    android:hint="Enter type Company"
+                    android:hint="@string/EnterCompanyType"
                     android:padding="16dp"
                     android:inputType="text"
                     android:textColor="@color/lavender" />
@@ -103,7 +103,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/lavender_border"
                     android:gravity="start|center_vertical"
-                    android:hint="identity Number Company"
+                    android:hint="@string/IdentityNumberofCompany"
                     android:inputType="number"
                     android:padding="16dp"
                     android:textColor="@color/lavender" />
@@ -115,7 +115,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/lavender_border"
                     android:gravity="start|center_vertical"
-                    android:hint="Enter Phone"
+                    android:hint="@string/EnterPhone"
                     android:padding="16dp"
                     android:textColor="@color/lavender" />
 
@@ -126,7 +126,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/lavender_border"
                     android:gravity="start|center_vertical"
-                    android:hint="Enter Email"
+                    android:hint="@string/EnterEmail"
                     android:inputType="textEmailAddress"
                     android:padding="16dp"
                     android:textColor="@color/lavender" />
@@ -138,7 +138,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/lavender_border"
                     android:gravity="start|center_vertical"
-                    android:hint="Enter Markter name"
+                    android:hint="@string/EnterMarketerName"
                     android:inputType="text|textPersonName"
                     android:padding="16dp"
                     android:textColor="@color/lavender" />
@@ -149,7 +149,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="@color/purple"
-                    android:text="Save"
+                    android:text="@string/Save"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
@@ -159,7 +159,7 @@
                     android:id="@+id/Back"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="back to Home"
+                    android:text="@string/backtoHome"
                     android:textAlignment="center"
                     android:textColor="@color/purple">
 
