@@ -30,7 +30,7 @@
         android:textStyle="italic"
         android:layout_marginHorizontal="70dp"
         android:textSize="32dp"
-        android:text="Offers Companys"
+        android:text="Offers Companies"
         />
 
 </RelativeLayout>
