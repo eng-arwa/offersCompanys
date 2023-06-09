@@ -90,6 +90,7 @@ public class MarketerPanel extends AppCompatActivity {
 //        recycler
         recyclerView = findViewById(R.id.recyclerViewmarkter);
         searchView=findViewById(R.id.searchcompany);
+        searchView.clearFocus();
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MarketerPanel.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -153,6 +154,19 @@ public class MarketerPanel extends AppCompatActivity {
 
 
     }
+    public void searchList(String text){
+        try {
+            ArrayList<DataAdmin> searchList = new ArrayList<>();
+            for (DataAdmin dataClass : dataList) {
+                if (dataClass.getDataname().toLowerCase().contains(text.toLowerCase())) {
+                    searchList.add(dataClass);
+                }
+            }
+            adapter.searchDataList(searchList);
+        }catch (Exception error){
+
+        }
+    }
     public void share() {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
@@ -161,13 +175,6 @@ public class MarketerPanel extends AppCompatActivity {
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
-    public void searchList(String text){
-        ArrayList<DataAdmin> searchList = new ArrayList<>();
-        for (DataAdmin dataClass: dataList){
-            if (dataClass.getFullName().toLowerCase().contains(text.toLowerCase())){
-                searchList.add(dataClass);
-            }
-        }
-        adapter.searchDataList(searchList);
-    }
+
+
 }

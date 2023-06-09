@@ -38,6 +38,7 @@ public class activity_upload extends AppCompatActivity {
     EditText uploadTopic, uploadDesc, uploadLang;
     String imageURL;
     Uri uri;
+    boolean valid,stateimage = false;
     SharedPreferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,7 @@ public class activity_upload extends AppCompatActivity {
                         if (result.getResultCode() == Activity.RESULT_OK){
                             Intent data = result.getData();
                             uri = data.getData();
+                            stateimage=true;
                             uploadImage.setImageURI(uri);
                         } else {
                             Toast.makeText(activity_upload.this, "No Image Selected", Toast.LENGTH_SHORT).show();
@@ -108,34 +110,54 @@ public class activity_upload extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveData();
+                if(stateimage){
+                    saveData();}
+                else{
+
+                    Toast.makeText(activity_upload.this, "No Image Selected", Toast.LENGTH_SHORT).show();}
+
+
+
             }
         });
     }
     public void saveData(){
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
-                .child(uri.getLastPathSegment());
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity_upload.this);
-        builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete());
-                Uri urlImage = uriTask.getResult();
-                imageURL = urlImage.toString();
-                uploadData();
-                dialog.dismiss();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                dialog.dismiss();
-            }
-        });
+        checkField(uploadDesc);
+        checkField(uploadLang);
+        checkField(uploadTopic);
+
+      if (valid){
+          StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
+                  .child(uri.getLastPathSegment());
+          AlertDialog.Builder builder = new AlertDialog.Builder(activity_upload.this);
+          builder.setCancelable(false);
+          builder.setView(R.layout.progress_layout);
+          AlertDialog dialog = builder.create();
+          dialog.show();
+          storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+              @Override
+              public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                  Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                  while (!uriTask.isComplete());
+                  Uri urlImage = uriTask.getResult();
+                  imageURL = urlImage.toString();
+                  if(!imageURL.isEmpty()){
+                      uploadData();
+                      dialog.dismiss();
+
+
+                  }
+                  else{
+                      Toast.makeText(activity_upload.this, " not selected Image", Toast.LENGTH_SHORT).show();
+                  }
+              }
+          }).addOnFailureListener(new OnFailureListener() {
+              @Override
+              public void onFailure(@NonNull Exception e) {
+                  dialog.dismiss();
+              }
+          });
+      }
     }
 //    public void uploadData(){
 //        String title = uploadTopic.getText().toString();
@@ -187,13 +209,13 @@ public class activity_upload extends AppCompatActivity {
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("offers").child(pref.getString("nameUserloined", null) + currentDate)
+        FirebaseDatabase.getInstance().getReference("offers").child(pref.getString("nameuserlogined", null) + currentDate)
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(activity_upload.this, "Saved", Toast.LENGTH_SHORT).show();
-                            finish();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -211,4 +233,15 @@ public class activity_upload extends AppCompatActivity {
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
+    public boolean checkField(EditText textField){
+        if(textField.getText().toString().isEmpty()){
+            textField.setError("Error");
+            valid = false;
+        }else {
+            valid = true;
+        }
+
+        return valid;
+    }
+
 }

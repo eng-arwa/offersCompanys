@@ -1,6 +1,5 @@
 package offersApp.offerscompanys;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -37,11 +36,11 @@ public class AddCompany extends AppCompatActivity {
     Button saveButton;
     EditText companyphone,passwordcopmany,companyemail,CreatedBy,companyidentitiy,companytype,companyadress, companyname,BackLink;
     String imageURL;
-    boolean valid;
+
+    boolean valid,stateimage=false;
 
     FirebaseAuth fAuth;
     Uri uri;
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +67,7 @@ public class AddCompany extends AppCompatActivity {
                         if (result.getResultCode() == Activity.RESULT_OK){
                             Intent data = result.getData();
                             uri = data.getData();
+                            stateimage=true;
                             uploadImage.setImageURI(uri);
                         } else {
                             Toast.makeText(AddCompany.this, "No Image Selected", Toast.LENGTH_SHORT).show();
@@ -86,8 +86,17 @@ public class AddCompany extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveData();
-            }
+                if(stateimage){
+                    saveData();}
+                else{
+
+                Toast.makeText(AddCompany.this, "No Image Selected", Toast.LENGTH_SHORT).show();}
+
+
+//
+
+                }
+
         });
 
 
@@ -101,6 +110,8 @@ public class AddCompany extends AppCompatActivity {
         checkField(companyadress);
         checkField(passwordcopmany);
         checkField(companytype);
+        checkField(CreatedBy);
+
 
         if(valid){
             StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
@@ -117,13 +128,21 @@ public class AddCompany extends AppCompatActivity {
                     while (!uriTask.isComplete());
                     Uri urlImage = uriTask.getResult();
                     imageURL = urlImage.toString();
-                    uploadData();
-                    dialog.dismiss();
+                    if(!imageURL.isEmpty()){
+                        uploadData();
+                        dialog.dismiss();
+
+
+                    }
+                    else{
+                        Toast.makeText(AddCompany.this, " not selected Image", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    dialog.dismiss();
+
+                    Toast.makeText(AddCompany.this, " not selected Image ", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -182,6 +201,8 @@ public class AddCompany extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(AddCompany.this, "Saved", Toast.LENGTH_SHORT).show();
+
+
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -192,6 +213,7 @@ public class AddCompany extends AppCompatActivity {
                 });
 
     }
+
     public boolean checkField(EditText textField){
         if(textField.getText().toString().isEmpty()){
             textField.setError("Error");
@@ -202,5 +224,8 @@ public class AddCompany extends AppCompatActivity {
 
         return valid;
     }
+
+
+
 
 }

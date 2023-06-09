@@ -63,7 +63,8 @@
             android:id="@+id/recname"
             android:text="name"
             android:textColor="@color/purple"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@id/reclogo"/>
@@ -146,6 +147,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:contentDescription="click"
+            android:layout_marginEnd="8dp"
             android:padding="5dp"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="8dp"
@@ -153,7 +155,7 @@
             android:backgroundTint="@color/purple"
             android:layout_marginBottom="8dp"
             android:pointerIcon="hand"
-            android:src="@drawable/baseline_close_24" />
+            android:src="@drawable/baseline_delete_forever_24" />
 
     </RelativeLayout>
 

@@ -18,7 +18,8 @@
         ><ImageView
         android:id="@+id/icon"
         android:layout_width="100dp"
-        android:layout_height="200dp"
+        android:layout_height="260dp"
+        android:background="@color/grey"
         android:src="@drawable/baseline_person_24"
         />
 
@@ -28,8 +29,9 @@
             android:id="@+id/Requestphone"
             android:text="phone"
             android:layout_toEndOf="@+id/icon"
-            android:textColor="@color/lavender"
-            android:textSize="15sp"
+            android:textColor="@color/purple"
+            android:textSize="16sp"
+            android:textStyle="bold"
 
             android:layout_below="@id/namehint"
             android:layout_marginStart="10dp"
@@ -54,8 +56,9 @@
             android:layout_height="30dp"
             android:id="@+id/namehint"
             android:text="name"
-            android:textColor="@color/lavender"
-            android:textSize="15sp"
+            android:textColor="@color/purple"
+            android:textStyle="bold"
+            android:textSize="16sp"
             android:layout_toEndOf="@+id/icon"
             android:layout_marginTop="20dp"
             android:layout_marginStart="10dp" />
@@ -77,8 +80,9 @@
             android:layout_height="30dp"
             android:id="@+id/identitynumber_m"
             android:text="Identity Number"
-            android:textColor="@color/lavender"
-            android:textSize="15sp"
+            android:textColor="@color/purple"
+            android:textStyle="bold"
+            android:textSize="16sp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/icon"
             android:layout_marginStart="10dp"
@@ -101,18 +105,19 @@
 
 
             />
+
         <TextView
             android:id="@+id/email_M"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Email"
-            android:textColor="@color/lavender"
-            android:layout_toEndOf="@+id/icon"
-            android:textSize="15sp"
             android:layout_below="@+id/Requestidentity"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/icon"
+            android:text="Email"
+            android:textColor="@color/purple"
+            android:textSize="16sp"
+            android:textStyle="bold"
 
 
             />
@@ -139,8 +144,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Adress"
-            android:textColor="@color/lavender"
-            android:textSize="15sp"
+            android:textColor="@color/purple"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:layout_below="@+id/email_M"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/icon"
@@ -166,26 +172,27 @@
 
 
             <Button
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:id="@+id/approved"
                 android:layout_height="40dp"
                 android:layout_below="@id/Requestadress"
                 android:layout_toEndOf="@+id/icon"
                 android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginBottom="20dp"
-                android:text="Approve"
+                android:text="Approved"
                 android:backgroundTint="@color/lavender"
                />
         <Button
             android:id="@+id/rejacted"
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_below="@id/Requestadress"
             android:layout_marginStart="20dp"
             android:backgroundTint="#DDCF1818"
-            android:text="Reject"
+            android:text="Rejected"
             android:layout_toEndOf="@+id/approved"/>
 
 

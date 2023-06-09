@@ -1,11 +1,11 @@
 package offersApp.offerscompanys;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -37,6 +37,7 @@ public class MarketerList extends AppCompatActivity {
     ImageButton deletemarkter;
     TextView countmarkter;
     SearchView searchView;
+    SharedPreferences pref;
     Button normalUserBtn;
     private AppBarConfiguration appBarConfiguration;
     @Override
@@ -44,6 +45,9 @@ public class MarketerList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marketer_list);
         countmarkter=findViewById(R.id.countmarkter);
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+
 
         //        start
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation2);
@@ -64,8 +68,16 @@ public class MarketerList extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                     return true;
+                case R.id.Request:
+
+                    startActivity(new Intent(getApplicationContext(), RequestSignUp.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+                    return true;
 
                 case R.id.logout:
+                    editor.clear();
+                    editor.commit();
 
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -109,7 +121,6 @@ public class MarketerList extends AppCompatActivity {
                        DataMarkter dataClass = itemSnapshot.getValue(DataMarkter.class);
                        dataClass.setKey(itemSnapshot.getKey());
 
-                       Toast.makeText(MarketerList.this,dataClass.toString(), Toast.LENGTH_LONG).show();
 
                        dataList.add(dataClass);
                        String c= String.valueOf(adapter.getItemCount());

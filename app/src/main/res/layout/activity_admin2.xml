@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/searchcompanyadmin"
         android:paddingStart="10dp"
-        android:text=" All Offers "
+        android:text=" All Companys "
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:textSize="18dp"

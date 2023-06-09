@@ -1,9 +1,11 @@
 package offersApp.offerscompanys;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,40 +34,46 @@ public class RequestSignUp extends AppCompatActivity {
     List<DataMarkter> dataList;
     MyAdapterRequest adapter;
     ImageButton deletemarkter;
+    TextView countRequest;
     SearchView searchView;
     Button normalUserBtn;
+    SharedPreferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_sign_up);
-
-
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        countRequest=findViewById(R.id.countRequest);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationtequest);
 
-        bottomNavigationView.setSelectedItemId(R.id.Marketer);
+        bottomNavigationView.setSelectedItemId(R.id.Request);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.Marketer:
+                    startActivity(new Intent(getApplicationContext(), MarketerList.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
                     return true;
                 case R.id.companyslist:
+                case R.id.addcompany:
                     startActivity(new Intent(getApplicationContext(), AdminActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                     return true;
-                case R.id.addcompany:
+                case R.id.Request:
 
-                    startActivity(new Intent(getApplicationContext(), SignupActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
                     return true;
 
                 case R.id.logout:
+
+                    editor.clear();
+                    editor.commit();
 
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                     return true;
-
 
 
             }
@@ -105,6 +113,8 @@ public class RequestSignUp extends AppCompatActivity {
                         Toast.makeText(RequestSignUp.this,dataClass.toString(), Toast.LENGTH_LONG).show();
 
                         dataList.add(dataClass);
+                        String c= String.valueOf(adapter.getItemCount());
+                        countRequest.setText(c.toString());
 
                     }
 

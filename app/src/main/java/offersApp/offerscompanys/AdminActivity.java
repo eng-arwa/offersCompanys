@@ -1,6 +1,7 @@
 package offersApp.offerscompanys;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -42,6 +43,7 @@ public class AdminActivity extends AppCompatActivity {
     CardView card;
     TextView countcompany;
     String key = "";
+    SharedPreferences pref;
     private AppBarConfiguration appBarConfiguration;
     private ActivityAdmin2Binding binding;
 
@@ -51,7 +53,8 @@ public class AdminActivity extends AppCompatActivity {
 
         binding = ActivityAdmin2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
         countcompany=findViewById(R.id.countcompany);
 
 //        start
@@ -77,10 +80,13 @@ public class AdminActivity extends AppCompatActivity {
 
                 case R.id.logout:
 
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        finish();
-                        return true;
+                    editor.clear();
+                    editor.commit();
+
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+                    return true;
                 case R.id.Request:
 
                     startActivity(new Intent(getApplicationContext(), RequestSignUp.class));
@@ -150,7 +156,7 @@ public class AdminActivity extends AppCompatActivity {
     public void searchList(String text){
         ArrayList<DataAdmin> searchList = new ArrayList<>();
         for (DataAdmin dataClass: dataList){
-            if (dataClass.getFullName().toLowerCase().contains(text.toLowerCase())){
+            if (dataClass.getDataname().toLowerCase().contains(text.toLowerCase())){
                 searchList.add(dataClass);
             }
         }
