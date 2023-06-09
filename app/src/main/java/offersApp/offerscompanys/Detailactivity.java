@@ -40,7 +40,7 @@ public class Detailactivity extends AppCompatActivity {
     boolean stateimage = false;;
     String title, desc, lang;
     String key, oldImageURL;
-    Uri uri;
+    Uri uri=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,10 +101,7 @@ public class Detailactivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
-                    imageUrl=oldImageURL.toString();
-                    saveData();
-                    Intent intent = new Intent(Detailactivity.this, MainActivity.class);
-                    startActivity(intent);
+                    Toast.makeText(Detailactivity.this, "Please choose new image", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -115,38 +112,49 @@ public class Detailactivity extends AppCompatActivity {
         });
     }
     public void saveData(){
-        storageReference = FirebaseStorage.getInstance().getReference().child("offers").child(uri.getLastPathSegment());
-        AlertDialog.Builder builder = new AlertDialog.Builder(Detailactivity.this);
-        builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete());
-                Uri urlImage = uriTask.getResult();
-                imageUrl = urlImage.toString();
-                if(!imageUrl.isEmpty()){
-                    updateData();
-                    dialog.dismiss();
+        try {
+            storageReference = FirebaseStorage.getInstance().getReference().child("offers").child(uri.getLastPathSegment());
+            AlertDialog.Builder builder = new AlertDialog.Builder(Detailactivity.this);
+            builder.setCancelable(false);
+            builder.setView(R.layout.progress_layout);
+            AlertDialog dialog = builder.create();
+            dialog.show();
 
+
+
+
+            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!uriTask.isComplete());
+                    Uri urlImage = uriTask.getResult();
+                    imageUrl = urlImage.toString();
+                    if(!imageUrl.isEmpty()){
+                        updateData();
+                        dialog.dismiss();
+
+
+                    }
+                    else{
+                        imageUrl=oldImageURL;
+                        updateData();
+                        dialog.dismiss();
+                    }
 
                 }
-                else{
-                    imageUrl=oldImageURL;
-                    updateData();
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
                     dialog.dismiss();
                 }
+            });
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                dialog.dismiss();
-            }
-        });
+            imageUrl=oldImageURL;}catch (Exception error){
+
+        }
+
+
     }
     public void updateData(){
         title = updateTitle.getText().toString().trim();

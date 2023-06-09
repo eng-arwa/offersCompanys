@@ -179,8 +179,12 @@ public class Login extends AppCompat {
 
                                         editor.commit(); // commit changes
 
-                                        if (usertype.trim().equals("marketer")){
-//                                            Toast.makeText(Login.this, "yes", Toast.LENGTH_SHORT).show();
+                                        if (usertype.trim().equals("marketer") || usertype.trim().equals("admin") || usertype.trim().equals("company") ){
+//
+                                            Intent intent=new Intent(Login.this,MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+
 
 
                                         }
@@ -190,11 +194,11 @@ public class Login extends AppCompat {
 
 
                                 }
-                                else{
-
-                                    Toast.makeText(Login.this, "sorry you are not login yet", Toast.LENGTH_SHORT).show();
-
-                                }
+//                                else{
+//
+//                                    Toast.makeText(Login.this, "sorry you are not login yet", Toast.LENGTH_SHORT).show();
+//
+//                                }
 
 
                             }
