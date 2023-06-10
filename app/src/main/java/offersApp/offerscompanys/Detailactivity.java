@@ -31,14 +31,14 @@ import com.google.firebase.storage.UploadTask;
 
 public class Detailactivity extends AppCompatActivity {
 
-    TextView updateDesc, updateTitle, updateLang;
+    TextView updateDesc, updateTitle, updateLang,updatepriceafter, updatepricebefore;
     ImageView updateImage;
     Button deleteButton, updateButton;
     DatabaseReference databaseReference;
     StorageReference storageReference;
     String imageUrl = "";
     boolean stateimage = false;;
-    String title, desc, lang;
+    String title, desc, lang,priceafter,pricebefore;
     String key, oldImageURL;
     Uri uri=null;
     @Override
@@ -48,6 +48,8 @@ public class Detailactivity extends AppCompatActivity {
         updateDesc = findViewById(R.id.detailDesc);
         updateImage = findViewById(R.id.detailImage);
         updateTitle = findViewById(R.id.detailTitle);
+        updatepriceafter = findViewById(R.id.detailpriceafter);
+        updatepricebefore = findViewById(R.id.detailpricebefore);
 
         updateButton = findViewById(R.id.editoffer);
 
@@ -77,6 +79,8 @@ public class Detailactivity extends AppCompatActivity {
             updateTitle.setText(bundle.getString("Title"));
             updateDesc.setText(bundle.getString("Description"));
             updateLang.setText(bundle.getString("Language"));
+            updatepricebefore.setText(bundle.getString("PriceBefore"));
+            updatepriceafter.setText(bundle.getString("PriceAfter"));
             key = bundle.getString("Key");
             oldImageURL = bundle.getString("Image");
         }
@@ -160,7 +164,9 @@ public class Detailactivity extends AppCompatActivity {
         title = updateTitle.getText().toString().trim();
         desc = updateDesc.getText().toString().trim();
         lang = updateLang.getText().toString();
-        DataClass dataClass = new DataClass(title, desc, lang, imageUrl);
+        pricebefore = updatepricebefore.getText().toString();
+        priceafter=updatepriceafter.getText().toString();
+        DataClass dataClass = new DataClass(title, desc, lang, imageUrl,pricebefore,priceafter);
         Toast.makeText(this, imageUrl, Toast.LENGTH_SHORT).show();
         databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

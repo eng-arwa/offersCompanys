@@ -1,8 +1,11 @@
 package offersApp.offerscompanys;
 
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,17 +62,19 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.homepage:
                     return true;
                 case R.id.setting:
-                    startActivity(new Intent(getApplicationContext(), Setting.class));
+                    Intent intent=new Intent(MainActivity.this,Setting.class);
+                    startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
+
                     return true;
                 case R.id.share:
                     share();
                     return true;
                 case R.id.account:
-                    startActivity(new Intent(getApplicationContext(), Login.class));
+                    Intent intent2=new Intent(MainActivity.this,Login.class);
+                    startActivity(intent2);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
+
                     return true;
                 case R.id.add:
 
@@ -81,20 +86,26 @@ public class MainActivity extends AppCompatActivity {
                         //do your staff here
 
                         if (pref.getString("typeuserlogined", null).equals("marketer")) {
-                            startActivity(new Intent(getApplicationContext(), MarketerPanel.class));
+
+                            Intent intent1=new Intent(MainActivity.this,MarketerPanel.class);
+                            startActivity(intent1);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            finish();
+
+
                             return true;
                         } else if (pref.getString("typeuserlogined", null).equals("admin")) {
-                            startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+
+                            Intent intent3=new Intent(MainActivity.this,AdminActivity.class);
+                            startActivity(intent3);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            finish();
+
                             return true;
                         } else if (pref.getString("typeuserlogined", null).equals("company")) {
-                            startActivity(new Intent(getApplicationContext(), companyPanel.class));
+                            Intent intent4=new Intent(MainActivity.this,companyPanel.class);
+                            startActivity(intent4);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            finish();
-                            return true;
+
+
                         }
 
 
@@ -111,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         searchView = findViewById(R.id.search);
-
+//main
+//end main
         searchView.clearFocus();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -154,6 +166,17 @@ public class MainActivity extends AppCompatActivity {
 
             public void onCancelled(@NonNull DatabaseError error) {
                 dialog.dismiss();
+            }
+        });
+        View inflatedView = getLayoutInflater().inflate(R.layout.recycler_item, null);
+        TextView text = (TextView) inflatedView.findViewById(R.id.recLang);
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager)
+                        getSystemService(Context.CLIPBOARD_SERVICE);
+                String getstring = text.getText().toString();
+                Toast.makeText(MainActivity.this, getstring, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -202,6 +202,11 @@ public class AddCompany extends AppCompatActivity {
                         if (task.isSuccessful()){
                             Toast.makeText(AddCompany.this, "Saved", Toast.LENGTH_SHORT).show();
 
+                            Intent intent=new Intent(AddCompany.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();
+
+
 
                         }
                     }

@@ -78,10 +78,13 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
             @Override
             public void onClick(View view) {
 
-                String key=dataList.get(holder.getAdapterPosition()).getKey();
-                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("RequestSignup");
+              try {
+                  String key=dataList.get(holder.getAdapterPosition()).getKey();
+                  final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("RequestSignup");
 
-                reference.child(key).removeValue();
+                  reference.child(key).removeValue();
+              }catch (Exception error){}
+
             }
         });
         holder.approve.setOnClickListener(new View.OnClickListener() {

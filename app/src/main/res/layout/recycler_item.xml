@@ -39,21 +39,9 @@
             android:textColor="@color/purple"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/recLang"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginStart="90dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@id/recTitle"
-            android:text="price"
-            android:textAlignment="textEnd"
-            android:paddingEnd="15dp"
-            android:textColor="@color/lavender"
-            android:textSize="16sp" />
 
         <TextView
-            android:layout_width="140dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/recDesc"
             android:text="desc"
@@ -66,6 +54,90 @@
             android:layout_marginTop="5dp"
             android:maxLines="1"
             android:layout_marginBottom="12dp"/>
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/recpricbeforetext"
+            android:text="Price Before"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif"
+            android:textSize="15sp"
+            android:layout_toEndOf="@id/recImage"
+            android:layout_below="@id/recDesc"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recpricbefore"
+            android:text="desc"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif"
+            android:textSize="15sp"
+            android:layout_toEndOf="@id/recpricbeforetext"
+            android:layout_below="@id/recDesc"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:layout_marginBottom="12dp"/>
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/recpricaftertext"
+            android:text="Price After"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif"
+            android:textSize="15sp"
+            android:layout_toEndOf="@id/recImage"
+            android:layout_below="@id/recpricbeforetext"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:layout_marginBottom="12dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recpricafter"
+            android:text="desc"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif"
+            android:textSize="15sp"
+            android:layout_toEndOf="@id/recpricaftertext"
+            android:layout_below="@id/recpricbeforetext"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:id="@+id/recLangtext"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/recpricaftertext"
+            android:layout_toEndOf="@id/recImage"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:text="Code Discount"
+            android:paddingEnd="15dp"
+            android:textColor="@color/lavender"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/recLang"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/recpricafter"
+            android:layout_toEndOf="@id/recLangtext"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:text="price"
+            android:paddingEnd="15dp"
+            android:textColor="@color/lavender"
+            android:textSize="16sp" />
+
+
 
     </RelativeLayout>
 

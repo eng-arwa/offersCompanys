@@ -40,6 +40,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recTitle.setText(dataList.get(position).getDataTitle());
         holder.recDesc.setText(dataList.get(position).getDataDesc());
         holder.recLang.setText(dataList.get(position).getDataLang());
+        holder.recpricebefore.setText(dataList.get(position).getDataPricebefore());
+        holder.recpriceafter.setText(dataList.get(position).getDataPriceafter());
 
 
 
@@ -55,6 +57,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 //                context.startActivity(intent);
 //            }
 //        });
+        holder.recLang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                ClipboardManager clipboard = (ClipboardManager)
+//                        getSystemService(Context.CLIPBOARD_SERVICE);
+//                String getstring = textView.getText().toString();
+            }
+        });
 
     }
 
@@ -74,7 +84,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 class MyViewHolder extends RecyclerView.ViewHolder{
 
     ImageView recImage;
-    TextView recTitle, recDesc, recLang;
+    TextView recTitle, recDesc, recLang,recpricebefore,recpriceafter;
     CardView recCard;
 
     public MyViewHolder(@NonNull View itemView) {
@@ -85,5 +95,7 @@ class MyViewHolder extends RecyclerView.ViewHolder{
         recDesc = itemView.findViewById(R.id.recDesc);
         recLang = itemView.findViewById(R.id.recLang);
         recTitle = itemView.findViewById(R.id.recTitle);
+        recpricebefore = itemView.findViewById(R.id.recpricbefore);
+        recpriceafter = itemView.findViewById(R.id.recpricafter);
     }
 }

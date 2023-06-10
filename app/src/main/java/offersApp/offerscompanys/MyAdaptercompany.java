@@ -43,6 +43,9 @@ public class MyAdaptercompany extends RecyclerView.Adapter<MyViewHolderCompany> 
         holder.recTitle.setText(dataList.get(position).getDataTitle());
         holder.recDesc.setText(dataList.get(position).getDataDesc());
         holder.recLang.setText(dataList.get(position).getDataLang());
+        holder.recbefore.setText(dataList.get(position).getDataPricebefore());
+        holder.recafter.setText(dataList.get(position).getDataPriceafter());
+
 
 
 
@@ -55,6 +58,8 @@ public class MyAdaptercompany extends RecyclerView.Adapter<MyViewHolderCompany> 
                 intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
                 intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
                 intent.putExtra("Language", dataList.get(holder.getAdapterPosition()).getDataLang());
+                intent.putExtra("PriceBefore",dataList.get(holder.getAdapterPosition()).getDataPricebefore());
+                intent.putExtra("PriceAfter", dataList.get(holder.getAdapterPosition()).getDataPriceafter());
                 context.startActivity(intent);
             }
         });
@@ -77,7 +82,7 @@ public class MyAdaptercompany extends RecyclerView.Adapter<MyViewHolderCompany> 
 class MyViewHolderCompany extends RecyclerView.ViewHolder{
 
     ImageView recImage;
-    TextView recTitle, recDesc, recLang;
+    TextView recTitle, recDesc, recLang,recbefore,recafter;
     CardView recCard;
     Button edit;
 
@@ -89,5 +94,8 @@ class MyViewHolderCompany extends RecyclerView.ViewHolder{
         recDesc = itemView.findViewById(R.id.recDescCompany);
         recLang = itemView.findViewById(R.id.recLangCompany);
         recTitle = itemView.findViewById(R.id.recTitleCompany);
+        recbefore = itemView.findViewById(R.id.rec_B);
+        recafter = itemView.findViewById(R.id.rec_A);
+
     }
 }

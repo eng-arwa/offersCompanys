@@ -55,22 +55,22 @@ public class MarketerPanel extends AppCompatActivity {
                 case R.id.homepage:
                     return true;
                 case R.id.setting:
-                    startActivity(new Intent(getApplicationContext(), Setting.class));
+                    Intent intent1=new Intent(MarketerPanel.this,Setting.class);
+                    startActivity(intent1);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
                     return true;
                 case R.id.share:
                    share();
                     return true;
                 case R.id.account:
-                    startActivity(new Intent(getApplicationContext(), Login.class));
+                    Intent intent2=new Intent(MarketerPanel.this,Login.class);
+                    startActivity(intent2);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
                     return true;
                 case R.id.add:
-                    startActivity(new Intent(getApplicationContext(), AddCompany.class));
+                    Intent intent=new Intent(MarketerPanel.this,AddCompany.class);
+                    startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
                     return true;
 
 

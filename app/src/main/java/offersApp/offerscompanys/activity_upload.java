@@ -23,7 +23,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -35,7 +34,7 @@ public class activity_upload extends AppCompatActivity {
 
     ImageView uploadImage;
     Button saveButton;
-    EditText uploadTopic, uploadDesc, uploadLang;
+    EditText uploadTopic, uploadDesc, uploadLang,uploadpriceafter,uploadpricebefore;
     String imageURL;
     Uri uri;
     boolean valid,stateimage = false;
@@ -47,40 +46,42 @@ public class activity_upload extends AppCompatActivity {
          pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
         //        start
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-
-
-        bottomNavigationView.setSelectedItemId(R.id.add);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.homepage:
-                    startActivity(new Intent(getApplicationContext(), companyPanel.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-                case R.id.setting:
-                    startActivity(new Intent(getApplicationContext(), Setting.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-                case R.id.share:
-                   share();
-                    return true;
-                case R.id.account:
-                    startActivity(new Intent(getApplicationContext(), Login.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-                case R.id.add:
-                    return true;
-            }
-            return false;
-        });
+//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+//
+//
+//        bottomNavigationView.setSelectedItemId(R.id.add);
+//        bottomNavigationView.setOnItemSelectedListener(item -> {
+//            switch (item.getItemId()) {
+//                case R.id.homepage:
+//                    startActivity(new Intent(getApplicationContext(), companyPanel.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.setting:
+//                    startActivity(new Intent(getApplicationContext(), Setting.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.share:
+//                   share();
+//                    return true;
+//                case R.id.account:
+//                    startActivity(new Intent(getApplicationContext(), Login.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
+//                case R.id.add:
+//                    return true;
+//            }
+//            return false;
+//        });
 //        end
         uploadImage = findViewById(R.id.uploadImage);
         uploadDesc = findViewById(R.id.uploadDesc);
         uploadTopic = findViewById(R.id.uploadTopic);
         uploadLang = findViewById(R.id.uploadLang);
+        uploadpriceafter = findViewById(R.id.uploadpriceafter);
+        uploadpricebefore = findViewById(R.id.uploadpricebefore);
         saveButton = findViewById(R.id.saveButton);
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
@@ -203,7 +204,9 @@ public class activity_upload extends AppCompatActivity {
         String title = uploadTopic.getText().toString();
         String desc = uploadDesc.getText().toString();
         String lang = uploadLang.getText().toString();
-        DataClass dataClass = new DataClass(title, desc, lang, imageURL);
+        String Priceafter = uploadpriceafter.getText().toString();
+        String Pricebefore = uploadpricebefore.getText().toString();
+        DataClass dataClass = new DataClass(title, desc, lang, imageURL,Pricebefore,Priceafter);
         //String isUser ;
 
         //We are changing the child from title to currentDate,

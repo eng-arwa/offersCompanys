@@ -27,6 +27,7 @@
         android:layout_below="@id/count"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
         android:id="@+id/recyclerView"
         android:scrollbars="vertical"/>
 

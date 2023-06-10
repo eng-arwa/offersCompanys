@@ -52,9 +52,11 @@ public class companyPanel extends AppCompatActivity {
                 case R.id.homepage:
                     return true;
                 case R.id.setting:
-                    startActivity(new Intent(getApplicationContext(), Setting.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
+
+                    Intent intent2=new Intent(companyPanel.this,Setting.class);
+                    startActivity(intent2);
+
+
                     return true;
                 case R.id.share:
                     share();
@@ -66,9 +68,13 @@ public class companyPanel extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.add:
-                    startActivity(new Intent(getApplicationContext(), activity_upload.class));
+
+                    Intent intent=new Intent(companyPanel.this,activity_upload.class);
+                    startActivity(intent);
+
+
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
+
                     return true;
 
 
