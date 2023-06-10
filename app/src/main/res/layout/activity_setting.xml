@@ -35,6 +35,17 @@ tools:context=".Setting">
             android:textColor="@color/purple"
             android:textSize="36sp"
             android:textStyle="bold" />
+
+            <TextView
+
+                android:id="@+id/languageTextSetting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Language"
+                android:textSize="18dp"
+                android:textStyle="bold"
+
+                />
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -44,34 +55,45 @@ tools:context=".Setting">
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             tools:context=".Setting">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Language"
-                android:textSize="18dp"
-                android:layout_marginEnd="20dp"
-                android:textStyle="bold"
 
-                />
 
-            <Button
-                android:id="@+id/enButton"
-                android:layout_width="wrap_content"
-                android:backgroundTint="@color/lavender"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_height="wrap_content"
-                android:text="@string/EN" />
+<!--            <Button-->
+<!--                android:id="@+id/enButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:backgroundTint="@color/lavender"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/EN" />-->
 
-            <Button
-                android:id="@+id/arButton"
-                android:layout_width="wrap_content"
-                android:backgroundTint="@color/lavender"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+<!--            <Button-->
+<!--                android:id="@+id/arButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:backgroundTint="@color/lavender"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/AR" />-->
+
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/AR" />
+                android:orientation="vertical">
+                <RadioButton android:id="@+id/enButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/EN"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/arButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/AR"
+                    android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
         </LinearLayout>
+
+
 
 
 

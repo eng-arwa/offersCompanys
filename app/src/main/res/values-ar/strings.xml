@@ -13,6 +13,9 @@
 
     // Setting
 
+    <string name="Language">اللغة</string>
+
+
     <string name="action_settings">الاعدادات</string>
 
     // Home
@@ -24,6 +27,60 @@
     // marketers
 
     <string name="AllMarketers">كل المسوقين</string>
+
+
+
+    <string name="YourAllOffers">كل العروض الخاصة بك</string>
+
+
+    // Admin
+
+    <string name="AllCompanies">كل الشركات</string>
+
+
+    // Details of offers to edite
+
+    <string name="Title">العنوان</string>
+    <string name="Price">السعر</string>
+    <string name="BeforePrice">السعر السابق</string>
+    <string name="AfterPrice">السعر بعد الخصم</string>
+    <string name="SaveEdit">تعديل</string>
+
+
+    // Login
+
+    <string name="BackToHome">الرجوع للرئيسية</string>
+    <string name="Logout">الخروج</string>
+
+
+    // upload offer
+
+    <string name="EnterCurrentPrice">ادخل السعر الحالي</string>
+    <string name="EnterPreviousPrice">ادخل السعر السابق</string>
+    <string name="EnterDiscountCode">ادخل كود الخصم</string>
+    <string name="EnterOfferDescription">ادخل شرح الخصم</string>
+    <string name="Enteranoffertitle">ادخل عنوان العرض</string>
+    <string name="UploadOffer">ارفع العرض</string>
+
+    // header nav
+
+    <string name="AllOffersonhands">كل العروض بين يديك</string>
+    <string name="CompaniesOffers">عروض الشركات</string>
+
+    // loading
+
+    <string name="Loading...">جاري التحميل...</string>
+
+    //recycle
+
+    <string name="CreatedBy">أنشأ بواسطة</string>
+    <string name="desc">الشرح</string>
+
+    <string name="DiscountCode">كود الخصم</string>
+    <string name="Approved">قبول</string>
+    <string name="Rejected">رفض</string>
+
+
 
 
 

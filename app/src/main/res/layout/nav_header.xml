@@ -17,14 +17,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Companys Offers "
+        android:text="@string/CompaniesOffers"
         android:textColor="@color/white"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="All Offers on hands"
+        android:text="@string/AllOffersonhands"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:layout_marginBottom="16dp"/>

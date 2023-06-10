@@ -27,7 +27,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:paddingStart="10dp"
-        android:text=" All Your Offers "
+        android:text="@string/YourAllOffers"
         android:textSize="18dp"
         android:textStyle="bold"
         android:layout_height="wrap_content"

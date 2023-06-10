@@ -11,6 +11,15 @@
 
     // setting
 
+    <string name="Language">Language</string>
+
+
+
+
+
+
+
+
     // Home
 
     <string name="SearchTitle">Search...</string>
@@ -44,6 +53,74 @@
     <string name="EnterEmail">Enter Email</string>
 
     <string name="EnterMarketerName">Enter Marketer Name</string>
+
+    <string name="YourAllOffers">Your All Offers</string>
+
+
+    // Admin
+
+    <string name="AllCompanies">All Companies</string>
+
+
+    // Details of offers to edite
+
+    <string name="Title">Title</string>
+    <string name="Price">Price</string>
+    <string name="BeforePrice">Before Price</string>
+    <string name="AfterPrice">After Price</string>
+    <string name="SaveEdit">Edit</string>
+
+
+    // Login
+
+    <string name="BackToHome">Back To Home</string>
+    <string name="Logout">Logout</string>
+
+
+    // upload offer
+
+    <string name="EnterCurrentPrice">Enter Current Price</string>
+    <string name="EnterPreviousPrice">Enter  Previous Price</string>
+    <string name="EnterDiscountCode">Enter Discount Code</string>
+    <string name="EnterOfferDescription">Enter Offer Description</string>
+    <string name="Enteranoffertitle">Enter an Offer Title</string>
+    <string name="UploadOffer">Upload Offer</string>
+
+// header nav
+
+    <string name="AllOffersonhands">All Offers on One Hand</string>
+    <string name="CompaniesOffers">Companies Offers</string>
+
+    // loading
+
+    <string name="Loading...">Loading...</string>
+
+    //recycle
+
+    <string name="CreatedBy">Created By</string>
+    <string name="desc">Description</string>
+
+    <string name="DiscountCode">Discount Code</string>
+    <string name="Approved">Approved</string>
+    <string name="Rejected">Rejected</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Signup
 

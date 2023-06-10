@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,9 +20,11 @@ public class Setting extends AppCompat {
     private AppBarConfiguration appBarConfiguration;
    // private ActivitySettingBinding binding;
    Button arButton,enButton;
-   TextView loginText;
+   TextView loginText, languageTextSetting;
 
     SharedPreferences pref;
+
+
 
 
 
@@ -39,6 +42,7 @@ public class Setting extends AppCompat {
         enButton= findViewById(R.id.enButton);
         arButton = findViewById(R.id.arButton);
         loginText = findViewById(R.id.loginTextSetting);
+        languageTextSetting = findViewById(R.id.languageTextSetting);
 
 //        SharedPreferences.Editor editor = pref.edit();
 
@@ -73,35 +77,39 @@ public class Setting extends AppCompat {
                     finish();
                     return true;
                 case R.id.add:
-                    Map<String, ?> entries = pref.getAll();//get all entries from shared preference
-                    Set<String> keys = entries.keySet();//set all key entries into an array of string type
 
-                    //first option
-                    if (!keys.isEmpty()) {
-                        //do your staff here
-                        Toast.makeText(this, pref.getString("typeuserlogined", null), Toast.LENGTH_SHORT).show();
-
-                        if (pref.getString("typeuserlogined", null).equals("marketer")) {
-                            startActivity(new Intent(getApplicationContext(), MarketerPanel.class));
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            finish();
-                            return true;
-                        } else if (pref.getString("typeuserlogined", null).equals("admin")) {
-                            startActivity(new Intent(getApplicationContext(), AdminActivity.class));
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            finish();
-                            return true;
-                        } else if (pref.getString("typeuserlogined", null).equals("company")) {
-                            startActivity(new Intent(getApplicationContext(), AddCompany.class));
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            finish();
-                            return true;
-                        }
-
-
-                    } else if (keys.isEmpty()) {
-                        Toast.makeText(this, "You no login in yet", Toast.LENGTH_SHORT).show();
-                    }
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+//                    Map<String, ?> entries = pref.getAll();//get all entries from shared preference
+//                    Set<String> keys = entries.keySet();//set all key entries into an array of string type
+//
+//                    //first option
+//                    if (!keys.isEmpty()) {
+//                        //do your staff here
+//                        Toast.makeText(this, pref.getString("typeuserlogined", null), Toast.LENGTH_SHORT).show();
+//
+//                        if (pref.getString("typeuserlogined", null).equals("marketer")) {
+//                            startActivity(new Intent(getApplicationContext(), MarketerPanel.class));
+//                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                            finish();
+//                            return true;
+//                        } else if (pref.getString("typeuserlogined", null).equals("admin")) {
+//                            startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+//                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                            finish();
+//                            return true;
+//                        } else if (pref.getString("typeuserlogined", null).equals("company")) {
+//                            startActivity(new Intent(getApplicationContext(), AddCompany.class));
+//                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                            finish();
+//                            return true;
+//                        }
+//
+//
+//                    } else if (keys.isEmpty()) {
+//                        Toast.makeText(this, "You no login in yet", Toast.LENGTH_SHORT).show();
+//                    }
 
 
             }

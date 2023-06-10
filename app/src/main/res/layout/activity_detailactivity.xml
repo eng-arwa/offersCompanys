@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/detailTitle"
-        android:text="Title"
+        android:text="@string/Title"
         android:layout_marginTop="14dp"
         android:textSize="24sp"
         android:layout_gravity="center"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="20dp"
-        android:text="Price"
+        android:text="@string/Price"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:textStyle="bold"
@@ -74,7 +74,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
 
-        android:text="Description"
+        android:text="@string/desc"
         android:layout_gravity="center"
         android:id="@+id/detailDesc"
         android:textSize="18sp"
@@ -86,7 +86,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
 
-        android:text="Description"
+        android:text="@string/BeforePrice"
         android:layout_gravity="center"
         android:id="@+id/detailpricebefore"
         android:textSize="18sp"
@@ -98,7 +98,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
 
-        android:text="Description"
+        android:text="@string/AfterPrice"
         android:layout_gravity="center"
         android:id="@+id/detailpriceafter"
         android:textSize="18sp"
@@ -112,7 +112,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="100dp"
         android:layout_marginBottom="50dp"
-        android:text="Save Edit" />
+        android:text="@string/SaveEdit" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

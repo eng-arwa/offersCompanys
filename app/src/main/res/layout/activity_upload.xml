@@ -37,7 +37,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Upload Offer"
+                android:text="@string/UploadOffer"
                 android:textAlignment="center"
                 android:textColor="@color/purple"
                 android:textSize="30sp" />
@@ -57,7 +57,7 @@
                 android:background="@drawable/lavender_border"
                 android:layout_marginTop="20dp"
                 android:padding="16dp"
-                android:hint="Enter title offers"
+                android:hint="@string/Enteranoffertitle"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"/>
 
@@ -68,7 +68,7 @@
                 android:background="@drawable/lavender_border"
                 android:layout_marginTop="20dp"
                 android:padding="16dp"
-                android:hint="Enter offer description"
+                android:hint="@string/EnterOfferDescription"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"/>
 
@@ -79,7 +79,7 @@
                 android:background="@drawable/lavender_border"
                 android:layout_marginTop="20dp"
                 android:padding="16dp"
-                android:hint="Enter Code Discount"
+                android:hint="@string/EnterDiscountCode"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"/>
             <EditText
@@ -89,7 +89,7 @@
                 android:background="@drawable/lavender_border"
                 android:layout_marginTop="20dp"
                 android:padding="16dp"
-                android:hint="Enter  before Price"
+                android:hint="@string/EnterPreviousPrice"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"/>
             <EditText
@@ -99,14 +99,14 @@
                 android:background="@drawable/lavender_border"
                 android:layout_marginTop="20dp"
                 android:padding="16dp"
-                android:hint="Enter  after price"
+                android:hint="@string/EnterCurrentPrice"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Save"
+                android:text="@string/Save"
                 android:id="@+id/saveButton"
                 android:backgroundTint="@color/purple"
                 android:textSize="18sp"

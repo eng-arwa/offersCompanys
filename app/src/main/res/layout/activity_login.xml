@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
         android:padding="8dp"
-        android:text="Back To Home"
+        android:text="@string/BackToHome"
         android:textAlignment="center"
         android:textColor="@color/purple"
         android:textSize="14sp" />
@@ -112,7 +112,7 @@
         android:layout_marginBottom="1dp"
         android:padding="8dp"
         android:paddingTop="0dp"
-        android:text="Logout"
+        android:text="@string/Logout"
         android:textAlignment="center"
         android:textColor="@color/purple"
         android:textSize="14sp" />
