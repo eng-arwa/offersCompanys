@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +67,16 @@ public class MyAdaptercompany extends RecyclerView.Adapter<MyViewHolderCompany> 
             }
         });
 
+        holder.deletedoffer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                String key=dataList.get(holder.getAdapterPosition()).getKey();
+                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("offers");
+
+                reference.child(key).removeValue();
+            }
+        });
     }
 
 
@@ -85,6 +97,7 @@ class MyViewHolderCompany extends RecyclerView.ViewHolder{
     TextView recTitle, recDesc, recLang,recbefore,recafter;
     CardView recCard;
     Button edit;
+    ImageButton deletedoffer;
 
     public MyViewHolderCompany(@NonNull View itemView) {
         super(itemView);
@@ -96,6 +109,7 @@ class MyViewHolderCompany extends RecyclerView.ViewHolder{
         recTitle = itemView.findViewById(R.id.recTitleCompany);
         recbefore = itemView.findViewById(R.id.rec_B);
         recafter = itemView.findViewById(R.id.rec_A);
+        deletedoffer = itemView.findViewById(R.id.D_Offer);
 
     }
 }

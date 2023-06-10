@@ -100,29 +100,34 @@ public class RequestSignUp extends AppCompatActivity {
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dataList.clear();
-                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                try {
+                    dataList.clear();
+                    for (DataSnapshot itemSnapshot: snapshot.getChildren()){
 
 
 
-                    if(itemSnapshot.child("datausertype").getValue().toString().equals("marketer")){
+                        if(itemSnapshot.child("datausertype").getValue().toString().equals("marketer")){
 //
-                        DataMarkter dataClass = itemSnapshot.getValue(DataMarkter.class);
-                        dataClass.setKey(itemSnapshot.getKey());
+                            DataMarkter dataClass = itemSnapshot.getValue(DataMarkter.class);
+                            dataClass.setKey(itemSnapshot.getKey());
 
-                        Toast.makeText(RequestSignUp.this,dataClass.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(RequestSignUp.this,dataClass.toString(), Toast.LENGTH_LONG).show();
 
-                        dataList.add(dataClass);
-                        String c= String.valueOf(adapter.getItemCount());
-                        countRequest.setText(c.toString());
+                            dataList.add(dataClass);
+                            String c= String.valueOf(adapter.getItemCount());
+                            countRequest.setText(c.toString());
+
+                        }
+
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+
 
                     }
-
-                    adapter.notifyDataSetChanged();
-                    dialog.dismiss();
-
-
+                }catch (Exception error){
+                    
                 }
+
 
             }
             @Override
