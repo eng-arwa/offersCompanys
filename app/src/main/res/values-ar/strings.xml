@@ -18,6 +18,14 @@
 
     <string name="action_settings">الاعدادات</string>
 
+    //Confirmation
+
+    <string name="Confirmation">رسالة تأكيد</string>
+    <string name="ConfirmationMsgOfCompany">هل انت متأكد من مسح هذه الشركة ؟</string>
+    <string name="ConfirmationMsgOfOffer">هل انت متأكد من مسح هذا العرض ؟</string>
+
+    <string name="ConfirmationMsgOfMarketerRequest">هل انت متأكد من مسح طلب انضمام المسوق هذا ؟</string>
+
     // Home
 
     <string name="SearchTitle">البحث...</string>

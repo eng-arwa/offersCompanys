@@ -1,7 +1,9 @@
 package offersApp.offerscompanys;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,6 +83,17 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
               try {
                   String key=dataList.get(holder.getAdapterPosition()).getKey();
                   final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("RequestSignup");
+
+                  new AlertDialog.Builder(context)
+                          .setTitle(R.string.Confirmation)
+                          .setMessage(R.string.ConfirmationMsgOfMarketerRequest)
+                          .setIcon(android.R.drawable.ic_dialog_alert)
+                          .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                              public void onClick(DialogInterface dialog, int whichButton) {
+                                  Toast.makeText(context.getApplicationContext(), "ٌRejected Successfully", Toast.LENGTH_SHORT).show();
+                              }})
+                          .setNegativeButton(android.R.string.no, null).show();
 
                   reference.child(key).removeValue();
               }catch (Exception error){}
