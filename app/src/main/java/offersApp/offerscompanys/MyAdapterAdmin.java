@@ -1,13 +1,16 @@
 package offersApp.offerscompanys;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -56,6 +59,17 @@ public class MyAdapterAdmin extends RecyclerView.Adapter<MyViewHolderAdmin> {
 
                 String key=dataList.get(holder.getAdapterPosition()).getKey();
                 final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Companys");
+
+                new AlertDialog.Builder(context)
+                        .setTitle(R.string.Confirmation)
+                        .setMessage(R.string.ConfirmationMsgOfCompany)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Toast.makeText(context.getApplicationContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
 
                 reference.child(key).removeValue();
             }

@@ -15,6 +15,16 @@
 
 
 
+// confirmation
+
+    <string name="Confirmation">Confirmation Message</string>
+    <string name="ConfirmationMsgOfCompany">Are you sure to delete this company ?</string>
+    <string name="ConfirmationMsgOfOffer">Are you sure to delete this offer ?</string>
+
+    <string name="ConfirmationMsgOfMarketerRequest">Are you sure to delete this Marketer Request ?</string>
+
+
+
 
 
 
