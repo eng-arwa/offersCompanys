@@ -13,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +48,18 @@ public class AdapterMarketer extends RecyclerView.Adapter<HolderMarkter>{
         }catch (Exception error){
             Toast.makeText(context, "error load data", Toast.LENGTH_SHORT).show();
         }
+        holder.deletedMarkter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               try {
+                   String key=dataList.get(holder.getAdapterPosition()).getKey();
+                   final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+
+                   reference.child(key).removeValue();
+               }catch (Exception error){}
+            }
+        });
 
     }
 

@@ -2,7 +2,6 @@ package offersApp.offerscompanys;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,21 +61,21 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
         }catch (Exception error){}
 
 
-        holder.recCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, Detailactivity.class);
-                intent.putExtra("name", dataList.get(holder.getAdapterPosition()).getFullName());
-                intent.putExtra("phone", dataList.get(holder.getAdapterPosition()).getPhone());
-                intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
-                intent.putExtra("email", dataList.get(holder.getAdapterPosition()).getEmail());
-                intent.putExtra("identity", dataList.get(holder.getAdapterPosition()).getIdentityNumber());
-
-                intent.putExtra("adress", dataList.get(holder.getAdapterPosition()).getAdress());
-
-                context.startActivity(intent);
-            }
-        });
+//        holder.recCard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, Detailactivity.class);
+//                intent.putExtra("name", dataList.get(holder.getAdapterPosition()).getFullName());
+//                intent.putExtra("phone", dataList.get(holder.getAdapterPosition()).getPhone());
+//                intent.putExtra("Key",dataList.get(holder.getAdapterPosition()).getKey());
+//                intent.putExtra("email", dataList.get(holder.getAdapterPosition()).getEmail());
+//                intent.putExtra("identity", dataList.get(holder.getAdapterPosition()).getIdentityNumber());
+//
+//                intent.putExtra("adress", dataList.get(holder.getAdapterPosition()).getAdress());
+//
+//                context.startActivity(intent);
+//            }
+//        });
         holder.rejected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

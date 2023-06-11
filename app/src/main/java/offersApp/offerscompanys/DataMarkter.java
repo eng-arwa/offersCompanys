@@ -60,11 +60,11 @@ public class DataMarkter {
                        String dataadress, String dataidentity,String password) {
         this.fullName= dataname;
         this.phone = dataphone;
-        this.password=password;
-        this.adress=dataadress;
-        this.datausertype="marketer";
         this.email = dataemail;
+        this.adress=dataadress;
         this.identityNumber=dataidentity;
+        this.password=password;
+        this.datausertype="marketer";
 
     }
     public DataMarkter(String dataname, String dataphone, String dataemail,
