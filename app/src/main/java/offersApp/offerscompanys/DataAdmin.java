@@ -72,7 +72,7 @@ public class DataAdmin {
         this.dataidentity=dataidentity;
         this.dataCreatedBy=dataCreatedBy;
         this.dataemail=dataemail;
-        this.datausertype="Company";
+        this.datausertype="company";
         this.dataadress=dataadress;
         this.fullName=dataname;
     }

@@ -31,6 +31,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class AddCompany extends AppCompatActivity {
     ImageView uploadImage;
@@ -181,7 +183,13 @@ public class AddCompany extends AppCompatActivity {
 
         //We are changing the child from title to currentDate,
         // because we will be updating title as well and it may affect child value.
+        Locale locale = new Locale("fr", "FR");
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, locale);
+        String date = dateFormat.format(new Date());
+        DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.DEFAULT, locale);
+        String time =timeFormat.format(new Date());
         FirebaseDatabase.getInstance().getReference("Companys").child(c_name)
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -197,7 +205,7 @@ public class AddCompany extends AppCompatActivity {
                     }
                 });
 
-        FirebaseDatabase.getInstance().getReference("Users").child(currentDate)
+        FirebaseDatabase.getInstance().getReference("Users").child(time)
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -179,7 +179,7 @@ public class Login extends AppCompat {
 
                                         editor.commit(); // commit changes
 
-                                        if (usertype.trim().equals("marketer") || usertype.trim().equals("admin") || usertype.trim().equals("company") ){
+
 //
                                             Intent intent=new Intent(Login.this,MainActivity.class);
                                             startActivity(intent);
@@ -187,7 +187,7 @@ public class Login extends AppCompat {
 
 
 
-                                        }
+
 
                                         break step;
                                     }
