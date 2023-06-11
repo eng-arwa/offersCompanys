@@ -37,7 +37,7 @@ public class Detailactivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     StorageReference storageReference;
     String imageUrl = "";
-    boolean stateimage = false;;
+    boolean stateimage = false;
     String title, desc, lang,priceafter,pricebefore;
     String key, oldImageURL;
     Uri uri=null;
@@ -112,6 +112,7 @@ public class Detailactivity extends AppCompatActivity {
         });
     }
     public void saveData(){
+        if(stateimage){
 
             storageReference = FirebaseStorage.getInstance().getReference().child("Android Images").child(uri.getLastPathSegment());
             AlertDialog.Builder builder = new AlertDialog.Builder(Detailactivity.this);
@@ -123,26 +124,41 @@ public class Detailactivity extends AppCompatActivity {
 
 
 
-            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                    while (!uriTask.isComplete());
-                    Uri urlImage = uriTask.getResult();
-                    imageUrl = urlImage.toString();
-                        updateData();
-                        dialog.dismiss();
+
+               storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                   @Override
+                   public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                       Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                       while (!uriTask.isComplete());
+                       Uri urlImage = uriTask.getResult();
+                       imageUrl = urlImage.toString();
+                       updateData();
+                       dialog.dismiss();
 
 
 
 
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    dialog.dismiss();
-                }
-            });
+                   }
+               }).addOnFailureListener(new OnFailureListener() {
+                   @Override
+                   public void onFailure(@NonNull Exception e) {
+                       dialog.dismiss();
+                   }
+               });
+
+           }else{
+//            storageReference = FirebaseStorage.getInstance().getReference().child("Android Images").child(uri.getLastPathSegment());
+//            AlertDialog.Builder builder = new AlertDialog.Builder(Detailactivity.this);
+//            builder.setCancelable(false);
+//            builder.setView(R.layout.progress_layout);
+//            AlertDialog dialog = builder.create();
+//            dialog.show();
+
+
+            Toast.makeText(this, "oppps !!!!!", Toast.LENGTH_SHORT).show();
+               imageUrl=oldImageURL;
+            updateData();
+           }
 
         }
 
