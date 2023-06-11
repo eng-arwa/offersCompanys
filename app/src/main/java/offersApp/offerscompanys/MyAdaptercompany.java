@@ -84,11 +84,12 @@ public class MyAdaptercompany extends RecyclerView.Adapter<MyViewHolderCompany> 
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                Toast.makeText(context.getApplicationContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                                reference.child(key).removeValue();
+
+                                Toast.makeText(context.getApplicationContext(), R.string.DeletedSuccessfully, Toast.LENGTH_SHORT).show();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
 
-                reference.child(key).removeValue();
             }
         });
     }

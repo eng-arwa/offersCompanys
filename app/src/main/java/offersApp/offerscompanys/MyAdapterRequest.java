@@ -94,11 +94,12 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
                           .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                               public void onClick(DialogInterface dialog, int whichButton) {
-                                  Toast.makeText(context.getApplicationContext(), "ٌRejected Successfully", Toast.LENGTH_SHORT).show();
+                                  reference.child(key).removeValue();
+
+                                  Toast.makeText(context.getApplicationContext(), R.string.rejected, Toast.LENGTH_SHORT).show();
                               }})
                           .setNegativeButton(android.R.string.no, null).show();
 
-                  reference.child(key).removeValue();
               }catch (Exception error){}
 
             }
@@ -135,7 +136,19 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
                                 if (task.isSuccessful()){
                                     Toast.makeText(context, "saved", Toast.LENGTH_SHORT).show();
                                     final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("RequestSignup");
-                                    reference.child(key).removeValue();
+
+                                    new AlertDialog.Builder(context)
+                                            .setTitle(R.string.Confirmation)
+                                            .setMessage(R.string.ConfirmationMsgOfMarketerRequest)
+                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                                public void onClick(DialogInterface dialog, int whichButton) {
+                                                    reference.child(key).removeValue();
+
+                                                    Toast.makeText(context.getApplicationContext(), R.string.approvedMsg, Toast.LENGTH_SHORT).show();
+                                                }})
+                                            .setNegativeButton(android.R.string.no, null).show();
 
                                 }
                             }

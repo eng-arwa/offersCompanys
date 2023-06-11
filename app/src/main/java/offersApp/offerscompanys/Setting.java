@@ -15,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Map;
 import java.util.Set;
 
-public class Setting extends AppCompat {
+public class Setting extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
    // private ActivitySettingBinding binding;
