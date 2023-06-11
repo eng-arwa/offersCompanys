@@ -26,7 +26,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> {
     ValueEventListener eventListener;
@@ -34,6 +36,7 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
     Object user ;
     int i=0;
     private List<DataMarkter> dataList;
+
 
     public MyAdapterRequest(Context context, List<DataMarkter> dataList) {
         this.context = context;
@@ -94,9 +97,15 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
             @Override
             public void onClick(View view) {
 
+                Locale locale = new Locale("fr", "FR");
                 String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
+                DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, locale);
+                String date = dateFormat.format(new Date());
+                DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.DEFAULT, locale);
                 String key=dataList.get(holder.getAdapterPosition()).getKey();
+                String time =timeFormat.format(new Date());
+
                 DataMarkter dataClass = new DataMarkter(
                         dataList.get(holder.getAdapterPosition()).getFullName(),
                         dataList.get(holder.getAdapterPosition()).getPhone(),
@@ -106,7 +115,7 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
                         dataList.get(holder.getAdapterPosition()).getIdentityNumber());
 
                 Toast.makeText(context, dataList.get(holder.getAdapterPosition()).getDatausertype(), Toast.LENGTH_LONG).show();
-                FirebaseDatabase.getInstance().getReference("Users").child(currentDate)
+                FirebaseDatabase.getInstance().getReference("Users").child(time)
                         .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
