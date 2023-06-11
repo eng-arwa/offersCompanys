@@ -58,13 +58,14 @@ public class DataMarkter {
 
     public DataMarkter(String dataname, String dataphone, String dataemail,
                        String dataadress, String dataidentity,String password) {
+        this.datausertype="marketer";
+
         this.fullName= dataname;
         this.phone = dataphone;
         this.email = dataemail;
         this.adress=dataadress;
         this.identityNumber=dataidentity;
         this.password=password;
-        this.datausertype="marketer";
 
     }
     public DataMarkter(String dataname, String dataphone, String dataemail,
