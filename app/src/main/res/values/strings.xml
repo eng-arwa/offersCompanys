@@ -21,6 +21,10 @@
     <string name="ConfirmationMsgOfCompany">Are you sure to delete this company ?</string>
     <string name="ConfirmationMsgOfOffer">Are you sure to delete this offer ?</string>
 
+    <string name="DeletedSuccessfully">Deleted Successfully</string>
+    <string name="rejected">ٌRejected Successfully</string>
+    <string name="approvedMsg">Approved Successfully</string>
+
     <string name="ConfirmationMsgOfMarketerRequest">Are you sure to delete this Marketer Request ?</string>
 
 

@@ -26,6 +26,10 @@
 
     <string name="ConfirmationMsgOfMarketerRequest">هل انت متأكد من مسح طلب انضمام المسوق هذا ؟</string>
 
+    <string name="DeletedSuccessfully">تم المسح بنجاح</string>
+    <string name="rejected">ٌتم الرفض بنجاح</string>
+    <string name="approvedMsg">تم القبول بنجاح</string>
+
     // Home
 
     <string name="SearchTitle">البحث...</string>
