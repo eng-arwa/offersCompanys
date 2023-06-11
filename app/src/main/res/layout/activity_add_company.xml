@@ -131,17 +131,17 @@
                     android:padding="16dp"
                     android:textColor="@color/lavender" />
 
-                <EditText
-                    android:id="@+id/CreatedBy"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/lavender_border"
-                    android:gravity="start|center_vertical"
-                    android:hint="@string/EnterMarketerName"
-                    android:inputType="text|textPersonName"
-                    android:padding="16dp"
-                    android:textColor="@color/lavender" />
+<!--                <EditText-->
+<!--                    android:id="@+id/CreatedBy"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:background="@drawable/lavender_border"-->
+<!--                    android:gravity="start|center_vertical"-->
+<!--                    android:hint="@string/EnterMarketerName"-->
+<!--                    android:inputType="text|textPersonName"-->
+<!--                    android:padding="16dp"-->
+<!--                    android:textColor="@color/lavender" />-->
 
                 <Button
                     android:id="@+id/saveButton"

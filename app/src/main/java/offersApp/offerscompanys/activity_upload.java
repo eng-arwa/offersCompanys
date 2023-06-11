@@ -222,7 +222,7 @@ public class activity_upload extends AppCompatActivity {
         DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.DEFAULT, locale);
         String time =timeFormat.format(new Date());
 
-        FirebaseDatabase.getInstance().getReference("offers").child(pref.getString("nameuserlogined", null) +time )
+        FirebaseDatabase.getInstance().getReference("offers").child(pref.getString("nameuserlogined", null) + time )
                 .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

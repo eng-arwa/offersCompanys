@@ -24,16 +24,17 @@
             android:src="@drawable/baseline_image_24"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
+
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"/>
 
         <TextView
             android:id="@+id/recTitleCompany"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_toEndOf="@id/recImageCompany"
             android:fontFamily="sans-serif"
             android:text="@string/Title"
@@ -53,7 +54,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/recDescCompany"
             android:text="@string/desc"
@@ -109,7 +110,7 @@
             android:maxLines="1"
             android:layout_marginBottom="12dp"/>
         <TextView
-            android:layout_width="140dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/rec_AText"
             android:id="@+id/rec_A"
@@ -143,6 +144,7 @@
             android:layout_height="30dp"
             android:contentDescription="click"
             android:layout_marginEnd="8dp"
+
             android:padding="5dp"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="8dp"

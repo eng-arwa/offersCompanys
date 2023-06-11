@@ -1,12 +1,15 @@
 package offersApp.offerscompanys;
 
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -59,10 +62,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 //        });
         holder.recLang.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
 //                ClipboardManager clipboard = (ClipboardManager)
-//                        getSystemService(Context.CLIPBOARD_SERVICE);
-//                String getstring = textView.getText().toString();
+//                        context.getSystemService(Context.CLIPBOARD_SERVICE);
+             try {
+                 String getstring = holder.recLang.getText().toString();
+                 ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                 ClipData clip = ClipData.newPlainText("code", getstring);
+                 clipboard.setPrimaryClip(clip);
+
+                 Toast.makeText(context, getstring, Toast.LENGTH_SHORT).show();
+
+             }catch (Exception error){}
             }
         });
 

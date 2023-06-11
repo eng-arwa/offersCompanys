@@ -99,16 +99,12 @@ public class Detailactivity extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(stateimage){
+                Toast.makeText(Detailactivity.this, key, Toast.LENGTH_SHORT).show();
                     saveData();
                     Intent intent = new Intent(Detailactivity.this, MainActivity.class);
                     startActivity(intent);
-                }
-                else{
-                    Toast.makeText(Detailactivity.this, "Please choose new image", Toast.LENGTH_SHORT).show();
 
 
-                }
 
 
 
@@ -116,8 +112,8 @@ public class Detailactivity extends AppCompatActivity {
         });
     }
     public void saveData(){
-        try {
-            storageReference = FirebaseStorage.getInstance().getReference().child("offers").child(uri.getLastPathSegment());
+
+            storageReference = FirebaseStorage.getInstance().getReference().child("Android Images").child(uri.getLastPathSegment());
             AlertDialog.Builder builder = new AlertDialog.Builder(Detailactivity.this);
             builder.setCancelable(false);
             builder.setView(R.layout.progress_layout);
@@ -134,17 +130,11 @@ public class Detailactivity extends AppCompatActivity {
                     while (!uriTask.isComplete());
                     Uri urlImage = uriTask.getResult();
                     imageUrl = urlImage.toString();
-                    if(!imageUrl.isEmpty()){
                         updateData();
                         dialog.dismiss();
 
 
-                    }
-                    else{
-                        imageUrl=oldImageURL;
-                        updateData();
-                        dialog.dismiss();
-                    }
+
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -154,12 +144,10 @@ public class Detailactivity extends AppCompatActivity {
                 }
             });
 
-            imageUrl=oldImageURL;}catch (Exception error){
-
         }
 
 
-    }
+
     public void updateData(){
         title = updateTitle.getText().toString().trim();
         desc = updateDesc.getText().toString().trim();

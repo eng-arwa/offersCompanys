@@ -160,7 +160,7 @@ class MyViewHolderRequest extends RecyclerView.ViewHolder{
         approve=itemView.findViewById(R.id.approved);
         rejected=itemView.findViewById(R.id.rejacted);
         fullName = itemView.findViewById(R.id.Requestname);
-        phone = itemView.findViewById(R.id.Requestphone);
+        phone = itemView.findViewById(R.id.phone_m);
         email = itemView.findViewById(R.id.Requestemail);
         identityNumber= itemView.findViewById(R.id.Requestidentity);
         adress = itemView.findViewById(R.id.Requestadress);

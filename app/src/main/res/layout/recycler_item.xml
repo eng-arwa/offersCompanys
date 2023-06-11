@@ -29,19 +29,20 @@
 
         <TextView
             android:id="@+id/recTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_toEndOf="@id/recImage"
             android:fontFamily="sans-serif"
+            android:textAlignment="textStart"
             android:text="@string/Title"
             android:textColor="@color/purple"
             android:textSize="20sp" />
 
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/recDesc"
             android:text="@string/desc"

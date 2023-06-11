@@ -3,6 +3,7 @@ package offersApp.offerscompanys;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -34,9 +35,9 @@ import java.util.Calendar;
 public class AddCompany extends AppCompatActivity {
     ImageView uploadImage;
     Button saveButton;
-    EditText companyphone,passwordcopmany,companyemail,CreatedBy,companyidentitiy,companytype,companyadress, companyname,BackLink;
-    String imageURL;
-
+    EditText companyphone,passwordcopmany,companyemail,companyidentitiy,companytype,companyadress, companyname,BackLink;
+    String imageURL,CreatedBy;
+    SharedPreferences pref;
     boolean valid,stateimage=false;
 
     FirebaseAuth fAuth;
@@ -47,7 +48,8 @@ public class AddCompany extends AppCompatActivity {
         setContentView(R.layout.activity_add_company);
 
 //        start
-
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
         uploadImage = findViewById(R.id.uploadImage);
         companyname = findViewById(R.id.companyname);
         companyadress = findViewById(R.id.companyadress);
@@ -55,7 +57,7 @@ public class AddCompany extends AppCompatActivity {
         companyphone = findViewById(R.id.companyphone);
         companytype =findViewById(R.id.companytype);
         companyidentitiy =findViewById(R.id.companyidentity);
-        CreatedBy=findViewById(R.id.CreatedBy);
+        CreatedBy=pref.getString("nameuserlogined", null).toString();
         passwordcopmany=findViewById(R.id.passwordcopmany);
         saveButton = findViewById(R.id.saveButton);
 
@@ -110,7 +112,7 @@ public class AddCompany extends AppCompatActivity {
         checkField(companyadress);
         checkField(passwordcopmany);
         checkField(companytype);
-        checkField(CreatedBy);
+
 
 
         if(valid){
@@ -172,7 +174,7 @@ public class AddCompany extends AppCompatActivity {
         String c_phone = companyphone.getText().toString();
         String c_email = companyemail.getText().toString();
         String c_identity= companyidentitiy.getText().toString();
-        String c_CreatedBy= CreatedBy.getText().toString();
+        String c_CreatedBy= CreatedBy.toString();
         String c_password=passwordcopmany.getText().toString();
         DataAdmin dataClass = new DataAdmin(c_name,c_password, c_type, c_phone,imageURL,c_email,c_adress,c_identity,c_CreatedBy);
         //String isUser ;

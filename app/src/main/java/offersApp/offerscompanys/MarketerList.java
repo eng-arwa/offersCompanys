@@ -116,17 +116,19 @@ public class MarketerList extends AppCompatActivity {
 
 
 
-                   if(itemSnapshot.child("datausertype").getValue().toString().equals("marketer")){
+                 try {
+                     if(itemSnapshot.child("datausertype").getValue().toString().equals("marketer")){
 //
-                       DataMarkter dataClass = itemSnapshot.getValue(DataMarkter.class);
-                       dataClass.setKey(itemSnapshot.getKey());
+                         DataMarkter dataClass = itemSnapshot.getValue(DataMarkter.class);
+                         dataClass.setKey(itemSnapshot.getKey());
 
 
-                       dataList.add(dataClass);
-                       String c= String.valueOf(adapter.getItemCount());
-                       countmarkter.setText(c.toString());
+                         dataList.add(dataClass);
+                         String c= String.valueOf(adapter.getItemCount());
+                         countmarkter.setText(c.toString());
 
-                    }
+                     }
+                 }catch (Exception error){}
 
                     adapter.notifyDataSetChanged();
                     dialog.dismiss();

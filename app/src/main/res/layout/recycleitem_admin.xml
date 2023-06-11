@@ -23,7 +23,7 @@
             android:src="@drawable/baseline_image_24"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"/>
 
@@ -36,10 +36,11 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_toEndOf="@id/reclogo"
+            android:layout_marginTop="20dp"
             android:layout_below="@id/recname"
             android:layout_marginStart="20dp"
             android:maxLines="1"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,44 +52,45 @@
             android:layout_toEndOf="@id/recname"
             android:layout_marginStart="20dp"
             android:layout_alignTop="@id/recname"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:maxLines="1"
             android:layout_marginBottom="12dp"/>
 
 
 
         <TextView
-            android:layout_width="120dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/recname"
             android:text="@string/Name"
             android:textColor="@color/purple"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@id/reclogo"/>
 
         <TextView
             android:id="@+id/recphone"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@id/rectype"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_toEndOf="@id/recname"
+            android:layout_toEndOf="@id/rectype"
             android:text="@string/Phone"
             android:textColor="@color/black"
             android:textSize="15sp" />
         <TextView
-            android:layout_width="120dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/recidentitynumber"
             android:text="@string/IdentityNumberofCompany"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginStart="20dp"
             android:layout_below="@+id/recphone"
             android:layout_toEndOf="@id/reclogo"/>
@@ -113,14 +115,14 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:text="@string/CreatedBy"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:layout_toEndOf="@id/reclogo"
             android:layout_below="@+id/recemail"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
 
 
             />
@@ -128,15 +130,15 @@
             android:id="@+id/RecCreatedBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/recidentitynumber"
+            android:layout_below="@+id/recemail"
             android:layout_marginTop="0dp"
             android:text="@string/CreatedBy"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:layout_alignTop="@id/RecCreatedBy"
-            android:layout_toEndOf="@id/recidentitynumber"
+            android:layout_alignTop="@id/text"
+            android:layout_toEndOf="@id/text"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
 
 
             />

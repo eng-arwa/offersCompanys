@@ -106,18 +106,20 @@ public class RequestSignUp extends AppCompatActivity {
 
 
 
-                        if(itemSnapshot.child("datausertype").getValue().toString().equals("marketer")){
+                     try {
+                         if(itemSnapshot.child("datausertype").getValue().toString().equals("marketer")){
 //
-                            DataMarkter dataClass = itemSnapshot.getValue(DataMarkter.class);
-                            dataClass.setKey(itemSnapshot.getKey());
+                             DataMarkter dataClass = itemSnapshot.getValue(DataMarkter.class);
+                             dataClass.setKey(itemSnapshot.getKey());
 
-                            Toast.makeText(RequestSignUp.this,dataClass.toString(), Toast.LENGTH_LONG).show();
+                             Toast.makeText(RequestSignUp.this,dataClass.toString(), Toast.LENGTH_LONG).show();
 
-                            dataList.add(dataClass);
-                            String c= String.valueOf(adapter.getItemCount());
-                            countRequest.setText(c.toString());
+                             dataList.add(dataClass);
+                             String c= String.valueOf(adapter.getItemCount());
+                             countRequest.setText(c.toString());
 
-                        }
+                         }
+                     }catch (Exception error){}
 
                         adapter.notifyDataSetChanged();
                         dialog.dismiss();
