@@ -20,6 +20,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -66,9 +68,14 @@ public class SignupActivity extends AppCompatActivity {
                     String password=userpassword.getText().toString();
                     String adress=useradress.getText().toString();
                     DataMarkter dataClass = new DataMarkter(name,phone,email,adress,identitynumber,password);
+                    Locale locale = new Locale("fr", "FR");
                     String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
-                    FirebaseDatabase.getInstance().getReference("RequestSignup").child(currentDate).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, locale);
+                    String date = dateFormat.format(new Date());
+                    DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.DEFAULT, locale);
+                    String time =timeFormat.format(new Date());
+                    FirebaseDatabase.getInstance().getReference("RequestSignup").child(time).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
