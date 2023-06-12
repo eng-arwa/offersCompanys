@@ -22,6 +22,9 @@
 
     <string name="AdminRegisteredSuccessfully">Admin Registered Successfully</string>
 
+    <string name="NoInternetConnection">No Internet Connection</string>
+
+
 
 
     // confirmation

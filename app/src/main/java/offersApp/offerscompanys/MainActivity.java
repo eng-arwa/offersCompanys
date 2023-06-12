@@ -3,7 +3,10 @@ package offersApp.offerscompanys;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +34,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity {
+import static com.google.common.collect.ComparisonChain.start;
+
+public class MainActivity extends AppCompatActivity implements ConnectionReceiver.ReceiverListener {
 //    FloatingActionButton fab;
     DatabaseReference databaseReference;
     ValueEventListener eventListener,eventListener2;
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     TextView count;
     Button normalUserBtn;
     SharedPreferences pref;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
         count = findViewById(R.id.count);
+
 
         //  start navigation
 
@@ -130,15 +137,17 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        dialog = builder.create();
+       // dialog.show();
         dataList = new ArrayList<>();
         adapter = new MyAdapter(MainActivity.this, dataList);
         recyclerView.setAdapter(adapter);
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
         databaseReference = FirebaseDatabase.getInstance().getReference("offers");
-        dialog.show();
+        //dialog.show();
+
+       onNetworkChange(true);
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -159,14 +168,16 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 adapter.notifyDataSetChanged();
-                dialog.dismiss();
+                onNetworkChange(false);
             }
 
             @Override
 
             public void onCancelled(@NonNull DatabaseError error) {
-                dialog.dismiss();
+                onNetworkChange(false);
             }
+
+
         });
         View inflatedView = getLayoutInflater().inflate(R.layout.recycler_item, null);
         TextView text = (TextView) inflatedView.findViewById(R.id.recLang);
@@ -179,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, getstring, Toast.LENGTH_SHORT).show();
             }
         });
+
 
 
 //        Toast.makeText(this, (String)count, Toast.LENGTH_SHORT).show();
@@ -216,7 +228,47 @@ public class MainActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 
+    private void checkConnection() {
+
+        // initialize intent filter
+        IntentFilter intentFilter = new IntentFilter();
+
+        // add action
+        intentFilter.addAction("android.new.conn.CONNECTIVITY_CHANGE");
+
+        // register receiver
+        registerReceiver(new ConnectionReceiver(), intentFilter);
+
+        // Initialize listener
+        ConnectionReceiver.Listener = this;
+
+        // Initialize connectivity manager
+        ConnectivityManager manager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Initialize network info
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+
+        // get connection status
+        boolean isConnected = networkInfo != null && networkInfo.isConnectedOrConnecting();
 
 
+    }
 
+
+    @Override
+    public void onNetworkChange(boolean isConnected) {
+        if (isConnected){
+            Toast.makeText(this, R.string.NoInternetConnection, Toast.LENGTH_SHORT).show();
+
+            dialog.dismiss();
+        }
+
+        if (!isConnected){
+
+
+            dialog.show();
+
+        }
+
+    }
 }

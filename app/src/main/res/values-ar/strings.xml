@@ -16,6 +16,7 @@
 
     // admin
 
+    <string name="NoInternetConnection">لايوجد اتصال بلانترنت</string>
 
 
     // Setting
