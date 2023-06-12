@@ -16,7 +16,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:paddingStart="10dp"
-        android:text=" All Marketer Reqest Signup"
+        android:text="@string/AllMarketerReqestSignup"
         android:textSize="18dp"
         android:textStyle="bold"
         android:layout_height="wrap_content"/>

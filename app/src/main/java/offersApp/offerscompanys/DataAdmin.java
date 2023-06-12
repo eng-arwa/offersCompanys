@@ -17,6 +17,8 @@ public class DataAdmin {
     private String dataadress;
     private String key;
 
+
+
     public String getKey() {
         return key;
     }
@@ -85,6 +87,17 @@ public class DataAdmin {
         this.datausertype="company";
         this.dataadress=dataadress;
 
+    }
+
+    public DataAdmin(String name, String phone, String email, String adress, String identitynumber, String password) {
+        this.fullName = name;
+//        this.dataCreatedBy = dataCreatedBy;
+        this.dataphone = phone;
+        this.dataemail = email;
+        this.password = password;
+        this.datausertype="admin";
+        this.dataidentity = identitynumber;
+        this.dataadress = adress;
     }
 
     public DataAdmin(){

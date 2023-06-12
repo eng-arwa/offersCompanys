@@ -11,6 +11,9 @@
     <string name="Password">كلمة السر</string>
     <string name="loginButton">دخول</string>
 
+    <string name="ConfirmationMsgOfMarketer">هل انت متأكد من هذف هذا المسوق ؟</string>
+
+
     // Setting
 
     <string name="Language">اللغة</string>
@@ -25,6 +28,9 @@
     <string name="ConfirmationMsgOfOffer">هل انت متأكد من مسح هذا العرض ؟</string>
 
     <string name="ConfirmationMsgOfMarketerRequest">هل انت متأكد من مسح طلب انضمام المسوق هذا ؟</string>
+
+    <string name="AllMarketerReqestSignup">كل طلبات الانضمام للمسوقين</string>
+
 
     <string name="DeletedSuccessfully">تم المسح بنجاح</string>
     <string name="rejected">ٌتم الرفض بنجاح</string>
@@ -168,7 +174,15 @@
 
     <string name="Share">مشاركة</string>
 
+    // items
 
+    <string name="AddAdmin">اضافة مدير</string>
+
+
+
+    // Toasts
+
+    <string name="AdminRegisteredSuccessfully">تم تسجيل المدير بنجاح</string>
 
 
 

@@ -13,25 +13,26 @@
 
     <string name="Language">Language</string>
 
+    // Toasts
+
+    <string name="AdminRegisteredSuccessfully">Admin Registered Successfully</string>
 
 
-// confirmation
+
+    // confirmation
 
     <string name="Confirmation">Confirmation Message</string>
     <string name="ConfirmationMsgOfCompany">Are you sure to delete this company ?</string>
     <string name="ConfirmationMsgOfOffer">Are you sure to delete this offer ?</string>
+    <string name="ConfirmationMsgOfMarketer">Are you sure to delete this Marketer ?</string>
 
     <string name="DeletedSuccessfully">Deleted Successfully</string>
     <string name="rejected">ٌRejected Successfully</string>
     <string name="approvedMsg">Approved Successfully</string>
 
+    <string name="AddAdmin">Add Admin</string>
+
     <string name="ConfirmationMsgOfMarketerRequest">Are you sure to delete this Marketer Request ?</string>
-
-
-
-
-
-
 
 
     // Home
@@ -70,6 +71,8 @@
 
     <string name="YourAllOffers">Your All Offers</string>
 
+    <string name="AllMarketerReqestSignup">All Marketer Request Signup</string>
+
 
     // Admin
 
@@ -100,7 +103,7 @@
     <string name="Enteranoffertitle">Enter an Offer Title</string>
     <string name="UploadOffer">Upload Offer</string>
 
-// header nav
+    // header nav
 
     <string name="AllOffersonhands">All Offers on One Hand</string>
     <string name="CompaniesOffers">Companies Offers</string>
@@ -117,23 +120,6 @@
     <string name="DiscountCode">Discount Code</string>
     <string name="Approved">Approved</string>
     <string name="Rejected">Rejected</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // Signup
