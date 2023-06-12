@@ -79,21 +79,21 @@ public class AdminActivity extends AppCompatActivity {
                     return true;
 
 
+
+
+
+//                case R.id.logout:
+//
+//                    editor.clear();
+//                    editor.commit();
+//
+//                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    finish();
+//                    return true;
                 case R.id.addadmin:
 
                     startActivity(new Intent(getApplicationContext(), AddAdmin.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-
-
-
-                case R.id.logout:
-
-                    editor.clear();
-                    editor.commit();
-
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                     return true;
@@ -103,6 +103,8 @@ public class AdminActivity extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                     return true;
+
+
 
 
 
