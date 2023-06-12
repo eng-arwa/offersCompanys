@@ -108,10 +108,11 @@ public class MyAdapterRequest extends RecyclerView.Adapter<MyViewHolderRequest> 
                 DataMarkter dataClass = new DataMarkter(
                         dataList.get(holder.getAdapterPosition()).getFullName(),
                         dataList.get(holder.getAdapterPosition()).getPhone(),
-                        dataList.get(holder.getAdapterPosition()).getPassword(),
-                        dataList.get(holder.getAdapterPosition()).getAdress(),
                         dataList.get(holder.getAdapterPosition()).getEmail(),
-                        dataList.get(holder.getAdapterPosition()).getIdentityNumber());
+                        dataList.get(holder.getAdapterPosition()).getAdress(),
+                        dataList.get(holder.getAdapterPosition()).getIdentityNumber(),
+                        dataList.get(holder.getAdapterPosition()).getPassword()
+                );
 
                 Toast.makeText(context, dataList.get(holder.getAdapterPosition()).getDatausertype(), Toast.LENGTH_LONG).show();
                 FirebaseDatabase.getInstance().getReference("Users").child(time)
