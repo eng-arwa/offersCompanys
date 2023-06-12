@@ -57,17 +57,7 @@ public class AddAdmin extends AppCompatActivity {
                 checkField(useradress);
                 checkField(userIdentityNumebr);
                 checkField(userpassword);
-
-
-//                fAuth.createUserWithEmailAndPassword(emailuser.getText().toString(), userpassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//                    @Override
-//                    public void onSuccess(AuthResult authResult) {
-//
-//                        Toast.makeText(AddAdmin.this, R.string.AdminRegisteredSuccessfully, Toast.LENGTH_SHORT).show();
-//
-//
-//                    }
-//                });
+                
 
 
 
@@ -85,7 +75,6 @@ public class AddAdmin extends AppCompatActivity {
                     String adress=useradress.getText().toString();
                     //String datausertype = "Admin";
 
-                    fAuth.createUserWithEmailAndPassword(fullName.getText().toString(), userpassword.getText().toString());
 
                     DataAdmin dataClass = new DataAdmin(name,phone,email,adress,identitynumber,password);
                     Locale locale = new Locale("fr", "FR");
