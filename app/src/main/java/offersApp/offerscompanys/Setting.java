@@ -3,15 +3,31 @@ package offersApp.offerscompanys;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,10 +37,14 @@ public class Setting extends AppCompatActivity {
    // private ActivitySettingBinding binding;
    Button arButton,enButton;
    TextView loginText, languageTextSetting;
+   EditText nameaccount,passaccount,adressaccount,emailaccount,phoneaccount;
+   String naccount="",paccount="",adaccount="",emaccount="",phoccount="",identity="" ,logo,type,created;
+   Button edit;
+//    LinearLayout parentaccount;
 
     SharedPreferences pref;
 
-
+    LinearLayout one;
 
 
 
@@ -36,13 +56,28 @@ public class Setting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Locale locale = new Locale("fr", "FR");
+        String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, locale);
+        String date = dateFormat.format(new Date());
+        DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.DEFAULT, locale);
+        String time =timeFormat.format(new Date());
         setContentView(R.layout.activity_setting);
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
 
         enButton= findViewById(R.id.enButton);
         arButton = findViewById(R.id.arButton);
         loginText = findViewById(R.id.loginTextSetting);
         languageTextSetting = findViewById(R.id.languageTextSetting);
+        nameaccount=findViewById(R.id.nameacount);
+        phoneaccount=findViewById(R.id.phoneacount);
+        emailaccount=findViewById(R.id.emailacount);
+        passaccount=findViewById(R.id.passacount);
+        adressaccount=findViewById(R.id.adressacount);
+        edit=findViewById(R.id.edit);
+//        parentaccount=(LinearLayout)findViewById(R.id.parentaccount);
 
 //        SharedPreferences.Editor editor = pref.edit();
 
@@ -50,6 +85,9 @@ public class Setting extends AppCompatActivity {
 
         LanguageManager lang = new LanguageManager(this);
 
+//  end navigation
+        Map<String, ?> entries = pref.getAll();//get all entries from shared preference
+        Set<String> keys = entries.keySet();//set all key entries into an array of string type
 
         //  start navigation
 
@@ -81,41 +119,82 @@ public class Setting extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
-//                    Map<String, ?> entries = pref.getAll();//get all entries from shared preference
-//                    Set<String> keys = entries.keySet();//set all key entries into an array of string type
-//
-//                    //first option
-//                    if (!keys.isEmpty()) {
-//                        //do your staff here
-//                        Toast.makeText(this, pref.getString("typeuserlogined", null), Toast.LENGTH_SHORT).show();
-//
-//                        if (pref.getString("typeuserlogined", null).equals("marketer")) {
-//                            startActivity(new Intent(getApplicationContext(), MarketerPanel.class));
-//                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                            finish();
-//                            return true;
-//                        } else if (pref.getString("typeuserlogined", null).equals("admin")) {
-//                            startActivity(new Intent(getApplicationContext(), AdminActivity.class));
-//                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                            finish();
-//                            return true;
-//                        } else if (pref.getString("typeuserlogined", null).equals("company")) {
-//                            startActivity(new Intent(getApplicationContext(), AddCompany.class));
-//                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                            finish();
-//                            return true;
-//                        }
-//
-//
-//                    } else if (keys.isEmpty()) {
-//                        Toast.makeText(this, "You no login in yet", Toast.LENGTH_SHORT).show();
-//                    }
 
 
             }
             return false;
         });
-//  end navigation
+        if (keys.isEmpty()) {
+             one = (LinearLayout) findViewById(R.id.parentaccount);
+            one.setVisibility(View.GONE);
+
+        }
+
+
+        //first option
+        if (!keys.isEmpty()) {
+            DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference users = root.child("Users").child(pref.getString("keyuser", null));
+            DataMarkter user = new DataMarkter();
+            users.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot snapshotinstace : snapshot.getChildren()) {
+//                    if(pref.getString("typeuserlogined", null).toLowerCase().equals("marketer")) {
+
+                        if (snapshotinstace.getKey().equals("fullName")) {
+                            naccount = snapshotinstace.getValue().toString();
+                            nameaccount.setText(naccount);
+
+
+                        } else if (snapshotinstace.getKey().equals("address") || snapshotinstace.getKey().equals("dataadress")) {
+                            adaccount = snapshotinstace.getValue().toString();
+                            Toast.makeText(Setting.this, snapshotinstace.getValue().toString(), Toast.LENGTH_SHORT).show();
+                        } else if (snapshotinstace.getKey().equals("phone") || snapshotinstace.getKey().equals("dataphone")) {
+                            phoccount = snapshotinstace.getValue().toString();
+                            phoneaccount.setText(paccount);
+
+                        } else if (snapshotinstace.getKey().equals("password")) {
+                            paccount = snapshotinstace.getValue().toString();
+//                        passaccount.setText(paccount);
+                        } else if (snapshotinstace.getKey().equals("email") || snapshotinstace.getKey().equals("dataemail")) {
+                            emaccount = snapshotinstace.getValue().toString();
+//
+                        } else if (snapshotinstace.getKey().equals("identityNumber") || snapshotinstace.getKey().equals("dataidentity")) {
+                            identity = snapshotinstace.getValue().toString();
+                        } else if (snapshotinstace.getKey().equals("datalogo")) {
+                            logo = snapshotinstace.getValue().toString();
+                        } else if (snapshotinstace.getKey().equals("datatype")) {
+                            type = snapshotinstace.getValue().toString();
+                        } else if (snapshotinstace.getKey().equals("dataCreatedBy")) {
+                            created = snapshotinstace.getValue().toString();
+                        }
+//
+//                    }
+//                    if(pref.getString("typeuserlogined", null).toLowerCase().equals("marketer")) {
+//
+//                    }
+                        nameaccount.setText(naccount);
+                        passaccount.setText(paccount);
+                        emailaccount.setText(emaccount);
+                        phoneaccount.setText(paccount);
+                        adressaccount.setText(adaccount);
+
+
+                    }
+                    //
+
+
+                }
+
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });
+        }
 
 
 
@@ -134,6 +213,64 @@ public class Setting extends AppCompatActivity {
             recreate();
 
 
+        });
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 naccount=nameaccount.getText().toString();
+                phoccount=phoneaccount.getText().toString();
+                emaccount=emailaccount.getText().toString();
+                adaccount=adressaccount.getText().toString();
+                paccount=passaccount.getText().toString();
+
+
+                if(pref.getString("typeuserlogined", null).toLowerCase().equals("marketer")){
+                    DataMarkter dataClass = new DataMarkter(naccount, phoccount, emaccount, adaccount,identity,paccount);
+
+
+                    FirebaseDatabase.getInstance().getReference("Users").child(pref.getString("keyuser", null))
+                            .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Toast.makeText(Setting.this, "Updated", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(), Login.class));
+                                        finish();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(Setting.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+                else if(pref.getString("typeuserlogined", null).toLowerCase().equals("company")){
+                    DataAdmin dataClass = new DataAdmin(naccount, paccount,type,phoccount,logo, emaccount, adaccount,identity,created);
+
+                    Toast.makeText(Setting.this, "company", Toast.LENGTH_SHORT).show();
+
+                    FirebaseDatabase.getInstance().getReference("Users").child(pref.getString("keyuser", null))
+                            .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Toast.makeText(Setting.this, "Updated", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(), Login.class));
+                                        finish();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(Setting.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+
+
+            }
         });
 
 

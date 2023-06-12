@@ -78,14 +78,17 @@ public class DataAdmin {
         this.dataadress=dataadress;
         this.fullName=dataname;
     }
-    public DataAdmin(String dataname, String datalogo,
-                     String dataadress) {
+    public DataAdmin(String dataname, String password,
+                     String dataemail,String adress,String phone,String identity) {
         this.dataname = dataname;
 
-        this.datalogo = datalogo;
-
+        this.datalogo = password;
+        this.dataemail=dataemail;
+        this.dataadress=adress;
+        this.dataphone=phone;
+        this.dataidentity=identity;
         this.datausertype="company";
-        this.dataadress=dataadress;
+
 
     }
 

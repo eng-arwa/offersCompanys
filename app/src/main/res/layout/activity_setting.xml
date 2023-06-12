@@ -11,7 +11,7 @@ tools:context=".Setting">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
@@ -79,9 +79,10 @@ tools:context=".Setting">
             <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
                 <RadioButton android:id="@+id/enButton"
                     android:layout_width="wrap_content"
+                    android:layout_marginEnd="10dp"
                     android:layout_height="wrap_content"
                     android:text="@string/EN"
                     android:onClick="onRadioButtonClicked"/>
@@ -92,6 +93,140 @@ tools:context=".Setting">
                     android:onClick="onRadioButtonClicked"/>
             </RadioGroup>
         </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/parentaccount"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Acount Details"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textSize="17dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/nameacount"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/lavender_border"
+                        android:layout_marginStart="20dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Password"
+                        android:textSize="17dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/passacount"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/lavender_border"
+                        android:layout_marginStart="20dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textSize="17dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/emailacount"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/lavender_border"
+                        android:layout_marginStart="20dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Phone"
+                        android:textSize="17dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/phoneacount"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/lavender_border"
+                        android:layout_marginStart="20dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Adress"
+                        android:textSize="17dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/adressacount"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/lavender_border"
+                        android:layout_marginStart="20dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+                    <Button
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Edit"
+                        android:id="@+id/edit"
+                        android:padding="10dp"
+                        android:backgroundTint="@color/purple"
+                        android:layout_marginStart="100dp"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
 
 
 

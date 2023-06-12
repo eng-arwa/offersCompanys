@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                             return true;
-                        } else if (pref.getString("typeuserlogined", null).equals("company")) {
+                        } else if (pref.getString("typeuserlogined", null).toLowerCase().equals("company")) {
                             Intent intent4=new Intent(MainActivity.this,companyPanel.class);
                             startActivity(intent4);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
