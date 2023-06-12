@@ -102,7 +102,7 @@ tools:context=".Setting">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Your Account Details"
+                    android:text="@string/YourAccountDetails"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:textSize="18dp"
