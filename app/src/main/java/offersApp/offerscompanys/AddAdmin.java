@@ -38,7 +38,6 @@ public class AddAdmin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_admin);
 
-        fAuth = FirebaseAuth.getInstance();
 
         fullName = findViewById(R.id.name);
         emailuser = findViewById(R.id.email);
@@ -73,17 +72,17 @@ public class AddAdmin extends AppCompatActivity {
                     String identitynumber =userIdentityNumebr.getText().toString();
                     String password=userpassword.getText().toString();
                     String adress=useradress.getText().toString();
-                    //String datausertype = "Admin";
+                    String datausertype = "admin";
 
 
-                    DataAdmin dataClass = new DataAdmin(name,phone,email,adress,identitynumber,password);
+                    DataAddAdmin dataAddAdmin = new DataAddAdmin(name,phone,email,adress,identitynumber,password,datausertype);
                     Locale locale = new Locale("fr", "FR");
 
                     DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.DEFAULT, locale);
                     String time =timeFormat.format(new Date());
 
 
-                    FirebaseDatabase.getInstance().getReference("Users").child(time).setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    FirebaseDatabase.getInstance().getReference("Users").child(time).setValue(dataAddAdmin).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
@@ -93,6 +92,7 @@ public class AddAdmin extends AppCompatActivity {
 
                                 Toast.makeText(AddAdmin.this, R.string.AdminRegisteredSuccessfully, Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), Login.class));
+                                finish();
 
 
 

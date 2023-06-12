@@ -19,6 +19,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
 
+
+
+
         </activity>
         <activity
             android:name=".Splachscreen"
@@ -29,6 +32,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
 
         </activity>
         <activity
@@ -46,6 +50,8 @@
         <activity
             android:name=".AddCompany"
             android:exported="true" />
+
+
         <activity
             android:name=".AdminActivity"
             android:exported="true"

@@ -115,6 +115,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/lavender_border"
                     android:gravity="start|center_vertical"
+                    android:inputType="number"
                     android:hint="@string/EnterPhone"
                     android:padding="16dp"
                     android:textColor="@color/lavender" />
@@ -158,7 +159,7 @@
                 <TextView
                     android:id="@+id/Back"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/backtoHome"
                     android:textAlignment="center"
                     android:textColor="@color/purple">

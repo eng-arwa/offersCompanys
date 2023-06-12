@@ -78,30 +78,20 @@ public class DataAdmin {
         this.dataadress=dataadress;
         this.fullName=dataname;
     }
-    public DataAdmin(String dataname, String password,
-                     String dataemail,String adress,String phone,String identity) {
-        this.dataname = dataname;
-
-        this.datalogo = password;
-        this.dataemail=dataemail;
-        this.dataadress=adress;
-        this.dataphone=phone;
-        this.dataidentity=identity;
-        this.datausertype="company";
-
-
-    }
-
-//    public DataAdmin(String name, String phone, String email, String adress, String identitynumber, String password) {
-//        this.fullName = name;
-////        this.dataCreatedBy = dataCreatedBy;
-//        this.dataphone = phone;
-//        this.dataemail = email;
-//        this.password = password;
-//        this.datausertype="admin";
-//        this.dataidentity = identitynumber;
-//        this.dataadress = adress;
+//    public DataAdmin(String dataname, String password,
+//                     String dataemail,String adress,String phone,String identity) {
+//        this.dataname = dataname;
+//
+//        this.datalogo = password;
+//        this.dataemail=dataemail;
+//        this.dataadress=adress;
+//        this.dataphone=phone;
+//        this.dataidentity=identity;
+//        this.datausertype="company";
+//
+//
 //    }
+
 
     public DataAdmin(){
 
