@@ -21,6 +21,9 @@
 
     <string name="action_settings">الاعدادات</string>
 
+    <string name="YourAccountDetails">تفاصيل حسابك</string>
+
+
     //Confirmation
 
     <string name="Confirmation">رسالة تأكيد</string>

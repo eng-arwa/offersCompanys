@@ -57,7 +57,7 @@ public class AddAdmin extends AppCompatActivity {
                 checkField(useradress);
                 checkField(userIdentityNumebr);
                 checkField(userpassword);
-                
+
 
 
 
