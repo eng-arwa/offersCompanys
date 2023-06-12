@@ -19,7 +19,7 @@
         <ImageView
         android:id="@+id/icon"
         android:layout_width="100dp"
-        android:layout_height="220dp"
+        android:layout_height="230dp"
         android:src="@drawable/baseline_person_24"
             android:backgroundTint="@color/grey"
             android:background="@color/grey"
@@ -101,6 +101,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:layout_toEndOf="@+id/icon"
             android:layout_marginStart="10dp"
             android:layout_below="@+id/phone"
@@ -111,14 +112,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/identitynumber_m"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="5dp"
             android:text="@string/IdentityNumberofCompany"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:layout_alignTop="@id/identitynumber_m"
             android:layout_toEndOf="@id/identitynumber_m"
             android:layout_marginStart="12dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
 
 
             />
@@ -126,7 +127,7 @@
             android:id="@+id/email_M"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:text="@string/Email"
             android:textColor="@color/purple"
             android:layout_toEndOf="@+id/icon"
@@ -134,7 +135,7 @@
             android:textStyle="bold"
             android:layout_below="@+id/identityNumber"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
 
 
             />
@@ -143,14 +144,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/identitynumber_m"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="10dp"
             android:text="@string/Email"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:layout_alignTop="@id/email_M"
-            android:layout_toEndOf="@id/identitynumber_m"
+            android:layout_toEndOf="@id/email_M"
             android:layout_marginStart="12dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
 
 
             />
