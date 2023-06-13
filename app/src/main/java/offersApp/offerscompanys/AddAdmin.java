@@ -1,8 +1,5 @@
 package offersApp.offerscompanys;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,17 +8,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -32,6 +28,7 @@ public class AddAdmin extends AppCompatActivity {
     TextView goToLogin;
     boolean valid = true;
     FirebaseAuth fAuth;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +53,7 @@ public class AddAdmin extends AppCompatActivity {
                 checkField(useradress);
                 checkField(userIdentityNumebr);
                 checkField(userpassword);
+                checkemail(emailuser);
 
 
 
@@ -132,6 +130,22 @@ public class AddAdmin extends AppCompatActivity {
             valid = false;
         }else {
             valid = true;
+        }
+
+        return valid;
+    }
+    public boolean checkemail(EditText textField){
+
+        if(textField.getText().toString().isEmpty()) {
+            textField.setError("Error");
+            valid = false;
+        }else {
+            if (textField.getText().toString().trim().matches(emailPattern)) {
+                valid = true;
+            } else {
+                textField.setError("Error");
+                valid = false;
+            }
         }
 
         return valid;

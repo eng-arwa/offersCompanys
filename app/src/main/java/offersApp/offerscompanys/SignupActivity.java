@@ -31,6 +31,8 @@ public class SignupActivity extends AppCompatActivity {
     boolean valid = true;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
                 if( checkField(fullName)&& checkField(emailuser)&& checkField(useradress)&&checkField(userphone)&&
-                checkField(userIdentityNumebr)&&checkField(userpassword)
+                checkField(userIdentityNumebr)&&checkField(userpassword) && checkemail(emailuser)
                 ){
                     String name=fullName.getText().toString();
                     String email=emailuser.getText().toString();
@@ -119,5 +121,22 @@ public class SignupActivity extends AppCompatActivity {
 
         return valid;
     }
+    public boolean checkemail(EditText textField){
+
+        if(textField.getText().toString().isEmpty()) {
+            textField.setError("Error");
+            valid = false;
+        }else {
+            if (textField.getText().toString().trim().matches(emailPattern)) {
+                valid = true;
+            } else {
+                textField.setError("Error");
+                valid = false;
+            }
+        }
+
+        return valid;
+    }
+
 
 }

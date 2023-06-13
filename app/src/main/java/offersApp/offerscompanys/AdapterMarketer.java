@@ -54,22 +54,25 @@ public class AdapterMarketer extends RecyclerView.Adapter<HolderMarkter>{
             @Override
             public void onClick(View view) {
 
-               try {
-                   String key=dataList.get(holder.getAdapterPosition()).getKey();
-                   final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
 
-                   new AlertDialog.Builder(context)
-                           .setTitle(R.string.Confirmation)
-                           .setMessage(R.string.ConfirmationMsgOfMarketer)
-                           .setIcon(android.R.drawable.ic_dialog_alert)
-                           .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                   try {
+                       String key=dataList.get(holder.getAdapterPosition()).getKey();
+                       final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
 
-                               public void onClick(DialogInterface dialog, int whichButton) {
-                                   reference.child(key).removeValue();
+                       new AlertDialog.Builder(context)
+                               .setTitle(R.string.Confirmation)
+                               .setMessage(R.string.ConfirmationMsgOfMarketer)
+                               .setIcon(android.R.drawable.ic_dialog_alert)
+                               .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                                   Toast.makeText(context.getApplicationContext(), R.string.DeletedSuccessfully, Toast.LENGTH_SHORT).show();
-                               }});
-               }catch (Exception error){}
+                                   public void onClick(DialogInterface dialog, int whichButton) {
+                                       reference.child(key).removeValue();
+
+                                       Toast.makeText(context.getApplicationContext(), R.string.DeletedSuccessfully, Toast.LENGTH_SHORT).show();
+                                   }})
+                               .setNegativeButton(android.R.string.no, null).show();
+                   }catch (Exception error){}
+
             }
         });
 

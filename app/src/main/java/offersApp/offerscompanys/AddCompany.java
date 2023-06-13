@@ -44,6 +44,7 @@ public class AddCompany extends AppCompatActivity {
 
     FirebaseAuth fAuth;
     Uri uri;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +115,7 @@ public class AddCompany extends AppCompatActivity {
         checkField(companyadress);
         checkField(passwordcopmany);
         checkField(companytype);
+        checkemail(companyemail);
 
 
 
@@ -240,7 +242,22 @@ public class AddCompany extends AppCompatActivity {
         return valid;
     }
 
+    public boolean checkemail(EditText textField){
 
+        if(textField.getText().toString().isEmpty()) {
+            textField.setError("Error");
+            valid = false;
+        }else {
+            if (textField.getText().toString().trim().matches(emailPattern)) {
+                valid = true;
+            } else {
+                textField.setError("Error");
+                valid = false;
+            }
+        }
+
+        return valid;
+    }
 
 
 }
