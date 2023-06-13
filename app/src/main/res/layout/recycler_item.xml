@@ -46,6 +46,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/recDesc"
             android:text="@string/desc"
+
+            android:paddingStart="10dp"
             android:textColor="@color/black"
             android:fontFamily="sans-serif"
             android:textSize="15sp"
