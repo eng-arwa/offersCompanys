@@ -45,6 +45,8 @@ public class Setting extends AppCompatActivity {
     SharedPreferences pref;
 boolean   valid = true, state=false;
     LinearLayout one;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
 
 
 
@@ -240,6 +242,7 @@ boolean   valid = true, state=false;
                     checkField(emailaccount);
                     checkField(adressaccount);
                     checkField(phoneaccount);
+                    checkemail(emailaccount);
                     if(valid){
                         naccount=nameaccount.getText().toString();
                         phoccount=phoneaccount.getText().toString();
@@ -384,6 +387,21 @@ boolean   valid = true, state=false;
 
         return valid;
     }
+    public boolean checkemail(EditText textField){
 
+        if(textField.getText().toString().isEmpty()) {
+            textField.setError("Error");
+            valid = false;
+        }else {
+            if (textField.getText().toString().trim().matches(emailPattern)) {
+                valid = true;
+            } else {
+                textField.setError("Error");
+                valid = false;
+            }
+        }
+
+        return valid;
+    }
 
 }
