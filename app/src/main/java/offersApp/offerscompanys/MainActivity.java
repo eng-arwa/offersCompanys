@@ -34,8 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.google.common.collect.ComparisonChain.start;
-
 public class MainActivity extends AppCompatActivity implements ConnectionReceiver.ReceiverListener {
 //    FloatingActionButton fab;
     DatabaseReference databaseReference;
@@ -137,17 +135,18 @@ public class MainActivity extends AppCompatActivity implements ConnectionReceive
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
-        dialog = builder.create();
-       // dialog.show();
+        AlertDialog dialog = builder.create();
+        dialog.show();
         dataList = new ArrayList<>();
         adapter = new MyAdapter(MainActivity.this, dataList);
         recyclerView.setAdapter(adapter);
         String currentDate = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-
         databaseReference = FirebaseDatabase.getInstance().getReference("offers");
-        //dialog.show();
 
-       onNetworkChange(true);
+        dialog.show();
+
+
+
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -168,13 +167,15 @@ public class MainActivity extends AppCompatActivity implements ConnectionReceive
                 }
 
                 adapter.notifyDataSetChanged();
-                onNetworkChange(false);
+                dialog.dismiss();
+
             }
 
             @Override
 
             public void onCancelled(@NonNull DatabaseError error) {
-                onNetworkChange(false);
+                dialog.dismiss();
+
             }
 
 
